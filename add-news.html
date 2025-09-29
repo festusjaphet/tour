@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add News - Wendo African Safaris</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <script src="https://unpkg.com/i18next@23.15.1/dist/umd/i18next.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .fade-in {
+            animation: fadeIn 1s ease-in;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        body {
+            background-color: rgb(111, 57, 36);
+        }
+        .nav-transparent {
+            transition: background 0.3s ease-in-out;
+            background: linear-gradient(to right, rgba(255, 255, 255, 0.063), rgba(0, 0, 0, 0.413), rgb(0, 0, 0));
+        }
+        .nav-solid {
+            background: linear-gradient(to right, rgb(255, 255, 255), rgb(0, 0, 0), rgb(0, 0, 0));
+        }
+        .nav-link {
+            transition: color 0.3s;
+        }
+        .nav-link.active {
+            color: #4CAF50 !important;
+        }
+        .site-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .site-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+        .site-card img {
+            transition: opacity 0.3s ease;
+        }
+        .site-card:hover img {
+            opacity: 0.9;
+        }
+        #mobile-menu {
+            display: none;
+        }
+        #mobile-menu.active {
+            display: block;
+        }
+        /* Mobile-specific styles */
+        @media (max-width: 768px) {
+            #news-grid .bg-white {
+                background-color: white;
+            }
+            #news-grid .rounded-lg {
+                border-radius: 0.5rem;
+            }
+            #news-grid .shadow-lg {
+                box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+            }
+            #news-grid .transform {
+                transition: transform 0.3s;
+            }
+            #news-grid .hover\:scale-105:hover {
+                transform: scale(1.05);
+            }
+            header.hero {
+                height: auto;
+                padding: 20px;
+            }
+            .chaa {
+                position: relative;
+                height: auto;
+            }
+            .chaa img,
+            .chaa video {
+                position: relative;
+                width: 100%;
+                height: auto;
+                margin-bottom: 10px;
+            }
+            .absolute.left-4.top-1\/4 {
+                position: relative;
+                top: auto;
+                left: auto;
+                width: 100%;
+                padding: 10px;
+                overflow-x: auto;
+                white-space: nowrap;
+            }
+            .absolute.left-4.top-1\/4 .grid {
+                display: flex;
+                flex-direction: row;
+                gap: 10px;
+            }
+            .absolute.left-4.top-1\/4 .grid > div {
+                flex-shrink: 0;
+                width: 150px;
+                height: 200px;
+                margin-bottom: 0;
+            }
+            .absolute.left-4.top-1\/4 .grid img,
+            .absolute.left-4.top-1\/4 .grid video {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+            .absolute.right-4.top-1\/4 {
+                position: relative;
+                top: auto;
+                right: auto;
+                width: 100%;
+                padding: 10px;
+                text-align: center;
+            }
+            .absolute.right-4.top-1\/4 .max-w-xl {
+                max-width: 100%;
+            }
+            .absolute.right-4.top-1\/4 h1 {
+                font-size: 2rem;
+            }
+            .absolute.right-4.top-1\/4 p,
+            .absolute.right-4.top-1\/4 h6 {
+                font-size: 1rem;
+            }
+            .absolute.right-4.top-1\/4 button {
+                width: 100%;
+                padding: 10px;
+            }
+            .youtube-btn {
+                background: linear-gradient(to right, #ff0000, #cc0000);
+                border: none;
+                overflow: hidden;
+                position: relative;
+                transition: all 0.3s ease;
+            }
+            .youtube-btn:hover {
+                transform: translateY(-2px);
+                background: linear-gradient(to right, #e60000, #b30000);
+            }
+            .youtube-btn svg {
+                filter: drop-shadow(1px 1px 1px rgba(0, 0, 0, 0.2));
+            }
+            .youtube-btn::before {
+                content: '';
+                position: absolute;
+                top: -50%;
+                left: -50%;
+                width: 200%;
+                height: 200%;
+                background: rgba(255, 255, 255, 0.2);
+                transform: rotate(30deg);
+                transition: all 0.5s ease;
+                pointer-events: none;
+            }
+            .youtube-btn:hover::before {
+                top: -100%;
+                left: -100%;
+            }
+        }
+    </style>
+</head>
+<body class="font-sans">
+    <!-- Navigation -->
+    <div class="relative">
+        <nav id="navbar" class="nav-transparent text-white fixed w-full top-0 z-50">
+            <div class="container mx-auto flex justify-between items-center px-4">
+                <a href="#home" class="flex items-center space-x-2">
+                    <img loading="lazy" src="assets/image1.png" alt="Wendo Safari Logo" class="size-20">
+                    <img loading="lazy" src="assets/wendo.png" alt="Wendo Safari Logo" class="h-12">
+                </a>
+                <div class="flex items-center space-x-4">
+                    <ul class="hidden md:flex space-x-6">
+                        <li><a href="index.html#home" class="nav-link hover:text-green-400 font-semibold" data-i18n="nav.home">Home</a></li>
+                        <li><a href="index.html#destinations" class="nav-link hover:text-green-400 font-semibold" data-i18n="nav.destinations">Destinations</a></li>
+                        <li><a href="index.html#Trips" class="nav-link hover:text-green-400 font-semibold" data-i18n="nav.trips">Trips</a></li>
+                        <li><a href="index.html#news" class="nav-link hover:text-green-400 font-semibold" data-i18n="nav.news">News</a></li>
+                        <li><a href="index.html#about" class="nav-link hover:text-green-400 font-semibold" data-i18n="nav.about">About</a></li>
+                        <li><a href="index.html#contact" class="nav-link hover:text-green-400 font-semibold" data-i18n="nav.contact">Contact</a></li>
+                        <select id="language-select-desktop" class="bg-green-500 text-white rounded-md focus:outline-none px-2 py-1">
+                            <option value="en">English</option>
+                            <option value="fr">Français</option>
+                            <option value="es">Español</option>
+                            <option value="sw">Kiswahili</option>
+                            <option value="de">Deutsch</option>
+                            <option value="zh">中文</option>
+                        </select>
+                    </ul>
+                    <button id="menu-toggle" class="md:hidden focus:outline-none transform transition-transform duration-300 hover:scale-110" aria-expanded="false">
+                        <svg class="w-6 h-6 menu-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path class="menu-open" stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16m-7 6h7"></path>
+                            <path class="menu-close hidden" stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            <div id="mobile-menu" class="md:hidden absolute top-16 w-full z-[100]">
+                <div class="backdrop-blur-sm bg-green-500/70 rounded-lg p-4 shadow-md">
+                    <ul class="space-y-4 text-center">
+                        <li><a href="index.html#home" class="block hover:text-green-300" data-i18n="nav.home">Home</a></li>
+                        <li><a href="index.html#destinations" class="block hover:text-green-300" data-i18n="nav.destinations">Destinations</a></li>
+                        <li><a href="index.html#Trips" class="block hover:text-green-300" data-i18n="nav.trips">Trips</a></li>
+                        <li><a href="index.html#news" class="block hover:text-green-300" data-i18n="nav.news">News</a></li>
+                        <li><a href="index.html#about" class="block hover:text-green-300" data-i18n="nav.about">About</a></li>
+                        <li><a href="index.html#contact" class="block hover:text-green-300" data-i18n="nav.contact">Contact</a></li>
+                        <li>
+                            <select id="language-select" class="bg-green-500 text-white rounded-md p-2 focus:outline-none">
+                                <option value="en">English</option>
+                                <option value="fr">Français</option>
+                                <option value="es">Español</option>
+                                <option value="sw">Kiswahili</option>
+                                <option value="de">Deutsch</option>
+                                <option value="zh">中文</option>
+                            </select>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </div>
+    <script>
+        // Mobile Menu Toggle
+        document.addEventListener('DOMContentLoaded', () => {
+            const toggleButton = document.getElementById('menu-toggle');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const menuIcon = toggleButton.querySelector('.menu-icon');
+            const menuOpen = menuIcon.querySelector('.menu-open');
+            const menuClose = menuIcon.querySelector('.menu-close');
+            if (toggleButton && mobileMenu) {
+                toggleButton.addEventListener('click', () => {
+                    console.log('Menu toggle clicked');
+                    const isExpanded = toggleButton.getAttribute('aria-expanded') === 'true';
+                    toggleButton.setAttribute('aria-expanded', !isExpanded);
+                    mobileMenu.classList.toggle('hidden');
+                    mobileMenu.classList.toggle('active');
+                    menuOpen.classList.toggle('hidden');
+                    menuClose.classList.toggle('hidden');
+                });
+            } else {
+                console.error('Toggle button or mobile menu not found');
+            }
+        });
+
+        // Language Switching
+        async function switchLanguage(languageCode) {
+            const contentElements = document.querySelectorAll('[data-i18n]');
+            for (const element of contentElements) {
+                const key = element.getAttribute('data-i18n');
+                const text = element.innerText;
+                const translatedText = await translateText(text, languageCode);
+                element.innerText = translatedText;
+            }
+        }
+
+        async function translateText(text, targetLanguage) {
+            try {
+                const url = 'https://libretranslate.com/translate';
+                const response = await fetch(url, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        q: text,
+                        source: 'en',
+                        target: targetLanguage
+                    })
+                });
+                const data = await response.json();
+                return data.translatedText || text;
+            } catch (error) {
+                console.error('Translation error:', error);
+                return text;
+            }
+        }
+
+        // Initialize default language
+        switchLanguage('en');
+
+        // Language select event listeners
+        document.getElementById('language-select-desktop').addEventListener('change', (e) => switchLanguage(e.target.value));
+        document.getElementById('language-select').addEventListener('change', (e) => switchLanguage(e.target.value));
+    </script>
+
+
+    <!-- News Listing Section -->
+    <section id="news-listing" class="py-20 relative overflow-hidden fade-in">
+        <div class="absolute inset-0 w-full h-full bg-[url('assets/news-bg.jpg')] bg-cover bg-center blur-sm"></div>
+        <div class="relative container mx-auto px-6 z-10">
+            <div class="bg-white bg-opacity-50 backdrop-blur-sm rounded-lg shadow-md max-w-4xl mx-auto p-8 mb-12">
+                <h2 class="text-3xl md:text-5xl font-bold text-green-900 mb-8 drop-shadow-lg" data-i18n="newsListing.title">Current News</h2>
+                <!-- <p class="text-gray-700 leading-relaxed mb-8 font-bold" data-i18n="newsListing.description">View all existing news items below.</p> -->
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8" id="news-grid"></div>
+        </div>
+    </section>
+
+    <!-- Add News Section -->
+    <section id="add-news" class="py-20 relative hidden fade-in">
+        <div class="absolute inset-0 w-full h-full bg-[url('assets/news-bg.jpg')] bg-cover bg-center blur-sm"></div>
+        <div class="relative container mx-auto px-6 z-10">
+            <div class="bg-white bg-opacity-50 backdrop-blur-sm rounded-lg shadow-md max-w-3xl mx-auto p-8">
+                <h2 class="text-3xl md:text-5xl font-bold text-green-900 mb-8 drop-shadow-lg" data-i18n="addNews.title">Add News</h2>
+                <p class="text-gray-700 leading-relaxed mb-8 font-bold" data-i18n="addNews.description">Submit a new news item with translations for all supported languages.</p>
+
+                <!-- News Form -->
+                <form id="news-form">
+                    <!-- Title Inputs -->
+                    <div class="mb-6">
+                        <label class="block text-gray-700 font-bold mb-2" data-i18n="addNews.form.title">Title</label>
+                        <input type="text" id="title-en" class="w-full p-2 border rounded mb-2" placeholder="English" required>
+                        <input type="text" id="title-fr" class="w-full p-2 border rounded mb-2" placeholder="French">
+                        <input type="text" id="title-es" class="w-full p-2 border rounded mb-2" placeholder="Spanish">
+                        <input type="text" id="title-sw" class="w-full p-2 border rounded mb-2" placeholder="Swahili">
+                        <input type="text" id="title-de" class="w-full p-2 border rounded mb-2" placeholder="German">
+                        <input type="text" id="title-zh" class="w-full p-2 border rounded" placeholder="Chinese">
+                    </div>
+                    <!-- Content Inputs -->
+                    <div class="mb-6">
+                        <label class="block text-gray-700 font-bold mb-2" data-i18n="addNews.form.content">Content</label>
+                        <textarea id="content-en" class="w-full p-2 border rounded mb-2" rows="4" placeholder="English" required></textarea>
+                        <textarea id="content-fr" class="w-full p-2 border rounded mb-2" rows="4" placeholder="French"></textarea>
+                        <textarea id="content-es" class="w-full p-2 border rounded mb-2" rows="4" placeholder="Spanish"></textarea>
+                        <textarea id="content-sw" class="w-full p-2 border rounded mb-2" rows="4" placeholder="Swahili"></textarea>
+                        <textarea id="content-de" class="w-full p-2 border rounded mb-2" rows="4" placeholder="German"></textarea>
+                        <textarea id="content-zh" class="w-full p-2 border rounded" rows="4" placeholder="Chinese"></textarea>
+                    </div>
+                    <!-- Image URL -->
+                    <div class="mb-6">
+                        <label for="news-image" class="block text-gray-700 font-bold mb-2" data-i18n="addNews.form.image">Image URL (optional)</label>
+                        <input type="url" id="news-image" class="w-full p-2 border rounded" placeholder="https://example.com/image.jpg">
+                    </div>
+                    <button type="submit" class="bg-green-900 text-white px-4 py-2 rounded hover:bg-green-700" data-i18n="addNews.form.submit">Add News</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <script type="module" src="add-news.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const toggleButton = document.getElementById('menu-toggle');
+            const mobileMenu = document.getElementById('mobile-menu');
+
+            toggleButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+
+            // Highlight active nav link
+            const navLinks = document.querySelectorAll('.nav-link');
+            navLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    navLinks.forEach(l => l.classList.remove('active'));
+                    link.classList.add('active');
+                });
+            });
+
+            // Toggle nav background on scroll
+            window.addEventListener('scroll', () => {
+                const navbar = document.getElementById('navbar');
+                if (window.scrollY > 50) {
+                    navbar.classList.remove('nav-transparent');
+                    navbar.classList.add('nav-solid');
+                } else {
+                    navbar.classList.remove('nav-solid');
+                    navbar.classList.add('nav-transparent');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

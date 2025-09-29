@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wendo African Safaris</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <script src="https://unpkg.com/i18next@23.15.1/dist/umd/i18next.min.js"></script>
+    <style>
+        body {
+            background-color: rgb(111, 57, 36);
+        }
+
+        .nav-transparent {
+            background: linear-gradient(to right, rgba(164, 255, 193, 0.585), transparent, rgba(6, 78, 29, 0.585));
+            transition: background 0.3s ease-in-out;
+        }
+
+        .nav-solid {
+            background: linear-gradient(to right, rgb(111, 57, 36), rgb(111, 57, 36), rgb(6, 78, 29));
+        }
+
+        .nav-link {
+            transition: color 0.3s;
+        }
+
+        .nav-link.active {
+            color: #4CAF50 !important;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 50;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 1rem;
+            padding: 2rem;
+            max-width: 600px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            position: relative;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            cursor: pointer;
+            font-size: 1.5rem;
+        }
+
+        .site-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .site-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .site-card img {
+            transition: opacity 0.3s ease;
+        }
+
+        .site-card:hover img {
+            opacity: 0.9;
+        }
+
+        @media (max-width: 768px) {
+            .site-card {
+                transform: none;
+            }
+
+            .site-card:hover {
+                transform: scale(1.02);
+            }
+        }
+
+        .fade-in {
+            animation: fadeIn 1s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    
+    <!-- Navigation Bar -->
+    <nav id="navbar" class="nav-transparent text-white fixed w-full top-0 z-50">
+        <div class="container mx-auto flex justify-between items-center py-4 px-4">
+            
+            <a href="#home" class="flex items-center space-x-2">
+                <img loading="lazy" src="assets/image1.png" alt="Wendo Safari Logo" class="size-20">
+                <img loading="lazy" src="assets/wendo.png" alt="Wendo Safari Logo" class="h-12">
+            </a>
+            
+            <div class="flex items-center space-x-4">
+                <ul class="hidden md:flex space-x-6">
+                    <li><a href="index.html#home " class="nav-link hover:text-green-400 font-semibold" data-i18n="nav.home">Home</a></li>
+                    <li><a href="index.html#destinations" class="nav-link hover:text-green-400 font-semibold" data-i18n="nav.destinations">Destinations</a></li>
+                    <li><a href="index.html#Trips" class="nav-link hover:text-green-400 font-semibold" data-i18n="nav.trips">Trips</a></li>
+                    <li><a href="add-news.html" class="nav-link hover:text-green-400 font-semibold" data-i18n="nav.news">News</a></li>
+                    <li><a href="index.html#about" class="nav-link hover:text-green-400 font-semibold" data-i18n="nav.about">About</a></li>
+                    <li><a href="index.html#contact" class="nav-link hover:text-green-400 font-semibold" data-i18n="nav.contact">Contact</a></li>
+                    <li>
+                        <select id="language-select-desktop" class="bg-green-500 text-white rounded-md focus:outline-none p-2">
+                            <option value="en">English</option>
+                            <option value="fr">Français</option>
+                            <option value="es">Español</option>
+                            <option value="sw">Kiswahili</option>
+                            <option value="de">Deutsch</option>
+                            <option value="zh">中文</option>
+                        </select>
+                    </li>
+                </ul>
+                <button id="menu-toggle" class="md:hidden focus:outline-none transform transition-transform duration-300 hover:scale-110">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16m-7 6h7"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <div id="mobile-menu" class="hidden md:hidden absolute top-16 w-full">
+            <div class="backdrop-blur-sm bg-green-500/70 rounded-lg p-4 shadow-md">
+                <ul class="space-y-4 text-center">
+                    <li><a href="#home" class="block hover:text-green-300" data-i18n="nav.home">Home</a></li>
+                    <li><a href="#destinations" class="block hover:text-green-300" data-i18n="nav.destinations">Destinations</a></li>
+                    <li><a href="#Trips" class="block hover:text-green-300" data-i18n="nav.trips">Trips</a></li>
+                    <li><a href="add-news.html" class="block hover:text-green-300" data-i18n="nav.news">News</a></li>
+                    <li><a href="#about" class="block hover:text-green-300" data-i18n="nav.about">About</a></li>
+                    <li><a href="#contact" class="block hover:text-green-300" data-i18n="nav.contact">Contact</a></li>
+                    <li>
+                        <select id="language-select" class="bg-green-500 text-white rounded-md p-2 focus:outline-none">
+                            <option value="en">English</option>
+                            <option value="fr">Français</option>
+                            <option value="es">Español</option>
+                            <option value="sw">Kiswahili</option>
+                            <option value="de">Deutsch</option>
+                            <option value="zh">中文</option>
+                        </select>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Trip Cards Section -->
+    <section id="Trips" class="container mx-auto py-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-20 fade-in">
+        <div
+            class="absolute inset-0 w-full h-full bg-[url('assets/background.jpeg')] bg-cover bg-center opacity-80 blur-sm">
+        </div> <div class="trip-card site-card bg-white/80 backdrop-blur-md rounded-3xl shadow-lg overflow-hidden" data-trip="special-safaris">
+            <div class="relative w-full h-60">
+                <img src="https://www.serengetinationalpark.travel/images/Elephant-during-game-drive-with-little-governors-camp.jpg" alt="Special Safaris" loading="lazy" class="absolute inset-0 w-full h-full object-cover rounded-t-2xl">
+            </div>
+            <div class="p-6 cursor-pointer">
+                <h3 class="text-xl font-semibold text-gray-900 mb-2" data-i18n="trips.special-safaris.title">Special Occasion Safaris</h3>
+                <p class="text-gray-700" data-i18n="trips.special-safaris.brief">Tailored safaris for birthdays, anniversaries, graduations, and honeymooners.</p>
+            </div>
+        </div>
+        <div class="trip-card site-card bg-white/80 backdrop-blur-md rounded-3xl shadow-lg overflow-hidden" data-trip="singer-travellers">
+            <div class="relative w-full h-60">
+                <img src="https://lepetitjournal.com/_next/image?url=https%3A%2F%2Fbackoffice.lepetitjournal.com%2Fsites%2Fdefault%2Ffiles%2F2024-09%2FSharjah%2520Safari.jpg&w=1920&q=75" alt="Singer Travellers" loading="lazy" class="absolute inset-0 w-full h-full object-cover rounded-t-2xl">
+            </div>
+            <div class="p-6 cursor-pointer">
+                <h3 class="text-xl font-semibold text-gray-900 mb-2" data-i18n="trips.singer-travellers.title">Solo Traveller Safari</h3>
+                <p class="text-gray-700" data-i18n="trips.singer-travellers.brief">Custom safaris for solo adventurers to explore nature.</p>
+            </div>
+        </div>
+        <div class="trip-card site-card bg-white/80 backdrop-blur-md rounded-3xl shadow-lg overflow-hidden" data-trip="family-safari">
+            <div class="relative w-full h-60">
+                <img src="https://www.discoverafrica.com/wp-content/uploads/2021/11/family_safari.jpg" alt="Special Family Safari" loading="lazy" class="absolute inset-0 w-full h-full object-cover rounded-t-2xl">
+            </div>
+            <div class="p-6 cursor-pointer">
+                <h3 class="text-xl font-semibold text-gray-900 mb-2" data-i18n="trips.family-safari.title">Special Family Safari</h3>
+                <p class="text-gray-700" data-i18n="trips.family-safari.brief">Family trips with special care for teenagers.</p>
+            </div>
+        </div>
+        <div class="trip-card site-card bg-white/80 backdrop-blur-md rounded-3xl shadow-lg overflow-hidden" data-trip="disabilities-safari">
+            <div class="relative w-full h-60">
+                <img src="https://media.cntraveler.com/photos/650458664f9f345bfc4edf95/master/w_1600%2Cc_limit/5Ximuwu--Luxury-Klaserie-Lodge-sophie-morgan-aug23-pr.jpg" alt="Disabilities Safari" loading="lazy" class="absolute inset-0 w-full h-full object-cover rounded-t-2xl">
+            </div>
+            <div class="p-6 cursor-pointer">
+                <h3 class="text-xl font-semibold text-gray-900 mb-2" data-i18n="trips.disabilities-safari.title">Accessible Safari</h3>
+                <p class="text-gray-700" data-i18n="trips.disabilities-safari.brief">Safaris with special care for people with disabilities or illnesses.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal -->
+    <div id="tripModal" class="modal">
+        <div class="modal-content">
+            <span class="modal-close">×</span>
+            <h2 id="modalTitle" class="text-2xl font-bold mb-4"></h2>
+            <img id="modalImage" src="" alt="Trip Image" class="w-full h-64 object-cover rounded-lg mb-4">
+            <p id="modalDescription" class="text-gray-700"></p>
+        </div>
+    </div>
+
+    <script>
+        // Initialize i18next
+        i18next.init({
+            lng: 'en',
+            resources: {
+                en: {
+                    translation: {
+                        'nav.home': 'Home',
+                        'nav.destinations': 'Destinations',
+                        'nav.trips': 'Trips',
+                        'nav.news': 'News',
+                        'nav.about': 'About',
+                        'nav.contact': 'Contact',
+                        'trips.special-safaris.title': 'Special Occasion Safaris',
+                        'trips.special-safaris.brief': 'Tailored safaris for birthdays, anniversaries, graduations, and honeymooners.',
+                        'trips.special-safaris.description': 'We plan unforgettable safaris for couples or groups celebrating special occasions like birthdays, anniversaries, graduations, and honeymooners. Our goal is to create unique, heartwarming experiences filled with surprises that will stay with you forever.',
+                        'trips.singer-travellers.title': 'Solo Traveller Safari',
+                        'trips.singer-travellers.brief': 'Custom safaris for solo adventurers to explore nature.',
+                        'trips.singer-travellers.description': 'Designed for those who wish to travel alone, our solo traveller safaris offer a personalized experience to explore nature and wildlife at your own pace, ensuring a safe and enriching adventure.',
+                        'trips.family-safari.title': 'Special Family Safari',
+                        'trips.family-safari.brief': 'Family trips with special care for teenagers.',
+                        'trips.family-safari.description': 'Perfect for families traveling together, we plan special safaris for parents and their teenage children. We provide tailored activities and care to ensure an enjoyable experience for all family members.',
+                        'trips.disabilities-safari.title': 'Accessible Safari',
+                        'trips.disabilities-safari.brief': 'Safaris with special care for people with disabilities or illnesses.',
+                        'trips.disabilities-safari.description': 'We believe everyone deserves to experience nature and wildlife. Our accessible safaris offer specialized care, medical support, and attention from arrival to departure for people with disabilities or illnesses.'
+                    }
+                },
+                fr: {
+                    translation: {
+                        'nav.home': 'Accueil',
+                        'nav.destinations': 'Destinations',
+                        'nav.trips': 'Voyages',
+                        'nav.news': 'Actualités',
+                        'nav.about': 'À propos',
+                        'nav.contact': 'Contact',
+                        'trips.special-safaris.title': 'Safaris pour occasions spéciales',
+                        'trips.special-safaris.brief': 'Safaris sur mesure pour anniversaires, jubilés, remises de diplômes et lunes de miel.',
+                        'trips.special-safaris.description': 'Nous organisons des safaris inoubliables pour les couples ou groupes célébrant des occasions spéciales comme les anniversaires, les jubilés, les remises de diplômes et les lunes de miel. Notre objectif est de créer des expériences uniques et chaleureuses, remplies de surprises qui resteront gravées dans votre cœur pour toujours.',
+                        'trips.singer-travellers.title': 'Safari pour voyageur solo',
+                        'trips.singer-travellers.brief': 'Safaris personnalisés pour les aventuriers solitaires souhaitant explorer la nature.',
+                        'trips.singer-travellers.description': 'Conçus pour ceux qui souhaitent voyager seuls, nos safaris pour voyageurs solos offrent une expérience personnalisée pour explorer la nature et la faune à votre propre rythme, garantissant une aventure sûre et enrichissante.',
+                        'trips.family-safari.title': 'Safari familial spécial',
+                        'trips.family-safari.brief': 'Voyages familiaux avec une attention particulière pour les adolescents.',
+                        'trips.family-safari.description': 'Parfait pour les familles voyageant ensemble, nous planifions des safaris spéciaux pour les parents et leurs enfants adolescents. Nous proposons des activités adaptées et des soins pour garantir une expérience agréable pour tous les membres de la famille.',
+                        'trips.disabilities-safari.title': 'Safari accessible',
+                        'trips.disabilities-safari.brief': 'Safaris avec des soins spéciaux pour les personnes handicapées ou malades.',
+                        'trips.disabilities-safari.description': 'Nous croyons que tout le monde mérite de découvrir la nature et la faune. Nos safaris accessibles offrent des soins spécialisés, un soutien médical et une attention particulière de l’arrivée au départ pour les personnes handicapées ou malades.'
+                    }
+                },
+                es: {
+                    translation: {
+                        'nav.home': 'Inicio',
+                        'nav.destinations': 'Destinos',
+                        'nav.trips': 'Viajes',
+                        'nav.news': 'Noticias',
+                        'nav.about': 'Acerca de',
+                        'nav.contact': 'Contacto',
+                        'trips.special-safaris.title': 'Safaris para ocasiones especiales',
+                        'trips.special-safaris.brief': 'Safaris personalizados para cumpleaños, aniversarios, graduaciones y lunas de miel.',
+                        'trips.special-safaris.description': 'Planificamos safaris inolvidables para parejas o grupos que celebran ocasiones especiales como cumpleaños, aniversarios, graduaciones y lunas de miel. Nuestro objetivo es crear experiencias únicas y conmovedoras, llenas de sorpresas que permanecerán contigo para siempre.',
+                        'trips.singer-travellers.title': 'Safari para viajeros solitarios',
+                        'trips.singer-travellers.brief': 'Safaris personalizados para aventureros solitarios que desean explorar la naturaleza.',
+                        'trips.singer-travellers.description': 'Diseñados para aquellos que desean viajar solos, nuestros safaris para viajeros solitarios ofrecen una experiencia personalizada para explorar la naturaleza y la vida silvestre a tu propio ritmo, garantizando una aventura segura y enriquecedora.',
+                        'trips.family-safari.title': 'Safari familiar especial',
+                        'trips.family-safari.brief': 'Viajes familiares con cuidado especial para adolescentes.',
+                        'trips.family-safari.description': 'Perfecto para familias que viajan juntas, planificamos safaris especiales para padres y sus hijos adolescentes. Ofrecemos actividades adaptadas y cuidados para garantizar una experiencia agradable para todos los miembros de la familia.',
+                        'trips.disabilities-safari.title': 'Safari accesible',
+                        'trips.disabilities-safari.brief': 'Safaris con cuidados especiales para personas con discapacidades o enfermedades.',
+                        'trips.disabilities-safari.description': 'Creemos que todos merecen experimentar la naturaleza y la vida silvestre. Nuestros safaris accesibles ofrecen cuidados especializados, apoyo médico y atención desde la llegada hasta la partida para personas con discapacidades o enfermedades.'
+                    }
+                },
+                sw: {
+                    translation: {
+                        'nav.home': 'Nyumbani',
+                        'nav.destinations': 'Maeneo',
+                        'nav.trips': 'Safari',
+                        'nav.news': 'Habari',
+                        'nav.about': 'Kuhusu',
+                        'nav.contact': 'Mawasiliano',
+                        'trips.special-safaris.title': 'Safari za Matukio Maalum',
+                        'trips.special-safaris.brief': 'Safari zilizoboreshwa kwa ajili ya siku za kuzaliwa, maadhimisho, mahafali na asali ya ndoa.',
+                        'trips.special-safaris.description': 'Tunapanga safari zisizosahaulika kwa wanandoa au vikundi vinavyoadhimisha matukio maalum kama siku za kuzaliwa, maadhimisho, mahafali na asali ya ndoa. Lengo letu ni kuunda uzoefu wa kipekee na wa moyo unaovutia, uliojaa mshangao ambao utabaki nawe milele.',
+                        'trips.singer-travellers.title': 'Safari ya Msafiri Pekee',
+                        'trips.singer-travellers.brief': 'Safari zilizoboreshwa kwa wanaotaka kusafiri peke yao kuchunguza asili.',
+                        'trips.singer-travellers.description': 'Zimeundwa kwa wale wanaotaka kusafiri peke yao, safari zetu za msafiri pekee hutoa uzoefu wa kibinafsi wa kuchunguza asili na wanyamapori kwa kasi yako mwenyewe, na kuhakikisha safari salama na yenye kuridhisha.',
+                        'trips.family-safari.title': 'Safari ya Familia Maalum',
+                        'trips.family-safari.brief': 'Safari za familia na uangalizi maalum kwa vijana.',
+                        'trips.family-safari.description': 'Zinazofaa kwa familia zinazosafiri pamoja, tunapanga safari maalum kwa wazazi na watoto wao wa umri wa vijana. Tunatoa shughuli zilizoboreshwa na uangalizi ili kuhakikisha uzoefu wa kufurahisha kwa wote wa familia.',
+                        'trips.disabilities-safari.title': 'Safari Inayoweza Kupatikana',
+                        'trips.disabilities-safari.brief': 'Safari zenye uangalizi maalum kwa watu wenye ulemavu au wagonjwa.',
+                        'trips.disabilities-safari.description': 'Tunaamini kwamba kila mtu anastahili kufurahia asili na wanyamapori. Safari zetu zinazoweza kupatikana hutoa huduma za pekee, msaada wa kimatibabu na uangalizi tangu kuwasili hadi kuondoka kwa watu wenye ulemavu au wagonjwa.'
+                    }
+                },
+                de: {
+                    translation: {
+                        'nav.home': 'Startseite',
+                        'nav.destinations': 'Reiseziele',
+                        'nav.trips': 'Reisen',
+                        'nav.news': 'Neuigkeiten',
+                        'nav.about': 'Über uns',
+                        'nav.contact': 'Kontakt',
+                        'trips.special-safaris.title': 'Safaris für besondere Anlässe',
+                        'trips.special-safaris.brief': 'Maßgeschneiderte Safaris für Geburtstage, Jubiläen, Abschlüsse und Flitterwochen.',
+                        'trips.special-safaris.description': 'Wir planen unvergessliche Safaris für Paare oder Gruppen, die besondere Anlässe wie Geburtstage, Jubiläen, Abschlüsse und Flitterwochen feiern. Unser Ziel ist es, einzigartige, herzerwärmende Erlebnisse voller Überraschungen zu schaffen, die Sie für immer in Erinnerung behalten werden.',
+                        'trips.singer-travellers.title': 'Safari für Alleinreisende',
+                        'trips.singer-travellers.brief': 'Individuelle Safaris für Abenteurer, die alleine die Natur erkunden möchten.',
+                        'trips.singer-travellers.description': 'Entwickelt für diejenigen, die alleine reisen möchten, bieten unsere Safaris für Alleinreisende ein individuelles Erlebnis, um die Natur und Tierwelt in Ihrem eigenen Tempo zu erkunden und ein sicheres und bereicherndes Abenteuer zu gewährleisten.',
+                        'trips.family-safari.title': 'Besondere Familiensafari',
+                        'trips.family-safari.brief': 'Familienreisen mit besonderer Betreuung für Teenager.',
+                        'trips.family-safari.description': 'Perfekt für zusammen reisende Familien, planen wir spezielle Safaris für Eltern und ihre jugendlichen Kinder. Wir bieten maßgeschneiderte Aktivitäten und Betreuung, um ein angenehmes Erlebnis für alle Familienmitglieder zu gewährleisten.',
+                        'trips.disabilities-safari.title': 'Barrierefreie Safari',
+                        'trips.disabilities-safari.brief': 'Safaris mit besonderer Betreuung für Menschen mit Behinderungen oder Krankheiten.',
+                        'trips.disabilities-safari.description': 'Wir glauben, dass jeder die Natur und Tierwelt erleben sollte. Unsere barrierefreien Safaris bieten spezialisierte Betreuung, medizinische Unterstützung und Aufmerksamkeit von der Ankunft bis zur Abreise für Menschen mit Behinderungen oder Krankheiten.'
+                    }
+                },
+                zh: {
+                    translation: {
+                        'nav.home': '首页',
+                        'nav.destinations': '目的地',
+                        'nav.trips': '旅行',
+                        'nav.news': '新闻',
+                        'nav.about': '关于我们',
+                        'nav.contact': '联系我们',
+                        'trips.special-safaris.title': '特殊场合Safari',
+                        'trips.special-safaris.brief': '为生日、纪念日、毕业典礼和蜜月定制的Safari之旅。',
+                        'trips.special-safaris.description': '我们为庆祝特殊场合（如生日、纪念日、毕业典礼和蜜月）的夫妇或团体策划难忘的Safari之旅。我们的目标是创造独特而温馨的体验，充满惊喜，让您永生难忘。',
+                        'trips.singer-travellers.title': '独旅行者Safari',
+                        'trips.singer-travellers.brief': '为独自探险者定制的探索自然的Safari之旅。',
+                        'trips.singer-travellers.description': '专为希望独自旅行的游客设计，我们的独旅行者Safari提供个性化的体验，让您以自己的节奏探索自然和野生动物，确保安全且充实的冒险之旅。',
+                        'trips.family-safari.title': '特殊家庭Safari',
+                        'trips.family-safari.brief': '为家庭旅行提供特别照顾青少年的Safari。',
+                        'trips.family-safari.description': '非常适合一起旅行的家庭，我们为父母及其青少年子女策划特殊的Safari之旅。我们提供定制的活动和照顾，确保所有家庭成员都能享受愉快的体验。',
+                        'trips.disabilities-safari.title': '无障碍Safari',
+                        'trips.disabilities-safari.brief': '为残疾或患病人士提供特别照顾的Safari。',
+                        'trips.disabilities-safari.description': '我们相信每个人都应该体验自然和野生动物。我们的无障碍Safari为残疾人或患病人士提供从到达至离开的专门照顾、医疗支持和关注。'
+                    }
+                }
+            }
+        }, () => {
+            applyTranslations();
+        });
+
+        // Apply translations to elements
+        function applyTranslations() {
+            document.querySelectorAll('[data-i18n]').forEach(element => {
+                const key = element.getAttribute('data-i18n');
+                element.textContent = i18next.t(key);
+            });
+        }
+
+        // Language switcher
+        const languageSelects = document.querySelectorAll('#language-select, #language-select-desktop');
+        languageSelects.forEach(select => {
+            select.addEventListener('change', (e) => {
+                const newLang = e.target.value;
+                i18next.changeLanguage(newLang, () => {
+                    applyTranslations();
+                    updateModalContent(); // Update modal content if open
+                });
+            });
+        });
+
+        // Modal handling
+        const modal = document.getElementById('tripModal');
+        const modalTitle = document.getElementById('modalTitle');
+        const modalImage = document.getElementById('modalImage');
+        const modalDescription = document.getElementById('modalDescription');
+        const closeModal = document.querySelector('.modal-close');
+        let currentTrip = '';
+
+        function updateModalContent() {
+            if (currentTrip) {
+                modalTitle.textContent = i18next.t(`trips.${currentTrip}.title`);
+                modalDescription.textContent = i18next.t(`trips.${currentTrip}.description`);
+            }
+        }
+
+        document.querySelectorAll('.trip-card').forEach(card => {
+            card.addEventListener('click', () => {
+                currentTrip = card.getAttribute('data-trip');
+                modalTitle.textContent = i18next.t(`trips.${currentTrip}.title`);
+                modalImage.src = card.querySelector('img').src;
+                modalImage.alt = card.querySelector('img').alt;
+                modalDescription.textContent = i18next.t(`trips.${currentTrip}.description`);
+                modal.style.display = 'flex';
+            });
+        });
+
+        closeModal.addEventListener('click', () => {
+            modal.style.display = 'none';
+            currentTrip = '';
+        });
+
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.style.display = 'none';
+                currentTrip = '';
+            }
+        });
+
+        // Mobile menu toggle
+        document.addEventListener('DOMContentLoaded', () => {
+            const toggleButton = document.getElementById('menu-toggle');
+            const mobileMenu = document.getElementById('mobile-menu');
+            toggleButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+        });
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.remove('nav-transparent');
+                navbar.classList.add('nav-solid');
+            } else {
+                navbar.classList.remove('nav-solid');
+                navbar.classList.add('nav-transparent');
+            }
+        });
+    </script>
+</body>
+
+</html>

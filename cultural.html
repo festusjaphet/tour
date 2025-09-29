@@ -1,0 +1,2414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wendo African Safaris - Domestic Safaris</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <script src="https://unpkg.com/i18next@23.15.1/dist/umd/i18next.min.js"></script>
+    <style>
+        body {
+            background-color: rgb(111, 57, 36);
+        }
+        .nav-transparent {
+            background: linear-gradient(to right, rgba(255, 255, 255, 0.063), rgba(0, 0, 0, 0.413), rgb(0, 0, 0));
+            transition: background 0.3s ease-in-out;
+        }
+        .nav-solid {
+            background: linear-gradient(to right, rgb(255, 255, 255), rgb(0, 0, 0), rgb(0, 0, 0));
+        }
+        .nav-link {
+            transition: color 0.3s;
+        }
+        .nav-link.active {
+            color: #4CAF50 !important;
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 50;
+            align-items: center;
+            justify-content: center;
+        }
+        .modal-content {
+            background: white;
+            border-radius: 1rem;
+            padding: 2rem;
+            max-width: 600px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            position: relative;
+        }
+        .modal-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            cursor: pointer;
+            font-size: 1.5rem;
+        }
+        .domestic-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .domestic-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+        .domestic-card img {
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+        .domestic-card:hover img {
+            opacity: 0.9;
+            transform: scale(1.05);
+        }
+        .domestic-card::before {
+            content: '\f0c0';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            color: #4CAF50;
+            font-size: 1.5rem;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .domestic-card:hover::before {
+            opacity: 1;
+        }
+        .hero {
+            position: relative;
+            width: 100%;
+            height: 60vh;
+            overflow: hidden;
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4));
+        }
+        .hero img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .hero-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: white;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        .fade-in {
+            animation: fadeIn 1s ease-in;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        #mobile-menu {
+            display: none;
+        }
+        #mobile-menu.active {
+            display: block;
+        }
+        @media (max-width: 768px) {
+            .hero {
+                height: 40vh;
+            }
+            .hero-text h1 {
+                font-size: 1.5rem;
+            }
+            .hero-text p {
+                font-size: 0.9rem;
+            }
+            .domestic-card {
+                transform: none;
+            }
+            .domestic-card:hover {
+                transform: scale(1.02);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="relative">
+        <nav id="navbar" class="nav-transparent text-white fixed w-full top-0 z-50">
+            <div class="container mx-auto flex justify-between items-center  px-4">
+                <a href="#home" class="flex items-center space-x-2">
+                    <img loading="lazy" src="assets/image1.png" alt="Wendo Safari Logo" class="size-20">
+                    <img loading="lazy" src="assets/wendo.png" alt="Wendo Safari Logo" class="h-12">
+                </a>
+                <div class="flex items-center space-x-4">
+                    <ul class="hidden md:flex space-x-6">
+                        <li><a href="index.html#home" class="nav-link hover:text-green-400 font-semibold" data-i18n="nav.home">Home</a></li>
+                        <li><a href="index.html#destinations" class="nav-link hover:text-green-400 font-semibold" data-i18n="nav.destinations">Destinations</a></li>
+                        <li><a href="index.html#Trips" class="nav-link hover:text-green-400 font-semibold" data-i18n="nav.trips">Trips</a></li>
+                        <li><a href="add-news.html" class="nav-link hover:text-green-400 font-semibold" data-i18n="nav.news">News</a></li>
+                        <li><a href="index.html#about" class="nav-link hover:text-green-400 font-semibold" data-i18n="nav.about">About</a></li>
+                        <li><a href="index.html#contact" class="nav-link hover:text-green-400 font-semibold" data-i18n="nav.contact">Contact</a></li>
+                        <!-- <li><a href="cultural.html" class="nav-link hover:text-green-400 font-semibold" data-i18n="nav.cultural">Cultural</a></li> -->
+                        <select id="language-select-desktop" class="bg-green-500 text-white rounded-md focus:outline-none px-2 py-1">
+                            <option value="en">English</option>
+                            <option value="fr">Français</option>
+                            <option value="es">Español</option>
+                            <option value="sw">Kiswahili</option>
+                            <option value="de">Deutsch</option>
+                            <option value="zh">中文</option>
+                        </select>
+                    </ul>
+                    <button id="menu-toggle" class="md:hidden focus:outline-none transform transition-transform duration-300 hover:scale-110" aria-expanded="false">
+                        <svg class="w-6 h-6 menu-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path class="menu-open" stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16m-7 6h7"></path>
+                            <path class="menu-close hidden" stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            <div id="mobile-menu" class="md:hidden absolute top-16 w-full z-[100]">
+                <div class="backdrop-blur-sm bg-green-500/70 rounded-lg p-4 shadow-md">
+                    <ul class="space-y-4 text-center">
+                        <li><a href="index.html#home" class="block hover:text-green-300" data-i18n="nav.home">Home</a></li>
+                        <li><a href="index.html#destinations" class="block hover:text-green-300" data-i18n="nav.destinations">Destinations</a></li>
+                        <li><a href="index.html#Trips" class="block hover:text-green-300" data-i18n="nav.trips">Trips</a></li>
+                        <li><a href="add-news.html" class="block hover:text-green-300" data-i18n="nav.news">News</a></li>
+                        <li><a href="index.html#about" class="block hover:text-green-300" data-i18n="nav.about">About</a></li>
+                        <li><a href="index.html#contact" class="block hover:text-green-300" data-i18n="nav.contact">Contact</a></li>
+                        <!-- <li><a href="cultural.html" class="block hover:text-green-300" data-i18n="nav.cultural">Cultural</a></li> -->
+                        <li>
+                            <select id="language-select" class="bg-green-500 text-white rounded-md p-2 focus:outline-none">
+                                <option value="en">English</option>
+                                <option value="fr">Français</option>
+                                <option value="es">Español</option>
+                                <option value="sw">Kiswahili</option>
+                                <option value="de">Deutsch</option>
+                                <option value="zh">中文</option>
+                            </select>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </div>
+    <script>
+        // Mobile Menu Toggle
+        document.addEventListener('DOMContentLoaded', () => {
+            const toggleButton = document.getElementById('menu-toggle');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const menuIcon = toggleButton.querySelector('.menu-icon');
+            const menuOpen = menuIcon.querySelector('.menu-open');
+            const menuClose = menuIcon.querySelector('.menu-close');
+            if (toggleButton && mobileMenu) {
+                toggleButton.addEventListener('click', () => {
+                    console.log('Menu toggle clicked');
+                    const isExpanded = toggleButton.getAttribute('aria-expanded') === 'true';
+                    toggleButton.setAttribute('aria-expanded', !isExpanded);
+                    mobileMenu.classList.toggle('hidden');
+                    mobileMenu.classList.toggle('active');
+                    menuOpen.classList.toggle('hidden');
+                    menuClose.classList.toggle('hidden');
+                });
+            } else {
+                console.error('Toggle button or mobile menu not found');
+            }
+        });
+
+        // Language Switching
+        async function switchLanguage(languageCode) {
+            const contentElements = document.querySelectorAll('[data-i18n]');
+            for (const element of contentElements) {
+                const key = element.getAttribute('data-i18n');
+                const text = element.innerText;
+                const translatedText = await translateText(text, languageCode);
+                element.innerText = translatedText;
+            }
+        }
+
+        async function translateText(text, targetLanguage) {
+            try {
+                const url = 'https://libretranslate.com/translate';
+                const response = await fetch(url, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        q: text,
+                        source: 'en',
+                        target: targetLanguage
+                    })
+                });
+                const data = await response.json();
+                return data.translatedText || text;
+            } catch (error) {
+                console.error('Translation error:', error);
+                return text;
+            }
+        }
+
+        // Initialize default language
+        switchLanguage('en');
+
+        // Language select event listeners
+        document.getElementById('language-select-desktop').addEventListener('change', (e) => switchLanguage(e.target.value));
+        document.getElementById('language-select').addEventListener('change', (e) => switchLanguage(e.target.value));
+    </script>
+
+
+    <!-- Cultural Section -->
+    <section id="cultural"
+        class="py-24 bg-gradient-to-br from-amber-100 via-yellow-200 to-orange-100 text-center px-6 overflow-hidden">
+        <div class="container mx-auto">
+            <h2 class="text-5xl md:text-6xl font-extrabold text-gray-900 mb-16 animate-slide-up tracking-tight"
+                data-i18n="cultural.title">Tanzania’s Cultural </h2>
+            <p class="text-lg text-gray-700 mb-12 max-w-2xl mx-auto animate-fade-in" data-i18n="cultural.description">
+                Journey through time and tradition with Tanzania’s breathtaking heritage sites, from ancient ruins to
+                vibrant villages.</p>
+
+            <!-- Category 1: UNESCO World Heritage Sites -->
+            <div class="mb-20">
+                <h3 class="text-3xl md:text-4xl font-bold text-gray-800 mb-10 pb-3 border-b-4 border-amber-400 inline-block animate-fade-in"
+                    data-i18n="cultural.unesco_title">UNESCO World Heritage Gems</h3>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
+                    <a href="detail.html?site=stone-town"
+                        class="site-card bg-white rounded-2xl shadow-lg transform hover:scale-105 transition-all duration-300">
+                        <img src="https://www.foreverafricasafari.com/wp-content/uploads/2022/08/fuerte-stone-town-zanzibar.jpg"
+                            alt="Stone Town" class="w-full h-60 object-cover rounded-t-2xl"
+                            onerror="this.src='https://via.placeholder.com/750x500?text=Stone+Town+Image+Not+Available';">
+                        <div class="p-6">
+                            <h4 class="text-xl font-semibold text-gray-900" data-i18n="cultural.sites.stone-town.title">
+                                Stone Town (Zanzibar)</h4>
+                            <p class="text-gray-600 mt-2" data-i18n="cultural.sites.stone-town.description">A
+                                mesmerizing blend of Swahili culture and historic trade.</p>
+                        </div>
+                    </a>
+                    <a href="detail.html?site=kondoa"
+                        class="site-card bg-white rounded-2xl shadow-lg transform hover:scale-105 transition-all duration-300">
+                        <img src="https://www.tanzaniatourism.com/images/uploads/Kondoa_Rock_Art_Site_07.jpg"
+                            alt="Kondoa Rock Art" class="w-full h-60 object-cover rounded-t-2xl"
+                            onerror="this.src='https://via.placeholder.com/750x500?text=Kondoa+Rock+Art+Image+Not+Available';">
+                        <div class="p-6">
+                            <h4 class="text-xl font-semibold text-gray-900" data-i18n="cultural.sites.kondoa.title">
+                                Kondoa Rock Art Caves</h4>
+                            <p class="text-gray-600 mt-2" data-i18n="cultural.sites.kondoa.description">Echoes of
+                                humanity from 2,000 BCE.</p>
+                        </div>
+                    </a>
+                    <a href="detail.html?site=kilwa-songo"
+                        class="site-card bg-white rounded-2xl shadow-lg transform hover:scale-105 transition-all duration-300">
+                        <img src="https://whc.unesco.org/uploads/thumbs/news_1147-1200-630-20140617202313.jpg"
+                            alt="Kilwa Ruins" class="w-full h-60 object-cover rounded-t-2xl"
+                            onerror="this.src='https://via.placeholder.com/750x500?text=Kilwa+Ruins+Image+Not+Available';">
+                        <div class="p-6">
+                            <h4 class="text-xl font-semibold text-gray-900"
+                                data-i18n="cultural.sites.kilwa-songo.title">Kilwa Kisiwani & Songo Mnara</h4>
+                            <p class="text-gray-600 mt-2" data-i18n="cultural.sites.kilwa-songo.description">Medieval
+                                ports whispering tales of the Swahili coast.</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Category 2: Archaeological and Prehistoric Sites -->
+            <div class="mb-20">
+                <h3 class="text-3xl md:text-4xl font-bold text-gray-800 mb-10 pb-3 border-b-4 border-amber-400 inline-block animate-fade-in"
+                    data-i18n="cultural.prehistory_title">Windows to Prehistory</h3>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
+                    <a href="detail.html?site=olduvai"
+                        class="site-card bg-white rounded-2xl shadow-lg transform hover:scale-105 transition-all duration-300">
+                        <img src="https://www.ncaa.go.tz/wp-content/uploads/2022/08/Olduvai-Gorge3.jpg"
+                            alt="Olduvai Gorge" class="w-full h-60 object-cover rounded-t-2xl"
+                            onerror="this.src='https://via.placeholder.com/750x500?text=Olduvai+Gorge+Image+Not+Available';">
+                        <div class="p-6">
+                            <h4 class="text-xl font-semibold text-gray-900" data-i18n="cultural.sites.olduvai.title">
+                                Olduvai Gorge (Ngorongoro)</h4>
+                            <p class="text-gray-600 mt-2" data-i18n="cultural.sites.olduvai.description">Cradle of
+                                humankind with ancient fossils.</p>
+                        </div>
+                    </a>
+                    <a href="detail.html?site=laetoli"
+                        class="site-card bg-white rounded-2xl shadow-lg transform hover:scale-105 transition-all duration-300">
+                        <img src="https://www.tanzaniatourism.com/images/uploads/Laetoli_Footprints_NCA_3.jpg"
+                            alt="Laetoli Footprints" class="w-full h-60 object-cover rounded-t-2xl"
+                            onerror="this.src='https://via.placeholder.com/750x500?text=Laetoli+Footprints+Image+Not+Available';">
+                        <div class="p-6">
+                            <h4 class="text-xl font-semibold text-gray-900" data-i18n="cultural.sites.laetoli.title">
+                                Laetoli Footprints (Ngorongoro)</h4>
+                            <p class="text-gray-600 mt-2" data-i18n="cultural.sites.laetoli.description">
+                                3.6-million-year-old steps of our ancestors.</p>
+                        </div>
+                    </a>
+                    <a href="detail.html?site=isimila"
+                        class="site-card bg-white rounded-2xl shadow-lg transform hover:scale-105 transition-all duration-300">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9f/Isimila.jpg/1200px-Isimila.jpg"
+                            alt="Isimila Stone Age" class="w-full h-60 object-cover rounded-t-2xl"
+                            onerror="this.src='https://via.placeholder.com/750x500?text=Isimila+Stone+Age+Image+Not+Available';">
+                        <div class="p-6">
+                            <h4 class="text-xl font-semibold text-gray-900" data-i18n="cultural.sites.isimila.title">
+                                Isimila Stone Age Site (Iringa)</h4>
+                            <p class="text-gray-600 mt-2" data-i18n="cultural.sites.isimila.description">Relics of tools
+                                and towering rock pillars.</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Category 3: Historic Towns and Trading Centers -->
+            <div class="mb-20">
+                <h3 class="text-3xl md:text-4xl font-bold text-gray-800 mb-10 pb-3 border-b-4 border-amber-400 inline-block animate-fade-in"
+                    data-i18n="cultural.trading_title">Timeless Trading Hubs</h3>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
+                    <a href="detail.html?site=bagamoyo"
+                        class="site-card bg-white rounded-2xl shadow-lg transform hover:scale-105 transition-all duration-300">
+                        <img src="https://safarispartners.com/images/destinations/bagamoyo.jpg" alt="Bagamoyo Town"
+                            class="w-full h-60 object-cover rounded-t-2xl"
+                            onerror="this.src='https://via.placeholder.com/750x500?text=Bagamoyo+Town+Image+Not+Available';">
+                        <div class="p-6">
+                            <h4 class="text-xl font-semibold text-gray-900" data-i18n="cultural.sites.bagamoyo.title">
+                                Bagamoyo Town</h4>
+                            <p class="text-gray-600 mt-2" data-i18n="cultural.sites.bagamoyo.description">A haunting
+                                legacy of trade and history.</p>
+                        </div>
+                    </a>
+                    <a href="detail.html?site=kaole"
+                        class="site-card bg-white rounded-2xl shadow-lg transform hover:scale-105 transition-all duration-300">
+                        <img src="https://www.tanzaniatourism.com/images/uploads/Bagamoyo/Kaole_Ruins_Bagamoyo_03.jpg"
+                            alt="Kaole Ruins" class="w-full h-60 object-cover rounded-t-2xl"
+                            onerror="this.src='https://via.placeholder.com/750x500?text=Kaole+Ruins+Image+Not+Available';">
+                        <div class="p-6">
+                            <h4 class="text-xl font-semibold text-gray-900" data-i18n="cultural.sites.kaole.title">Kaole
+                                Ruins (Bagamoyo)</h4>
+                            <p class="text-gray-600 mt-2" data-i18n="cultural.sites.kaole.description">Whispers of a
+                                13th-century Swahili past.</p>
+                        </div>
+                    </a>
+                    <a href="detail.html?site=mikindani"
+                        class="site-card bg-white rounded-2xl shadow-lg transform hover:scale-105 transition-all duration-300">
+                        <img src="https://mikindani.com/wp-content/uploads/2015/08/Bay-6.jpg" alt="Mikindani"
+                            class="w-full h-60 object-cover rounded-t-2xl"
+                            onerror="this.src='https://via.placeholder.com/750x500?text=Mikindani+Image+Not+Available';">
+                        <div class="p-6">
+                            <h4 class="text-xl font-semibold text-gray-900" data-i18n="cultural.sites.mikindani.title">
+                                Mikindani (Mtwara)</h4>
+                            <p class="text-gray-600 mt-2" data-i18n="cultural.sites.mikindani.description">Colonial
+                                charm on the coast.</p>
+                        </div>
+                    </a>
+                    <a href="detail.html?site=ujiji"
+                        class="site-card bg-white rounded-2xl shadow-lg transform hover:scale-105 transition-all duration-300">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/a/a1/Kigoma_Railway_Station%2C_Kigoma_Ward.jpg"
+                            alt="Ujiji" class="w-full h-60 object-cover rounded-t-2xl"
+                            onerror="this.src='https://via.placeholder.com/750x500?text=Ujiji+Image+Not+Available';">
+                        <div class="p-6">
+                            <h4 class="text-xl font-semibold text-gray-900" data-i18n="cultural.sites.ujiji.title">Ujiji
+                                (Kigoma)</h4>
+                            <p class="text-gray-600 mt-2" data-i18n="cultural.sites.ujiji.description">Where Stanley met
+                                Livingstone.</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Category 4: Indigenous and Cultural Villages -->
+            <div class="mb-20">
+                <h3 class="text-3xl md:text-4xl font-bold text-gray-800 mb-10 pb-3 border-b-4 border-amber-400 inline-block animate-fade-in"
+                    data-i18n="cultural.villages_title">Living Traditions</h3>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-10">
+                    <a href="detail.html?site=maasai"
+                        class="site-card bg-white rounded-2xl shadow-lg transform hover:scale-105 transition-all duration-300">
+                        <img src="https://cdn-ajfhi.nitrocdn.com/KGztweKcUtUgsFQkUHxObgZRMXOaBfJI/assets/images/optimized/rev-fbb238a/tanzania-specialist.com/wp-content/uploads/2023/08/visit-maasai-village-1.jpg"
+                            alt="Maasai Villages" class="w-full h-60 object-cover rounded-t-2xl">
+                        <div class="p-6">
+                            <h4 class="text-xl font-semibold text-gray-900" data-i18n="cultural.sites.maasai.title">
+                                Maasai Villages (Arusha & Manyara)</h4>
+                            <p class="text-gray-600 mt-2" data-i18n="cultural.sites.maasai.description">Vivid traditions
+                                of the Maasai people.</p>
+                        </div>
+                    </a>
+                    <a href="detail.html?site=hadzabe"
+                        class="site-card bg-white rounded-2xl shadow-lg transform hover:scale-105 transition-all duration-300">
+                        <img src="https://www.shadowsofafrica.com/media/catalog/product/cache/1/image/900x/040ec09b1e35df139433887a97daa66f/h/a/hadzabe_in_tanzania_2.jpg"
+                            alt="Hadzabe Tribe" class="w-full h-60 object-cover rounded-t-2xl"
+                            onerror="this.src='https://via.placeholder.com/750x500?text=Hadzabe+Tribe+Image+Not+Available';">
+                        <div class="p-6">
+                            <h4 class="text-xl font-semibold text-gray-900" data-i18n="cultural.sites.hadzabe.title">
+                                Hadzabe & Datoga (Lake Eyasi)</h4>
+                            <p class="text-gray-600 mt-2" data-i18n="cultural.sites.hadzabe.description">Ancient
+                                hunter-gatherer ways.</p>
+                        </div>
+                    </a>
+                    <a href="detail.html?site=sukuma"
+                        class="site-card bg-white rounded-2xl shadow-lg transform hover:scale-105 transition-all duration-300">
+                        <img src="https://sukumamuseum.org/wp-content/uploads/royal-pavilion-5.4-1.jpg"
+                            alt="Sukuma Museum" class="w-full h-60 object-cover rounded-t-2xl"
+                            onerror="this.src='https://via.placeholder.com/750x500?text=Sukuma+Museum+Image+Not+Available';">
+                        <div class="p-6">
+                            <h4 class="text-xl font-semibold text-gray-900" data-i18n="cultural.sites.sukuma.title">
+                                Sukuma Museum (Mwanza)</h4>
+                            <p class="text-gray-600 mt-2" data-i18n="cultural.sites.sukuma.description">Treasures of
+                                Sukuma heritage.</p>
+                        </div>
+                    </a>
+                    <a href="detail.html?site=makonde"
+                        class="site-card bg-white rounded-2xl shadow-lg transform hover:scale-105 transition-all duration-300">
+                        <img src="https://www.blackwoodconservation.org/wp-content/uploads/2019/04/Mak-Instrument-Players.jpg"
+                            alt="Makonde Carvings" class="w-full h-60 object-cover rounded-t-2xl"
+                            onerror="this.src='https://via.placeholder.com/750x500?text=Makonde+Carvings+Image+Not+Available';">
+                        <div class="p-6">
+                            <h4 class="text-xl font-semibold text-gray-900" data-i18n="cultural.sites.makonde.title">
+                                Makonde Villages (Mtwara & Lindi)</h4>
+                            <p class="text-gray-600 mt-2" data-i18n="cultural.sites.makonde.description">Masters of
+                                intricate wood carvings.</p>
+                        </div>
+                    </a>
+                    <a href="detail.html?site=ikombe"
+                        class="site-card bg-white rounded-2xl shadow-lg transform hover:scale-105 transition-all duration-300">
+                        <img src="https://dailynews.co.tz/wp-content/uploads/2022/09/rukwa.jpg" alt="Ikombe Village"
+                            class="w-full h-60 object-cover rounded-t-2xl"
+                            onerror="this.src='https://via.placeholder.com/750x500?text=Ikombe+Village+Image+Not+Available';">
+                        <div class="p-6">
+                            <h4 class="text-xl font-semibold text-gray-900" data-i18n="cultural.sites.ikombe.title">
+                                Ikombe Village (Rukwa)</h4>
+                            <p class="text-gray-600 mt-2" data-i18n="cultural.sites.ikombe.description">Rich Fipa tribal
+                                legacy.</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Initialize i18next
+        i18next.init({
+            lng: 'en',
+            resources: {
+                en: {
+                    translation: {
+                        'nav.home': 'Home',
+                        'nav.destinations': 'Destinations',
+                        'nav.trips': 'Trips',
+                        'nav.photographers': 'Photographers',
+                        'nav.domestic': 'Domestic Safaris',
+                        'nav.news': 'News',
+                        'nav.about': 'About',
+                        'nav.contact': 'Contact',
+                        'domestic.hero.title': 'Explore Tanzania Together',
+                        'domestic.hero.description': 'Join family and friends on affordable domestic safaris to discover Tanzania’s iconic wildlife, stunning landscapes, and rich cultures.',
+                        'domestic.serengeti-family.title': 'Serengeti Family Adventure',
+                        'domestic.serengeti-family.brief': 'A fun-filled safari for families to explore Serengeti’s wildlife.',
+                        'domestic.serengeti-family.description': 'Gather your family for an unforgettable adventure in the Serengeti National Park. This budget-friendly safari includes game drives to see lions, zebras, and wildebeests, with activities like storytelling and bush dinners to create lasting memories for kids and adults alike.',
+                        'domestic.zanzibar-coastal.title': 'Zanzibar Coastal Escape',
+                        'domestic.zanzibar-coastal.brief': 'Relax and bond on Zanzibar’s pristine beaches and historic sites.',
+                        'domestic.zanzibar-coastal.description': 'Perfect for groups and families, this coastal getaway to Zanzibar offers white sandy beaches, snorkeling in coral reefs, and tours of Stone Town’s historic alleys. Enjoy affordable accommodations and cultural experiences that bring everyone closer together.',
+                        'domestic.kilimanjaro-cultural.title': 'Kilimanjaro Cultural Trek',
+                        'domestic.kilimanjaro-cultural.brief': 'Discover Chagga culture and scenic trails around Kilimanjaro.',
+                        'domestic.kilimanjaro-cultural.description': 'Explore the foothills of Mount Kilimanjaro with your team or family, visiting Chagga villages, coffee farms, and waterfalls. This cultural trek combines light hiking, local storytelling, and traditional meals, offering a deep connection to Tanzania’s heritage.',
+                        'domestic.southern-circuit.title': 'Southern Circuit Discovery',
+                        'domestic.southern-circuit.brief': 'Explore the hidden gems of Tanzania’s southern parks as a group.',
+                        'domestic.southern-circuit.description': 'Venture to Tanzania’s less-traveled southern parks like Selous and Ruaha with your group. This safari offers affordable game drives, boat safaris, and walking tours to see elephants, hippos, and rare birds, ideal for teams seeking adventure and bonding.'
+                    }
+                },
+                fr: {
+                    translation: {
+                        'nav.home': 'Accueil',
+                        'nav.destinations': 'Destinations',
+                        'nav.trips': 'Voyages',
+                        'nav.photographers': 'Photographes',
+                        'nav.domestic': 'Safaris domestiques',
+                        'nav.news': 'Actualités',
+                        'nav.about': 'À propos',
+                        'nav.contact': 'Contact',
+                        'domestic.hero.title': 'Explorez la Tanzanie ensemble',
+                        'domestic.hero.description': 'Rejoignez famille et amis pour des safaris domestiques abordables afin de découvrir la faune emblématique, les paysages magnifiques et les cultures riches de la Tanzanie.',
+                        'domestic.serengeti-family.title': 'Aventure familiale au Serengeti',
+                        'domestic.serengeti-family.brief': 'Un safari amusant pour les familles pour explorer la faune du Serengeti.',
+                        'domestic.serengeti-family.description': 'Réunissez votre famille pour une aventure inoubliable dans le parc national du Serengeti. Ce safari économique comprend des safaris pour voir des lions, des zèbres et des gnous, avec des activités comme des contes et des dîners dans la brousse pour créer des souvenirs durables pour les enfants et les adultes.',
+                        'domestic.zanzibar-coastal.title': 'Évasion côtière à Zanzibar',
+                        'domestic.zanzibar-coastal.brief': 'Détendez-vous et créez des liens sur les plages immaculées et les sites historiques de Zanzibar.',
+                        'domestic.zanzibar-coastal.description': 'Idéal pour les groupes et les familles, cette escapade côtière à Zanzibar offre des plages de sable blanc, de la plongée avec tuba dans les récifs coralliens et des visites des ruelles historiques de Stone Town. Profitez d’hébergements abordables et d’expériences culturelles qui rapprochent tout le monde.',
+                        'domestic.kilimanjaro-cultural.title': 'Trek culturel du Kilimandjaro',
+                        'domestic.kilimanjaro-cultural.brief': 'Découvrez la culture Chagga et les sentiers pittoresques autour du Kilimandjaro.',
+                        'domestic.kilimanjaro-cultural.description': 'Explorez les contreforts du mont Kilimandjaro avec votre équipe ou votre famille, en visitant des villages Chagga, des fermes de café et des cascades. Ce trek culturel combine randonnée légère, récits locaux et repas traditionnels, offrant une connexion profonde avec l’héritage tanzanien.',
+                        'domestic.southern-circuit.title': 'Découverte du circuit sud',
+                        'domestic.southern-circuit.brief': 'Explorez les joyaux cachés des parcs du sud de la Tanzanie en groupe.',
+                        'domestic.southern-circuit.description': 'Aventurez-vous dans les parcs moins fréquentés du sud de la Tanzanie comme Selous et Ruaha avec votre groupe. Ce safari propose des safaris abordables, des safaris en bateau et des randonnées pour voir des éléphants, des hippopotames et des oiseaux rares, idéal pour les équipes en quête d’aventure et de cohésion.'
+                    }
+                },
+                es: {
+                    translation: {
+                        'nav.home': 'Inicio',
+                        'nav.destinations': 'Destinos',
+                        'nav.trips': 'Viajes',
+                        'nav.photographers': 'Fotógrafos',
+                        'nav.domestic': 'Safaris domésticos',
+                        'nav.news': 'Noticias',
+                        'nav.about': 'Acerca de',
+                        'nav.contact': 'Contacto',
+                        'domestic.hero.title': 'Explora Tanzania juntos',
+                        'domestic.hero.description': 'Únete a familiares y amigos en safaris domésticos asequibles para descubrir la fauna icónica, los paisajes impresionantes y las ricas culturas de Tanzania.',
+                        'domestic.serengeti-family.title': 'Aventura familiar en Serengeti',
+                        'domestic.serengeti-family.brief': 'Un safari divertido para familias para explorar la fauna del Serengeti.',
+                        'domestic.serengeti-family.description': 'Reúne a tu familia para una aventura inolvidable en el Parque Nacional del Serengeti. Este safari económico incluye recorridos para ver leones, cebras y ñus, con actividades como narración de cuentos y cenas en la sabana para crear recuerdos duraderos para niños y adultos.',
+                        'domestic.zanzibar-coastal.title': 'Escapada costera a Zanzíbar',
+                        'domestic.zanzibar-coastal.brief': 'Relájate y fortalece lazos en las playas vírgenes y sitios históricos de Zanzíbar.',
+                        'domestic.zanzibar-coastal.description': 'Perfecto para grupos y familias, esta escapada costera a Zanzíbar ofrece playas de arena blanca, esnórquel en arrecifes de coral y recorridos por los callejones históricos de Stone Town. Disfruta de alojamientos asequibles y experiencias culturales que unen a todos.',
+                        'domestic.kilimanjaro-cultural.title': 'Trekking cultural del Kilimanjaro',
+                        'domestic.kilimanjaro-cultural.brief': 'Descubre la cultura Chagga y los senderos escénicos alrededor del Kilimanjaro.',
+                        'domestic.kilimanjaro-cultural.description': 'Explora las faldas del monte Kilimanjaro con tu equipo o familia, visitando aldeas Chagga, fincas de café y cascadas. Este trekking cultural combina caminatas ligeras, narraciones locales y comidas tradicionales, ofreciendo una conexión profunda con el patrimonio tanzaniano.',
+                        'domestic.southern-circuit.title': 'Descubrimiento del circuito sur',
+                        'domestic.southern-circuit.brief': 'Explora las joyas ocultas de los parques del sur de Tanzania en grupo.',
+                        'domestic.southern-circuit.description': 'Aventúrate en los parques menos visitados del sur de Tanzania como Selous y Ruaha con tu grupo. Este safari ofrece recorridos asequibles, safaris en barco y caminatas para ver elefantes, hipopótamos y aves raras, ideal para equipos que buscan aventura y unión.'
+                    }
+                },
+                sw: {
+                    translation: {
+                        'nav.home': 'Nyumbani',
+                        'nav.destinations': 'Maeneo',
+                        'nav.trips': 'Safari',
+                        'nav.photographers': 'Wapiga Picha',
+                        'nav.domestic': 'Safari za Ndani',
+                        'nav.news': 'Habari',
+                        'nav.about': 'Kuhusu',
+                        'nav.contact': 'Mawasiliano',
+                        'domestic.hero.title': 'Chunguza Tanzania Pamoja',
+                        'domestic.hero.description': 'Jiunge na familia na marafiki kwenye safari za ndani za bei nafuu ili kugundua wanyamapori wa kipekee, mandhari ya kupendeza na tamaduni za tajiri za Tanzania.',
+                        'domestic.serengeti-family.title': 'Matukio ya Familia ya Serengeti',
+                        'domestic.serengeti-family.brief': 'Safari ya kufurahisha kwa familia kuchunguza wanyamapori wa Serengeti.',
+                        'domestic.serengeti-family.description': 'Kusanya familia yako kwa ajili ya tukio lisilosahaulika katika Hifadhi ya Taifa ya Serengeti. Safari hii ya bei nafuu inajumuisha safari za kumudu wanyama kama simba, pundamilia na nyumbu, pamoja na shughuli kama hadithi za hadithi na chakula cha jioni porini ili kuunda kumbukumbu za kudumu kwa watoto na wazazi.',
+                        'domestic.zanzibar-coastal.title': 'Mapumziko ya Pwani ya Zanzibar',
+                        'domestic.zanzibar-coastal.brief': 'Pumzika na uunganishe kwenye fukwe safi za Zanzibar na maeneo ya kihistoria.',
+                        'domestic.zanzibar-coastal.description': 'Inafaa kwa vikundi na familia, mapumziko haya ya pwani ya Zanzibar yanatoa fukwe za mchanga mweupe, kupiga mbizi kwenye miamba ya matumbawe na ziara za mitaa ya kihistoria ya Stone Town. Furahia malazi ya bei nafuu na uzoefu wa kitamaduni unaowakusanya wote pamoja.',
+                        'domestic.kilimanjaro-cultural.title': 'Safari ya Kitamaduni ya Kilimanjaro',
+                        'domestic.kilimanjaro-cultural.brief': 'Gundua tamaduni ya Wachagga na njia za kupendeza karibu na Kilimanjaro.',
+                        'domestic.kilimanjaro-cultural.description': 'Chunguza miteremko ya Mlima Kilimanjaro na timu yako au familia, ukitembelea vijiji vya Wachagga, mashamba ya kahawa na maporomoko ya maji. Safari hii ya kitamaduni inachanganya matembezi mepesi, hadithi za mitaa na chakula cha jadi, ikitoa uhusiano wa kina na urithi wa Tanzania.',
+                        'domestic.southern-circuit.title': 'Ugunduzi wa Mzunguko wa Kusini',
+                        'domestic.southern-circuit.brief': 'Chunguza maeneo yaliyofichika ya mbuga za kusini za Tanzania kama kundi.',
+                        'domestic.southern-circuit.description': 'Jiunge na safari kwenye mbuga zisizotembelewa sana za kusini za Tanzania kama Selous na Ruaha na kundi lako. Safari hii inatoa safari za bei nafuu, safari za boti na matembezi ya kutazama tembo, viboko na ndege wa nadra, bora kwa timu zinazotafuta tukio na umoja.'
+                    }
+                },
+                de: {
+                    translation: {
+                        'nav.home': 'Startseite',
+                        'nav.destinations': 'Reiseziele',
+                        'nav.trips': 'Reisen',
+                        'nav.photographers': 'Fotografen',
+                        'nav.domestic': 'Inlandssafaris',
+                        'nav.news': 'Neuigkeiten',
+                        'nav.about': 'Über uns',
+                        'nav.contact': 'Kontakt',
+                        'domestic.hero.title': 'Tansania gemeinsam erkunden',
+                        'domestic.hero.description': 'Schließen Sie sich Familie und Freunden an für erschwingliche Inlandssafaris, um Tansanias ikonische Tierwelt, atemberaubende Landschaften und reiche Kulturen zu entdecken.',
+                        'domestic.serengeti-family.title': 'Serengeti-Familienabenteuer',
+                        'domestic.serengeti-family.brief': 'Ein unterhaltsamer Safari für Familien, um die Tierwelt des Serengeti zu erkunden.',
+                        'domestic.serengeti-family.description': 'Versammeln Sie Ihre Familie für ein unvergessliches Abenteuer im Serengeti-Nationalpark. Dieser budgetfreundliche Safari umfasst Pirschfahrten, um Löwen, Zebras und Gnus zu sehen, mit Aktivitäten wie Geschichtenerzählen und Busch-Dinners, um bleibende Erinnerungen für Kinder und Erwachsene zu schaffen.',
+                        'domestic.zanzibar-coastal.title': 'Sansibar-Küstenflucht',
+                        'domestic.zanzibar-coastal.brief': 'Entspannen und verbinden Sie sich an Sansibars unberührten Stränden und historischen Stätten.',
+                        'domestic.zanzibar-coastal.description': 'Perfekt für Gruppen und Familien, bietet dieser Küstenausflug nach Sansibar weiße Sandstrände, Schnorcheln in Korallenriffen und Touren durch die historischen Gassen von Stone Town. Genießen Sie erschwingliche Unterkünfte und kulturelle Erlebnisse, die alle näher zusammenbringen.',
+                        'domestic.kilimanjaro-cultural.title': 'Kilimandscharo-Kulturtrek',
+                        'domestic.kilimanjaro-cultural.brief': 'Entdecken Sie die Chagga-Kultur und malerische Pfade rund um den Kilimandscharo.',
+                        'domestic.kilimanjaro-cultural.description': 'Erkunden Sie die Ausläufer des Kilimandscharo mit Ihrem Team oder Ihrer Familie, besuchen Sie Chagga-Dörfer, Kaffeefarmen und Wasserfälle. Dieser Kulturtrip kombiniert leichte Wanderungen, lokale Geschichten und traditionelle Mahlzeiten und bietet eine tiefe Verbindung zum tansanischen Erbe.',
+                        'domestic.southern-circuit.title': 'Entdeckung des südlichen Kreises',
+                        'domestic.southern-circuit.brief': 'Erkunden Sie die verborgenen Schätze der südlichen Parks Tansanias als Gruppe.',
+                        'domestic.southern-circuit.description': 'Begeben Sie sich mit Ihrer Gruppe in die weniger besuchten südlichen Parks Tansanias wie Selous und Ruaha. Dieser Safari bietet erschwingliche Pirschfahrten, Bootsafaris und Wanderungen, um Elefanten, Flusspferde und seltene Vögel zu sehen, ideal für Teams, die Abenteuer und Zusammenhalt suchen.'
+                    }
+                },
+                zh: {
+                    translation: {
+                        'nav.home': '首页',
+                        'nav.destinations': '目的地',
+                        'nav.trips': '旅行',
+                        'nav.photographers': '摄影师',
+                        'nav.domestic': '国内Safari',
+                        'nav.news': '新闻',
+                        'nav.about': '关于我们',
+                        'nav.contact': '联系我们',
+                        'domestic.hero.title': '一起探索坦桑尼亚',
+                        'domestic.hero.description': '与家人和朋友一起参加价格实惠的国内Safari，发现坦桑尼亚标志性的野生动物、壮丽的风景和丰富的文化。',
+                        'domestic.serengeti-family.title': '塞伦盖蒂家庭冒险',
+                        'domestic.serengeti-family.brief': '为家庭设计的充满乐趣的Safari，探索塞伦盖蒂的野生动物。',
+                        'domestic.serengeti-family.description': '召集您的家人，在塞伦盖蒂国家公园体验一次难忘的冒险。这个经济实惠的Safari包括观赏狮子、斑马和角马的游猎活动，以及讲故事和丛林晚餐等活动，为儿童和成人创造持久的回忆。',
+                        'domestic.zanzibar-coastal.title': '桑给巴尔海岸之旅',
+                        'domestic.zanzibar-coastal.brief': '在桑给巴尔的原始海滩和历史遗址上放松和联系。',
+                        'domestic.zanzibar-coastal.description': '适合团体和家庭，这个桑给巴尔海岸之旅提供白色沙滩、在珊瑚礁中浮潜，以及石头城历史小巷的游览。享受价格实惠的住宿和文化体验，让每个人更加亲近。',
+                        'domestic.kilimanjaro-cultural.title': '乞力马扎罗文化徒步',
+                        'domestic.kilimanjaro-cultural.brief': '发现乞力马扎罗周围的查加文化和风景优美的步道。',
+                        'domestic.kilimanjaro-cultural.description': '与您的团队或家人一起探索乞力马扎罗山脚，参观查加村庄、咖啡农场和瀑布。这个文化徒步结合了轻松的徒步旅行、当地故事和传统美食，提供与坦桑尼亚遗产的深厚联系。',
+                        'domestic.southern-circuit.title': '南部环线探秘',
+                        'domestic.southern-circuit.brief': '以团队形式探索坦桑尼亚南部公园的隐秘瑰宝。',
+                        'domestic.southern-circuit.description': '与您的团队一起前往坦桑尼亚南部较少游览的公园，如塞卢斯和鲁阿哈。这个Safari提供价格实惠的游猎、船上Safari和步行游览，观赏大象、河马和稀有鸟类，非常适合寻求冒险和团队凝聚力的团队。'
+                    }
+                }
+            }
+        }, () => {
+            applyTranslations();
+        });
+
+        // Apply translations to elements
+        function applyTranslations() {
+            document.querySelectorAll('[data-i18n]').forEach(element => {
+                const key = element.getAttribute('data-i18n');
+                element.textContent = i18next.t(key);
+            });
+        }
+
+        // Language switcher
+        const languageSelects = document.querySelectorAll('#language-select, #language-select-desktop');
+        languageSelects.forEach(select => {
+            select.addEventListener('change', (e) => {
+                const newLang = e.target.value;
+                i18next.changeLanguage(newLang, () => {
+                    applyTranslations();
+                    updateModalContent();
+                });
+            });
+        });
+
+        // Modal handling
+        const modal = document.getElementById('tripModal');
+        const modalTitle = document.getElementById('modalTitle');
+        const modalImage = document.getElementById('modalImage');
+        const modalDescription = document.getElementById('modalDescription');
+        const closeModal = document.querySelector('.modal-close');
+        let currentTrip = '';
+
+        function updateModalContent() {
+            if (currentTrip) {
+                modalTitle.textContent = i18next.t(`domestic.${currentTrip}.title`);
+                modalDescription.textContent = i18next.t(`domestic.${currentTrip}.description`);
+            }
+        }
+
+        document.querySelectorAll('.domestic-card').forEach(card => {
+            card.addEventListener('click', () => {
+                currentTrip = card.getAttribute('data-trip');
+                modalTitle.textContent = i18next.t(`domestic.${currentTrip}.title`);
+                modalImage.src = card.querySelector('img').src;
+                modalImage.alt = card.querySelector('img').alt;
+                modalDescription.textContent = i18next.t(`domestic.${currentTrip}.description`);
+                modal.style.display = 'flex';
+            });
+        });
+
+        closeModal.addEventListener('click', () => {
+            modal.style.display = 'none';
+            currentTrip = '';
+        });
+
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.style.display = 'none';
+                currentTrip = '';
+            }
+        });
+
+        // Mobile menu toggle
+        document.addEventListener('DOMContentLoaded', () => {
+            const toggleButton = document.getElementById('menu-toggle');
+            const mobileMenu = document.getElementById('mobile-menu');
+            toggleButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+        });
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.remove('nav-transparent');
+                navbar.classList.add('nav-solid');
+            } else {
+                navbar.classList.remove('nav-solid');
+                navbar.classList.add('nav-transparent');
+            }
+        });
+    </script>
+     <script>
+        const destinations = [
+            {
+                id: "serengeti",
+                image: "https://firebasestorage.googleapis.com/v0/b/feskilimo.appspot.com/o/Tour%2Fzebraz.mp4?alt=media&token=6b35f19b-d2fe-44e2-875a-66750c5b7b70",
+                isVideo: true
+            },
+            {
+                id: "ngorongoro",
+                image: "https://firebasestorage.googleapis.com/v0/b/feskilimo.appspot.com/o/Tour%2Fsimbafamily.jpeg?alt=media&token=1befb5d8-d339-422c-ad26-1e792fdd7f92",
+                isVideo: false
+            },
+            {
+                id: "tarangire",
+                image: "https://firebasestorage.googleapis.com/v0/b/feskilimo.appspot.com/o/Tour%2Ftembo.jpeg?alt=media&token=e6e344a0-1241-4162-858a-2445fcf9b44b",
+                isVideo: false
+            },
+            {
+                id: "manyara",
+                image: "assets/Manyara.jpeg",
+                isVideo: false
+            },
+            {
+                id: "arusha",
+                image: "https://firebasestorage.googleapis.com/v0/b/feskilimo.appspot.com/o/Tour%2Fsimbatoto.jpeg?alt=media&token=e02c6f65-a951-45d8-a0c8-9d405861c43c",
+                isVideo: false
+            },
+            {
+                id: "kilimanjaro",
+                image: "https://firebasestorage.googleapis.com/v0/b/feskilimo.appspot.com/o/Tour%2Fkilimanjarol.mp4?alt=media&token=63a36a66-08d1-4114-a3ab-560a809d65a5",
+                isVideo: true
+            }
+        ];
+
+        // Initialize i18next
+
+        i18next.init({
+            lng: localStorage.getItem('language') || 'en', // Default language
+            fallbackLng: 'en',
+            resources: {
+                en: {
+                    translation: {
+                        // Previous translations for nav and hero
+                        "nav": {
+                            "home": "Home",
+                            "destinations": "Destinations",
+                            "trips": "Trips",
+                            "about": "About",
+                            "contact": "Contact",
+                            news: 'News',
+                        },
+                        "hero": {
+                            "title": "Your Gateway to Northern Tanzania’s Wonders",
+                            "subtitle": "Explore breathtaking safaris, stunning landscapes, and rich cultural heritage with expert guides.",
+                            "description": "From the legendary Serengeti plains, Lake Mantra, Tarangire, Arusha National Park, Mount Kilimanjaro to the lush highlands of Ngorongoro Crater, every journey with us is designed to explore the most stunning and diverse ecosystems in the world."
+                        },
+                        // New translations for destinations section
+                        "destinations": {
+                            "title": "Our Destinations",
+                            "description": "Wendo African Safaris specializes in safaris across Northern Tanzania's most celebrated national parks and reserves.",
+                            "serengeti": {
+                                "title": "Serengeti National Park",
+                                "description": "Witness the awe-inspiring Great Migration and vast savannahs teeming with wildlife."
+                            },
+                            "ngorongoro": {
+                                "title": "Ngorongoro Conservation Area",
+                                "description": "Explore the Ngorongoro Crater, a UNESCO World Heritage Site with diverse ecosystems."
+                            },
+                            "tarangire": {
+                                "title": "Tarangire National Park",
+                                "description": "Discover a haven for elephant herds and iconic baobab trees."
+                            },
+                            "manyara": {
+                                "title": "Lake Manyara National Park",
+                                "description": "Marvel at tree-climbing lions and vibrant birdlife along the lake."
+                            },
+                            "arusha": {
+                                "title": "Arusha National Park",
+                                "description": "Experience diverse landscapes from forests to volcanic craters."
+                            },
+                            "kilimanjaro": {
+                                "title": "Mount Kilimanjaro",
+                                "description": "Embark on the adventure of a lifetime climbing Africa’s highest peak."
+                            }
+                        },
+                        // Trips
+                        "trips": {
+                            "title": "Our Tour Packages",
+                            "description": "Explore our carefully crafted safari trips across Northern Tanzania and beyond. Each journey offers unique experiences tailored to your adventure style.",
+                            "dates": "Dates",
+                            "duration": "Duration",
+                            "customizable": "Customizable",
+                            "north-tanzania-circuit": {
+                                "title": "North Tanzania Circuit Safari",
+                                "duration": "8 Days / 7 Nights"
+                            },
+                            "zanzibar-dar-es-salaam": {
+                                "title": "Zanzibar and Dar-es-Salaam Beach Safari",
+                                "duration": "5 Days / 4 Nights"
+                            },
+                            "serengeti-authenticity": {
+                                "title": "5 Days Serengeti Authenticity Safari",
+                                "duration": "5 Days / 4 Nights"
+                            }, "special_safaris": {
+                                "title": "Special Safaris",
+                                "duration": "5 Days / 4 Nights"
+                            },
+                            "photography": {
+                                "title": "Photography Safaris",
+                                "duration": "5 Days / 4 Nights"
+                            },
+                            "domestic_safaris": {
+                                "title": "Domestic Safaris",
+                                "duration": "5 Days / 4 Nights"
+                            }
+                        },
+                        // Adventure
+                        "adventure": {
+                            "title": "Are you ready for an adventure?",
+                            "description": "Ready to embark on the safari of your dreams? Let Wendo African Safaris take you on a journey through Northern Tanzania’s most spectacular destinations. Whether you’re planning your first safari or returning for another adventure, we’re here to make your dream trip a reality.",
+                            "youtube": "Watch on YouTube",
+                            "youtube_title": "Wendo African Safaris Video"
+                        },
+                        // Sustainability
+                        "sustainability": {
+                            "title": "Our Sustainability Commitment",
+                            "description": "Wendo African Safaris is deeply committed to responsible tourism. We strive to minimize our environmental footprint while maximizing the positive impact on local communities. Our sustainability initiatives include:",
+                            "initiatives": {
+                                "conservation": "Supporting conservation projects to protect endangered species and preserve Tanzania's unique ecosystems.",
+                                "communities": "Partnering with local communities to promote cultural preservation and provide economic opportunities.",
+                                "eco-practices": "Adopting eco-friendly practices in our operations, including reducing waste and promoting renewable energy.",
+                                "education": "Educating our guests about the importance of conservation and responsible travel."
+                            }
+                        },
+                        // Plan Your Adventure
+                        "plan-your-adventure": {
+                            "title": "Plan Your Adventure",
+                            "description": "Ready to embark on the safari of your dreams? Let Wendo African Safaris take you on a journey through Northern Tanzania's most spectacular destinations. Whether you're planning your first safari or returning for another adventure, we're here to make your dream trip a reality."
+                        },
+                        // Contact
+                        "contact": {
+                            "title": "Contact Us",
+                            "description": "Have questions or need help planning your trip? We'd love to hear from you!",
+                            "email_label": "Email",
+                            "phone_label": "Phone",
+                            "website_label": "Website",
+                            "social_label": "Social Media",
+                            "social_instagram": "Follow us on Instagram",
+                            "social_facebook": "Follow us on Facebook",
+                            "social_twitter": "Follow us on Twitter",
+                            "social_youtube": "Watch us on YouTube",
+                            "social_whatsapp": "Contact us on WhatsApp",
+                            "social_telegram": "Join us on Telegram",
+                            "form_name": "Your Name",
+                            "form_email": "Your Email",
+                            "form_phone": "Your Phone Number",
+                            "form_message": "Your Message",
+                            "form_submit": "Send Message"
+                        },
+                        // About
+                        "about": {
+                            "title": "About Us",
+                            "description1": "Welcome to Wendo African Safaris, your premier partner for unforgettable safari experiences across the breathtaking landscapes of Northern Tanzania. We are proud to be based in a region that is home to some of the world's most iconic destinations, including the Serengeti, Ngorongoro Crater, and Mount Kilimanjaro. With a name inspired by the Swahili word for \"journey,\" Wendo African Safaris is committed to creating personalized adventures that allow our guests to connect with the beauty, culture, and wildlife of Tanzania like never before.",
+                            "description2": "At Wendo African Safaris, we believe that travel is more than just sightseeing—it’s about immersion, transformation, and connection. With years of experience, a dedicated team of experts, and a deep passion for Tanzania’s unparalleled natural and cultural heritage, we offer tailored experiences that leave lasting memories.",
+                            "mission_title": "Our Mission",
+                            "mission_description": "To provide extraordinary safari experiences that showcase the natural beauty, diverse wildlife, and rich cultural traditions of Northern Tanzania while promoting sustainable tourism and supporting local communities.",
+                            "vision_title": "Our Vision",
+                            "vision_description": "To be recognized as the leading safari company in Northern Tanzania, known for our exceptional service, commitment to conservation, and transformative travel experiences that inspire a love for nature and culture."
+                        },
+                        // Cultural
+                        "cultural": {
+                            "title": "Tanzania’s Cultural ",
+                            "description": "Journey through time and tradition with Tanzania’s breathtaking heritage sites, from ancient ruins to vibrant villages.",
+                            "unesco_title": "UNESCO World Heritage Gems",
+                            "prehistory_title": "Windows to Prehistory",
+                            "trading_title": "Timeless Trading Hubs",
+                            "villages_title": "Living Traditions",
+                            "sites": {
+                                "stone-town": {
+                                    "title": "Stone Town (Zanzibar)",
+                                    "description": "A mesmerizing blend of Swahili culture and historic trade."
+                                },
+                                "kondoa": {
+                                    "title": "Kondoa Rock Art Caves",
+                                    "description": "Echoes of humanity from 2,000 BCE."
+                                },
+                                "kilwa-songo": {
+                                    "title": "Kilwa Kisiwani & Songo Mnara",
+                                    "description": "Medieval ports whispering tales of the Swahili coast."
+                                },
+                                "olduvai": {
+                                    "title": "Olduvai Gorge (Ngorongoro)",
+                                    "description": "Cradle of humankind with ancient fossils."
+                                },
+                                "laetoli": {
+                                    "title": "Laetoli Footprints (Ngorongoro)",
+                                    "description": "3.6-million-year-old steps of our ancestors."
+                                },
+                                "isimila": {
+                                    "title": "Isimila Stone Age Site (Iringa)",
+                                    "description": "Relics of tools and towering rock pillars."
+                                },
+                                "bagamoyo": {
+                                    "title": "Bagamoyo Town",
+                                    "description": "A haunting legacy of trade and history."
+                                },
+                                "kaole": {
+                                    "title": "Kaole Ruins (Bagamoyo)",
+                                    "description": "Whispers of a 13th-century Swahili past."
+                                },
+                                "mikindani": {
+                                    "title": "Mikindani (Mtwara)",
+                                    "description": "Colonial charm on the coast."
+                                },
+                                "ujiji": {
+                                    "title": "Ujiji (Kigoma)",
+                                    "description": "Where Stanley met Livingstone."
+                                },
+                                "maasai": {
+                                    "title": "Maasai Villages (Arusha & Manyara)",
+                                    "description": "Vivid traditions of the Maasai people."
+                                },
+                                "hadzabe": {
+                                    "title": "Hadzabe & Datoga (Lake Eyasi)",
+                                    "description": "Ancient hunter-gatherer ways."
+                                },
+                                "sukuma": {
+                                    "title": "Sukuma Museum (Mwanza)",
+                                    "description": "Treasures of Sukuma heritage."
+                                },
+                                "makonde": {
+                                    "title": "Makonde Villages (Mtwara & Lindi)",
+                                    "description": "Masters of intricate wood carvings."
+                                },
+                                "ikombe": {
+                                    "title": "Ikombe Village (Rukwa)",
+                                    "description": "Rich Fipa tribal legacy."
+                                }
+                            }
+                        },
+                        // Footer
+                        "footer": {
+                            "copyright": "© {{year}} Wendo Safari. All rights reserved."
+                        },
+                        news: {
+                            title: 'News and Updates',
+                            description: 'Stay updated with the latest news and announcements from Wendo African Safaris.'
+                        }, "special-safaris": {
+                            "title": "Special Safaris",
+                            "description": "Celebrate life’s special moments or embark on a unique adventure with our tailored safari experiences.",
+                            "occasions": {
+                                "title": "Birthday, Anniversary, Graduation & Honeymoon",
+                                "description": "Unforgettable safaris with surprises for couples or groups celebrating special occasions."
+                            },
+                            "single-travellers": {
+                                "title": "Single Travellers",
+                                "description": "Solo adventures designed for exploring nature at your own pace."
+                            },
+                            "family-safari": {
+                                "title": "Special Family Safari",
+                                "description": "Bespoke safaris for families with teenagers, featuring special activities."
+                            },
+                            "accessible-safari": {
+                                "title": "People with Disabilities & Sick",
+                                "description": "Accessible safaris with specialized care and medical support."
+                            }
+                        }
+                    }
+                },
+                fr: {
+                    translation: {
+                        // Previous translations
+                        "nav": {
+                            "home": "Accueil",
+                            "destinations": "Destinations",
+                            "trips": "Voyages",
+                            "about": "À propos",
+                            "contact": "Contact",
+                            news: 'Nouvelles',
+                        },
+                        "hero": {
+                            "title": "Votre porte d'entrée vers les merveilles du nord de la Tanzanie",
+                            "subtitle": "Explorez des safaris époustouflants, des paysages magnifiques et un riche patrimoine culturel avec des guides experts.",
+                            "description": "Des plaines légendaires du Serengeti, du lac Mantra, de Tarangire, du parc national d'Arusha, du mont Kilimanjaro aux hautes terres luxuriantes du cratère de Ngorongoro, chaque voyage avec nous est conçu pour explorer les écosystèmes les plus spectaculaires et diversifiés au monde."
+                        },
+                        // New translations
+                        "destinations": {
+                            "title": "Nos Destinations",
+                            "description": "Wendo African Safaris se spécialise dans les safaris à travers les parcs nationaux et réserves les plus célèbres du nord de la Tanzanie.",
+                            "serengeti": {
+                                "title": "Parc National du Serengeti",
+                                "description": "Découvrez la grande migration impressionnante et les vastes savanes regorgeant de faune."
+                            },
+                            "ngorongoro": {
+                                "title": "Aire de Conservation de Ngorongoro",
+                                "description": "Explorez le cratère de Ngorongoro, un site du patrimoine mondial de l'UNESCO avec des écosystèmes variés."
+                            },
+                            "tarangire": {
+                                "title": "Parc National de Tarangire",
+                                "description": "Découvrez un havre pour les troupeaux d'éléphants et les baobabs emblématiques."
+                            },
+                            "manyara": {
+                                "title": "Parc National du Lac Manyara",
+                                "description": "Admirez les lions grimpeurs d'arbres et la vie ornithologique vibrante le long du lac."
+                            },
+                            "arusha": {
+                                "title": "Parc National d'Arusha",
+                                "description": "Découvrez des paysages variés, des forêts aux cratères volcaniques."
+                            },
+                            "kilimanjaro": {
+                                "title": "Mont Kilimanjaro",
+                                "description": "Lancez-vous dans l'aventure de votre vie en escaladant le plus haut sommet d'Afrique."
+                            }
+                        },
+                        "trips": {
+                            "title": "Nos Forfaits de Voyage",
+                            "description": "Découvrez nos voyages safari soigneusement conçus à travers le nord de la Tanzanie et au-delà. Chaque voyage offre des expériences uniques adaptées à votre style d'aventure.",
+                            "dates": "Dates",
+                            "duration": "Durée",
+                            "customizable": "Personnalisable",
+                            "north-tanzania-circuit": {
+                                "title": "Safari Circuit Nord de la Tanzanie",
+                                "duration": "8 Jours / 7 Nuits"
+                            },
+                            "zanzibar-dar-es-salaam": {
+                                "title": "Safari Plage de Zanzibar et Dar-es-Salaam",
+                                "duration": "5 Jours / 4 Nuits"
+                            },
+                            "serengeti-authenticity": {
+                                "title": "Safari Authenticité du Serengeti de 5 Jours",
+                                "duration": "5 Jours / 4 Nuits"
+                            },
+                            "special_safaris": {
+                                "title": "Safaris Spéciaux",
+                                "duration": "5 Jours / 4 Nuits"
+                            },
+                            "photography": {
+                                "title": "Safaris Photographiques",
+                                "duration": "5 Jours / 4 Nuits"
+                            },
+                            "domestic_safaris": {
+                                "title": "Safaris Domestiques",
+                                "duration": "5 Jours / 4 Nuits"
+                            }
+                        },
+                        "adventure": {
+                            "title": "Êtes-vous prêt pour une aventure ?",
+                            "description": "Prêt à embarquer pour le safari de vos rêves ? Laissez Wendo African Safaris vous emmener dans un voyage à travers les destinations les plus spectaculaires du nord de la Tanzanie. Que vous planifiez votre premier safari ou que vous reveniez pour une autre aventure, nous sommes là pour faire de votre voyage de rêve une réalité.",
+                            "youtube": "Regarder sur YouTube",
+                            "youtube_title": "Vidéo de Wendo African Safaris"
+                        },
+                        "sustainability": {
+                            "title": "Notre Engagement envers la Durabilité",
+                            "description": "Wendo African Safaris est profondément engagé dans le tourisme responsable. Nous nous efforçons de minimiser notre empreinte environnementale tout en maximisant l'impact positif sur les communautés locales. Nos initiatives de durabilité incluent :",
+                            "initiatives": {
+                                "conservation": "Soutenir des projets de conservation pour protéger les espèces menacées et préserver les écosystèmes uniques de la Tanzanie.",
+                                "communities": "Collaborer avec les communautés locales pour promouvoir la préservation culturelle et offrir des opportunités économiques.",
+                                "eco-practices": "Adopter des pratiques écologiques dans nos opérations, y compris la réduction des déchets et la promotion des énergies renouvelables.",
+                                "education": "Sensibiliser nos clients à l'importance de la conservation et des voyages responsables."
+                            }
+                        },
+                        "plan-your-adventure": {
+                            "title": "Planifiez Votre Aventure",
+                            "description": "Prêt à embarquer pour le safari de vos rêves ? Laissez Wendo African Safaris vous emmener dans un voyage à travers les destinations les plus spectaculaires du nord de la Tanzanie. Que vous planifiez votre premier safari ou que vous reveniez pour une autre aventure, nous sommes là pour faire de votre voyage de rêve une réalité."
+                        },
+                        "contact": {
+                            "title": "Contactez-Nous",
+                            "description": "Vous avez des questions ou besoin d'aide pour planifier votre voyage ? Nous serions ravis d'avoir de vos nouvelles !",
+                            "email_label": "Email",
+                            "phone_label": "Téléphone",
+                            "website_label": "Site Web",
+                            "social_label": "Réseaux Sociaux",
+                            "social_instagram": "Suivez-nous sur Instagram",
+                            "social_facebook": "Suivez-nous sur Facebook",
+                            "social_twitter": "Suivez-nous sur Twitter",
+                            "social_youtube": "Regardez-nous sur YouTube",
+                            "social_whatsapp": "Contactez-nous sur WhatsApp",
+                            "social_telegram": "Rejoignez-nous sur Telegram",
+                            "form_name": "Votre Nom",
+                            "form_email": "Votre Email",
+                            "form_phone": "Votre Numéro de Téléphone",
+                            "form_message": "Votre Message",
+                            "form_submit": "Envoyer le Message"
+                        },
+                        "about": {
+                            "title": "À Propos de Nous",
+                            "description1": "Bienvenue chez Wendo African Safaris, votre partenaire privilégié pour des expériences de safari inoubliables à travers les paysages époustouflants du nord de la Tanzanie. Nous sommes fiers d'être basés dans une région qui abrite certains des destinations les plus emblématiques au monde, y compris le Serengeti, le cratère de Ngorongoro et le mont Kilimanjaro. Avec un nom inspiré du mot swahili pour « voyage », Wendo African Safaris s'engage à créer des aventures personnalisées qui permettent à nos clients de se connecter avec la beauté, la culture et la faune de la Tanzanie comme jamais auparavant.",
+                            "description2": "Chez Wendo African Safaris, nous croyons que voyager va au-delà de la simple visite touristique — c’est une question d’immersion, de transformation et de connexion. Avec des années d’expérience, une équipe dévouée d’experts et une passion profonde pour le patrimoine naturel et culturel inégalé de la Tanzanie, nous offrons des expériences sur mesure qui laissent des souvenirs durables.",
+                            "mission_title": "Notre Mission",
+                            "mission_description": "Offrir des expériences de safari extraordinaires qui mettent en valeur la beauté naturelle, la faune diversifiée et les riches traditions culturelles du nord de la Tanzanie tout en promouvant un tourisme durable et en soutenant les communautés locales.",
+                            "vision_title": "Notre Vision",
+                            "vision_description": "Être reconnu comme la principale entreprise de safari dans le nord de la Tanzanie, connu pour notre service exceptionnel, notre engagement envers la conservation et des expériences de voyage transformatrices qui inspirent un amour pour la nature et la culture."
+                        },
+                        "cultural": {
+                            "title": "Découvrez les Richesses Culturelles de la Tanzanie",
+                            "description": "Voyagez à travers le temps et la tradition avec les sites patrimoniaux époustouflants de la Tanzanie, des ruines anciennes aux villages vibrants.",
+                            "unesco_title": "Joyaux du Patrimoine Mondial de l'UNESCO",
+                            "prehistory_title": "Fenêtres sur la Préhistoire",
+                            "trading_title": "Centres Commerciaux Intemporels",
+                            "villages_title": "Traditions Vivantes",
+                            "sites": {
+                                "stone-town": {
+                                    "title": "Stone Town (Zanzibar)",
+                                    "description": "Un mélange fascinant de culture swahili et de commerce historique."
+                                },
+                                "kondoa": {
+                                    "title": "Grottes d'Art Rupestre de Kondoa",
+                                    "description": "Échos de l'humanité depuis 2000 avant notre ère."
+                                },
+                                "kilwa-songo": {
+                                    "title": "Kilwa Kisiwani & Songo Mnara",
+                                    "description": "Ports médiévaux murmurant des récits de la côte swahili."
+                                },
+                                "olduvai": {
+                                    "title": "Gorge d'Olduvai (Ngorongoro)",
+                                    "description": "Berceau de l'humanité avec des fossiles anciens."
+                                },
+                                "laetoli": {
+                                    "title": "Empreintes de Laetoli (Ngorongoro)",
+                                    "description": "Pas de nos ancêtres vieux de 3,6 millions d'années."
+                                },
+                                "isimila": {
+                                    "title": "Site de l'Âge de Pierre d'Isimila (Iringa)",
+                                    "description": "Reliques d'outils et piliers de pierre imposants."
+                                },
+                                "bagamoyo": {
+                                    "title": "Ville de Bagamoyo",
+                                    "description": "Un héritage poignant du commerce et de l'histoire."
+                                },
+                                "kaole": {
+                                    "title": "Ruines de Kaole (Bagamoyo)",
+                                    "description": "Murmures d'un passé swahili du 13e siècle."
+                                },
+                                "mikindani": {
+                                    "title": "Mikindani (Mtwara)",
+                                    "description": "Charme colonial sur la côte."
+                                },
+                                "ujiji": {
+                                    "title": "Ujiji (Kigoma)",
+                                    "description": "Là où Stanley a rencontré Livingstone."
+                                },
+                                "maasai": {
+                                    "title": "Villages Maasai (Arusha & Manyara)",
+                                    "description": "Traditions vivantes du peuple Maasai."
+                                },
+                                "hadzabe": {
+                                    "title": "Hadzabe & Datoga (Lac Eyasi)",
+                                    "description": "Modes de vie anciens des chasseurs-cueilleurs."
+                                },
+                                "sukuma": {
+                                    "title": "Musée Sukuma (Mwanza)",
+                                    "description": "Trésors de l'héritage Sukuma."
+                                },
+                                "makonde": {
+                                    "title": "Villages Makonde (Mtwara & Lindi)",
+                                    "description": "Maîtres des sculptures sur bois complexes."
+                                },
+                                "ikombe": {
+                                    "title": "Village d'Ikombe (Rukwa)",
+                                    "description": "Riche héritage tribal Fipa."
+                                }
+                            }
+                        },
+                        "footer": {
+                            "copyright": "© {{year}} Wendo Safari. Tous droits réservés."
+                        },
+                        news: {
+                            title: 'Nouvelles et mises à jour',
+                            description: 'Restez informé des dernières nouvelles et annonces de Wendo African Safaris.'
+                        },
+                        "special-safaris": {
+                            "title": "Safaris Spéciaux",
+                            "description": "Célébrez les moments spéciaux de la vie ou partez pour une aventure unique avec nos safaris sur mesure.",
+                            "occasions": {
+                                "title": "Anniversaire, Anniversaire de Mariage, Remise de Diplôme & Lune de Miel",
+                                "description": "Safaris inoubliables avec des surprises pour les couples ou groupes célébrant des occasions spéciales."
+                            },
+                            "single-travellers": {
+                                "title": "Voyageurs Solo",
+                                "description": "Aventures en solo conçues pour explorer la nature à votre rythme."
+                            },
+                            "family-safari": {
+                                "title": "Safari Familial Spécial",
+                                "description": "Safaris sur mesure pour les familles avec adolescents, avec des activités spéciales."
+                            },
+                            "accessible-safari": {
+                                "title": "Personnes Handicapées & Malades",
+                                "description": "Safaris accessibles avec des soins spécialisés et un soutien médical."
+                            }
+                        }
+                    }
+                },
+                es: {
+                    translation: {
+                        "nav": {
+                            "home": "Inicio",
+                            "destinations": "Destinos",
+                            "trips": "Viajes",
+                            "about": "Acerca de",
+                            "contact": "Contacto",
+                            news: 'Noticias',
+                        },
+                        "hero": {
+                            "title": "Tu puerta de entrada a las maravillas del norte de Tanzania",
+                            "subtitle": "Explora safaris impresionantes, paisajes deslumbrantes y un rico patrimonio cultural con guías expertos.",
+                            "description": "Desde las legendarias llanuras del Serengeti, el lago Mantra, Tarangire, el Parque Nacional de Arusha, el monte Kilimanjaro hasta las exuberantes tierras altas del cráter de Ngorongoro, cada viaje con nosotros está diseñado para explorar los ecosistemas más impresionantes y diversos del mundo."
+                        },
+                        "destinations": {
+                            "title": "Nuestros Destinos",
+                            "description": "Wendo African Safaris se especializa en safaris por los parques nacionales y reservas más célebres del norte de Tanzania.",
+                            "serengeti": {
+                                "title": "Parque Nacional del Serengeti",
+                                "description": "Presencia la impresionante Gran Migración y vastas sabanas llenas de vida silvestre."
+                            },
+                            "ngorongoro": {
+                                "title": "Área de Conservación de Ngorongoro",
+                                "description": "Explora el Cráter de Ngorongoro, un sitio del Patrimonio Mundial de la UNESCO con ecosistemas diversos."
+                            },
+                            "tarangire": {
+                                "title": "Parque Nacional de Tarangire",
+                                "description": "Descubre un refugio para manadas de elefantes y árboles baobab icónicos."
+                            },
+                            "manyara": {
+                                "title": "Parque Nacional del Lago Manyara",
+                                "description": "Maravíllate con leones trepadores de árboles y una vibrante vida aviar junto al lago."
+                            },
+                            "arusha": {
+                                "title": "Parque Nacional de Arusha",
+                                "description": "Experimenta paisajes diversos, desde bosques hasta cráteres volcánicos."
+                            },
+                            "kilimanjaro": {
+                                "title": "Monte Kilimanjaro",
+                                "description": "Embárcate en la aventura de tu vida escalando el pico más alto de África."
+                            }
+                        },
+                        "trips": {
+                            "title": "Nuestros Paquetes de Viaje",
+                            "description": "Explora nuestros viajes de safari cuidadosamente diseñados por el norte de Tanzania y más allá. Cada viaje ofrece experiencias únicas adaptadas a tu estilo de aventura.",
+                            "dates": "Fechas",
+                            "duration": "Duración",
+                            "customizable": "Personalizable",
+                            "north-tanzania-circuit": {
+                                "title": "Safari Circuito Norte de Tanzania",
+                                "duration": "8 Días / 7 Noches"
+                            },
+                            "zanzibar-dar-es-salaam": {
+                                "title": "Safari de Playa en Zanzíbar y Dar-es-Salaam",
+                                "duration": "5 Días / 4 Noches"
+                            },
+                            "serengeti-authenticity": {
+                                "title": "Safari de Autenticidad en Serengeti de 5 Días",
+                                "duration": "5 Días / 4 Noches"
+                            },
+                            "special_safaris": {
+                                "title": "Safaris Especiales",
+                                "duration": "5 Días / 4 Noches"
+                            },
+                            "photography": {
+                                "title": "Safaris Fotográficos",
+                                "duration": "5 Días / 4 Noches"
+                            },
+                            "domestic_safaris": {
+                                "title": "Safaris Domésticos",
+                                "duration": "5 Días / 4 Noches"
+                            }
+                        },
+                        "adventure": {
+                            "title": "¿Estás listo para una aventura?",
+                            "description": "¿Listo para embarcarte en el safari de tus sueños? Deja que Wendo African Safaris te lleve en un viaje a través de los destinos más espectaculares del norte de Tanzania. Ya sea que estés planeando tu primer safari o regresando por otra aventura, estamos aquí para hacer realidad tu viaje soñado.",
+                            "youtube": "Ver en YouTube",
+                            "youtube_title": "Vídeo de Wendo African Safaris"
+                        },
+                        "sustainability": {
+                            "title": "Nuestro Compromiso con la Sostenibilidad",
+                            "description": "Wendo African Safaris está profundamente comprometido con el turismo responsable. Nos esforzamos por minimizar nuestra huella ambiental mientras maximizamos el impacto positivo en las comunidades locales. Nuestras iniciativas de sostenibilidad incluyen:",
+                            "initiatives": {
+                                "conservation": "Apoyar proyectos de conservación para proteger especies en peligro y preservar los ecosistemas únicos de Tanzania.",
+                                "communities": "Asociarnos con comunidades locales para promover la preservación cultural y proporcionar oportunidades económicas.",
+                                "eco-practices": "Adoptar prácticas ecológicas en nuestras operaciones, incluyendo la reducción de residuos y la promoción de energías renovables.",
+                                "education": "Educar a nuestros huéspedes sobre la importancia de la conservación y los viajes responsables."
+                            }
+                        },
+                        "plan-your-adventure": {
+                            "title": "Planifica Tu Aventura",
+                            "description": "¿Listo para embarcarte en el safari de tus sueños? Deja que Wendo African Safaris te lleve en un viaje a través de los destinos más espectaculares del norte de Tanzania. Ya sea que estés planeando tu primer safari o regresando por otra aventura, estamos aquí para hacer realidad tu viaje soñado."
+                        },
+                        "contact": {
+                            "title": "Contáctanos",
+                            "description": "¿Tienes preguntas o necesitas ayuda para planificar tu viaje? ¡Nos encantaría saber de ti!",
+                            "email_label": "Correo Electrónico",
+                            "phone_label": "Teléfono",
+                            "website_label": "Sitio Web",
+                            "social_label": "Redes Sociales",
+                            "social_instagram": "Síguenos en Instagram",
+                            "social_facebook": "Síguenos en Facebook",
+                            "social_twitter": "Síguenos en Twitter",
+                            "social_youtube": "Míranos en YouTube",
+                            "social_whatsapp": "Contáctanos en WhatsApp",
+                            "social_telegram": "Únete a nosotros en Telegram",
+                            "form_name": "Tu Nombre",
+                            "form_email": "Tu Correo Electrónico",
+                            "form_phone": "Tu Número de Teléfono",
+                            "form_message": "Tu Mensaje",
+                            "form_submit": "Enviar Mensaje"
+                        },
+                        "about": {
+                            "title": "Sobre Nosotros",
+                            "description1": "Bienvenido a Wendo African Safaris, tu principal aliado para experiencias de safari inolvidables a través de los impresionantes paisajes del norte de Tanzania. Estamos orgullosos de estar ubicados en una región que alberga algunos de los destinos más emblemáticos del mundo, incluyendo el Serengeti, el Cráter de Ngorongoro y el Monte Kilimanjaro. Con un nombre inspirado en la palabra suajili para «viaje», Wendo African Safaris está comprometido en crear aventuras personalizadas que permitan a nuestros huéspedes conectar con la belleza, la cultura y la vida silvestre de Tanzania como nunca antes.",
+                            "description2": "En Wendo African Safaris, creemos que viajar es más que solo hacer turismo: se trata de inmersión, transformación y conexión. Con años de experiencia, un equipo dedicado de expertos y una profunda pasión por el incomparable patrimonio natural y cultural de Tanzania, ofrecemos experiencias personalizadas que dejan recuerdos duraderos.",
+                            "mission_title": "Nuestra Misión",
+                            "mission_description": "Proporcionar experiencias de safari extraordinarias que muestren la belleza natural, la diversa vida silvestre y las ricas tradiciones culturales del norte de Tanzania, mientras promovemos el turismo sostenible y apoyamos a las comunidades locales.",
+                            "vision_title": "Nuestra Visión",
+                            "vision_description": "Ser reconocidos como la principal empresa de safaris en el norte de Tanzania, conocidos por nuestro excepcional servicio, compromiso con la conservación y experiencias de viaje transformadoras que inspiran amor por la naturaleza y la cultura."
+                        },
+                        "cultural": {
+                            "title": "Descubre las Riquezas Culturales de Tanzania",
+                            "description": "Viaja a través del tiempo y la tradición con los impresionantes sitios patrimoniales de Tanzania, desde ruinas antiguas hasta vibrantes aldeas.",
+                            "unesco_title": "Joya del Patrimonio Mundial de la UNESCO",
+                            "prehistory_title": "Ventanas a la Prehistoria",
+                            "trading_title": "Centros Comerciales Atemporales",
+                            "villages_title": "Tradiciones Vivas",
+                            "sites": {
+                                "stone-town": {
+                                    "title": "Stone Town (Zanzíbar)",
+                                    "description": "Una fascinante mezcla de cultura suajili y comercio histórico."
+                                },
+                                "kondoa": {
+                                    "title": "Cuevas de Arte Rupestre de Kondoa",
+                                    "description": "Ecos de la humanidad desde el 2000 a.C."
+                                },
+                                "kilwa-songo": {
+                                    "title": "Kilwa Kisiwani y Songo Mnara",
+                                    "description": "Puertos medievales que susurran historias de la costa suajili."
+                                },
+                                "olduvai": {
+                                    "title": "Garganta de Olduvai (Ngorongoro)",
+                                    "description": "Cuna de la humanidad con fósiles antiguos."
+                                },
+                                "laetoli": {
+                                    "title": "Huellas de Laetoli (Ngorongoro)",
+                                    "description": "Pasos de nuestros antepasados de 3.6 millones de años."
+                                },
+                                "isimila": {
+                                    "title": "Sitio de la Edad de Piedra de Isimila (Iringa)",
+                                    "description": "Reliquias de herramientas y pilares de roca imponentes."
+                                },
+                                "bagamoyo": {
+                                    "title": "Ciudad de Bagamoyo",
+                                    "description": "Un legado inquietante de comercio e historia."
+                                },
+                                "kaole": {
+                                    "title": "Ruinas de Kaole (Bagamoyo)",
+                                    "description": "Susurros de un pasado suajili del siglo XIII."
+                                },
+                                "mikindani": {
+                                    "title": "Mikindani (Mtwara)",
+                                    "description": "Encanto colonial en la costa."
+                                },
+                                "ujiji": {
+                                    "title": "Ujiji (Kigoma)",
+                                    "description": "Donde Stanley conoció a Livingstone."
+                                },
+                                "maasai": {
+                                    "title": "Aldeas Maasai (Arusha y Manyara)",
+                                    "description": "Tradiciones vibrantes del pueblo Maasai."
+                                },
+                                "hadzabe": {
+                                    "title": "Hadzabe y Datoga (Lago Eyasi)",
+                                    "description": "Costumbres antiguas de cazadores-recolectores."
+                                },
+                                "sukuma": {
+                                    "title": "Museo Sukuma (Mwanza)",
+                                    "description": "Tesoros del patrimonio Sukuma."
+                                },
+                                "makonde": {
+                                    "title": "Aldeas Makonde (Mtwara y Lindi)",
+                                    "description": "Maestros de tallados en madera intrincados."
+                                },
+                                "ikombe": {
+                                    "title": "Aldea de Ikombe (Rukwa)",
+                                    "description": "Rico legado tribal Fipa."
+                                }
+                            }
+                        },
+                        "footer": {
+                            "copyright": "© {{year}} Wendo Safari. Todos los derechos reservados."
+                        }, news: {
+                            title: 'Noticias y Actualizaciones',
+                            description: 'Manténgase al día con las últimas noticias y anuncios de Wendo African Safaris.'
+                        },
+                        "special-safaris": {
+                            "title": "Safaris Especiales",
+                            "description": "Celebra los momentos especiales de la vida o embárcate en una aventura única con nuestros safaris personalizados.",
+                            "occasions": {
+                                "title": "Cumpleaños, Aniversario, Graduación y Luna de Miel",
+                                "description": "Safaris inolvidables con sorpresas para parejas o grupos que celebran ocasiones especiales."
+                            },
+                            "single-travellers": {
+                                "title": "Viajeros Solitarios",
+                                "description": "Aventuras en solitario diseñadas para explorar la naturaleza a tu propio ritmo."
+                            },
+                            "family-safari": {
+                                "title": "Safari Familiar Especial",
+                                "description": "Safaris a medida para familias con adolescentes, con actividades especiales."
+                            },
+                            "accessible-safari": {
+                                "title": "Personas con Discapacidades y Enfermos",
+                                "description": "Safaris accesibles con cuidados especializados y apoyo médico."
+                            }
+                        }
+                    }
+                },
+                sw: {
+                    translation: {
+                        "nav": {
+                            "home": "Nyumbani",
+                            "destinations": "Maeneo",
+                            "trips": "Safari",
+                            "about": "Kuhusu",
+                            news: 'Habari',
+                            "contact": "Mawasiliano"
+                        },
+                        "hero": {
+                            "title": "Lango Lako la Maajabu ya Kaskazini mwa Tanzania",
+                            "subtitle": "Chunguza safari za kustaajabisha, mandhari za kupendeza, na urithi wa kitamaduni na waelekezi wa kitaalamu.",
+                            "description": "Kutoka nyanda za hadithi za Serengeti, Ziwa Mantra, Tarangire, Hifadhi ya Taifa ya Arusha, Mlima Kilimanjaro hadi nyanda za juu za Crater ya Ngorongoro, kila safari na sisi imeundwa kuchunguza mifumo ikolojia ya kustaajabisha na tofauti zaidi duniani."
+                        },
+                        "destinations": {
+                            "title": "Maeneo Yetu",
+                            "description": "Wendo African Safaris ina utaalamu wa safari katika mbuga za kitaifa na hifadhi za kaskazini mwa Tanzania zinazosherehekewa zaidi.",
+                            "serengeti": {
+                                "title": "Hifadhi ya Taifa ya Serengeti",
+                                "description": "Shuhudia Uhamiaji Mkuu wa kustaajabisha na savana pana zilizojawa na wanyamapori."
+                            },
+                            "ngorongoro": {
+                                "title": "Eneo la Hifadhi ya Ngorongoro",
+                                "description": "Chunguza Crater ya Ngorongoro, tovuti ya Urithi wa Dunia wa UNESCO yenye mifumo ikolojia tofauti."
+                            },
+                            "tarangire": {
+                                "title": "Hifadhi ya Taifa ya Tarangire",
+                                "description": "Gundua hifadhi ya tembo na miti ya baobab ya kihistoria."
+                            },
+                            "manyara": {
+                                "title": "Hifadhi ya Taifa ya Ziwa Manyara",
+                                "description": "Staajabu na simba wanaopanda miti na wanyamapori wa ndege wa kupendeza kando ya ziwa."
+                            },
+                            "arusha": {
+                                "title": "Hifadhi ya Taifa ya Arusha",
+                                "description": "Pata uzoefu wa mandhari tofauti kutoka misitu hadi volkeno."
+                            },
+                            "kilimanjaro": {
+                                "title": "Mlima Kilimanjaro",
+                                "description": "Anza safari ya maisha yako ya kupanda kilele cha juu zaidi cha Afrika."
+                            }
+                        },
+                        "trips": {
+                            "title": "Mifuko Yetu ya Safari",
+                            "description": "Chunguza safari zetu za safari zilizoundwa kwa uangalifu kote kaskazini mwa Tanzania na zaidi. Kila safari inatoa uzoefu wa kipekee unaolingana na mtindo wako wa adventure.",
+                            "dates": "Tarehe",
+                            "duration": "Muda",
+                            "customizable": "Inaweza Kubadilishwa",
+                            "north-tanzania-circuit": {
+                                "title": "Safari ya Mzunguko wa Kaskazini mwa Tanzania",
+                                "duration": "Siku 8 / Usiku 7"
+                            },
+                            "zanzibar-dar-es-salaam": {
+                                "title": "Safari ya Pwani ya Zanzibar na Dar-es-Salaam",
+                                "duration": "Siku 5 / Usiku 4"
+                            },
+                            "serengeti-authenticity": {
+                                "title": "Safari ya Uhalisia wa Serengeti ya Siku 5",
+                                "duration": "Siku 5 / Usiku 4"
+                            },
+                            "special_safaris": {
+                                "title": "Safari za Kipekee",
+                                "duration": "Siku 5 / Usiku 4"
+                            },
+                            "photography": {
+                                "title": "Safari za Upigaji Picha",
+                                "duration": "Siku 5 / Usiku 4"
+                            },
+                            "domestic_safaris": {
+                                "title": "Safari za Ndani",
+                                "duration": "Siku 5 / Usiku 4"
+                            }
+                        },
+                        "adventure": {
+                            "title": "Je, uko tayari kwa adventure?",
+                            "description": "Je, uko tayari kuanza safari ya ndoto zako? Acha Wendo African Safaris ikupeleke kwenye safari kupitia maeneo ya kustaajabisha zaidi ya kaskazini mwa Tanzania. Iwe unapanga safari yako ya kwanza au unarudi kwa adventure nyingine, tuko hapa kufanya safari yako ya ndoto iwe ya kweli.",
+                            "youtube": "Tazama kwenye YouTube",
+                            "youtube_title": "Video ya Wendo African Safaris"
+                        },
+                        "sustainability": {
+                            "title": "Ahadi Yetu ya Uendelevu",
+                            "description": "Wendo African Safaris imejitolea sana kwa utalii wa kuwajibika. Tunajitahidi kupunguza athari zetu za kimazingira huku tukiboresha athari chanya kwa jamii za wenyeji. Juhudi zetu za uendelevu zinajumuisha:",
+                            "initiatives": {
+                                "conservation": "Kusaidia miradi ya uhifadhi ili kulinda spishi zilizo hatarini na kuhifadhi mifumo ikolojia ya kipekee ya Tanzania.",
+                                "communities": "Kushirikiana na jamii za wenyeji kukuza uhifadhi wa kitamaduni na kutoa fursa za kiuchumi.",
+                                "eco-practices": "Kuchukua mazoea ya kirafiki kwa mazingira katika shughuli zetu, ikiwa ni pamoja na kupunguza taka na kukuza nishati mbadala.",
+                                "education": "Kuelimisha wageni wetu kuhusu umuhimu wa uhifadhi na usafiri wa kuwajibika."
+                            }
+                        },
+                        "plan-your-adventure": {
+                            "title": "Panga Adventure Yako",
+                            "description": "Je, uko tayari kuanza safari ya ndoto zako? Acha Wendo African Safaris ikupeleke kwenye safari kupitia maeneo ya kustaajabisha zaidi ya kaskazini mwa Tanzania. Iwe unapanga safari yako ya kwanza au unarudi kwa adventure nyingine, tuko hapa kufanya safari yako ya ndoto iwe ya kweli."
+                        },
+                        "contact": {
+                            "title": "Wasiliana Nasi",
+                            "description": "Una maswali au unahitaji msaada wa kupanga safari yako? Tungependa kusikia kutoka kwako!",
+                            "email_label": "Barua Pepe",
+                            "phone_label": "Simu",
+                            "website_label": "Tovuti",
+                            "social_label": "Mitandao ya Kijamii",
+                            "social_instagram": "Tufuate kwenye Instagram",
+                            "social_facebook": "Tufuate kwenye Facebook",
+                            "social_twitter": "Tufuate kwenye Twitter",
+                            "social_youtube": "Tazama kwenye YouTube",
+                            "social_whatsapp": "Wasiliana nasi kwenye WhatsApp",
+                            "social_telegram": "Jiunge nasi kwenye Telegram",
+                            "form_name": "Jina Lako",
+                            "form_email": "Barua Pepe Yako",
+                            "form_phone": "Namba Yako ya Simu",
+                            "form_message": "Ujumbe Wako",
+                            "form_submit": "Tuma Ujumbe"
+                        },
+                        "about": {
+                            "title": "Kuhusu Sisi",
+                            "description1": "Karibu Wendo African Safaris, mshirika wako wa kwanza kwa uzoefu wa safari usiosahaulika katika mandhari ya kustaajabisha ya kaskazini mwa Tanzania. Tunajivunia kuwa tumejikita katika eneo ambalo ni nyumbani kwa baadhi ya maeneo ya kihistoria zaidi ulimwenguni, ikiwemo Serengeti, Crater ya Ngorongoro, na Mlima Kilimanjaro. Kwa jina lililochochewa na neno la Kiswahili la « safari », Wendo African Safaris imejitolea kuunda adventure za kibinafsi zinazoruhusu wageni wetu kuungana na uzuri, utamaduni, na wanyamapori wa Tanzania kama hapo awali.",
+                            "description2": "Katika Wendo African Safaris, tunaamini kuwa kusafiri ni zaidi ya kutazama tu—ni kuhusu kujishirikisha, kubadilika, na kuungana. Kwa uzoefu wa miaka, timu iliyojitolea ya wataalamu, na shauku ya kina kwa urithi wa asili na kitamaduni usio na kifani wa Tanzania, tunatoa uzoefu wa kibinafsi ambao unaacha kumbukumbu za kudumu.",
+                            "mission_title": "Dhamira Yetu",
+                            "mission_description": "Kutoa uzoefu wa safari wa kipekee unaoonyesha uzuri wa asili, wanyamapori wa aina mbalimbali, na mila za kitamaduni za kaskazini mwa Tanzania huku tukihimiza utalii endelevu na kusaidia jamii za wenyeji.",
+                            "vision_title": "Maono Yetu",
+                            "vision_description": "Kutambuliwa kama kampuni ya safari inayoongoza katika kaskazini mwa Tanzania, inayojulikana kwa huduma yetu ya kipekee, kujitolea kwa uhifadhi, na uzoefu wa kusafiri unaobadilisha unaochochea upendo kwa asili na utamaduni."
+                        },
+                        "cultural": {
+                            "title": "Fichua Utajiri wa Kitamaduni wa Tanzania",
+                            "description": "Safiri kupitia wakati na mila na maeneo ya urithi wa kustaajabisha ya Tanzania, kutoka magofu ya kale hadi vijiji vilivyo hai.",
+                            "unesco_title": "Vito vya Urithi wa Dunia wa UNESCO",
+                            "prehistory_title": "Dirisha za Historia ya Awali",
+                            "trading_title": "Vituo vya Biashara visivyo na Wakati",
+                            "villages_title": "Mila Zilizo Hai",
+                            "sites": {
+                                "stone-town": {
+                                    "title": "Stone Town (Zanzibar)",
+                                    "description": "Mchanganyiko wa kuvutia wa utamaduni wa Kiswahili na biashara ya kihistoria.",
+                                    "aria": "Jifunze zaidi kuhusu Stone Town huko Zanzibar"
+                                },
+                                "kondoa": {
+                                    "title": "Mapango ya Sanaa ya Mwamba ya Kondoa",
+                                    "description": "Mwangwi wa ubinadamu tangu 2000 KK.",
+                                    "aria": "Jifunze zaidi kuhusu Mapango ya Sanaa ya Mwamba ya Kondoa"
+                                },
+                                "kilwa-songo": {
+                                    "title": "Kilwa Kisiwani na Songo Mnara",
+                                    "description": "Bandari za zama za kati zinazonong’ona hadithi za pwani ya Kiswahili.",
+                                    "aria": "Jifunze zaidi kuhusu Kilwa Kisiwani na Songo Mnara"
+                                },
+                                "olduvai": {
+                                    "title": "Korongo la Olduvai (Ngorongoro)",
+                                    "description": "Chimbuko la ubinadamu na visukuku vya kale.",
+                                    "aria": "Jifunze zaidi kuhusu Korongo la Olduvai huko Ngorongoro"
+                                },
+                                "laetoli": {
+                                    "title": "Nyayo za Laetoli (Ngorongoro)",
+                                    "description": "Hatua za mababu zetu za miaka milioni 3.6.",
+                                    "aria": "Jifunze zaidi kuhusu Nyayo za Laetoli huko Ngorongoro"
+                                },
+                                "isimila": {
+                                    "title": "Tovuti ya Zama za Mawe ya Isimila (Iringa)",
+                                    "description": "Visalia vya zana na nguzo za mawe zinazosimama.",
+                                    "aria": "Jifunze zaidi kuhusu Tovuti ya Zama za Mawe ya Isimila huko Iringa"
+                                },
+                                "bagamoyo": {
+                                    "title": "Mji wa Bagamoyo",
+                                    "description": "Urithi unaovuta wa biashara na historia.",
+                                    "aria": "Jifunze zaidi kuhusu Mji wa Bagamoyo"
+                                },
+                                "kaole": {
+                                    "title": "Magofu ya Kaole (Bagamoyo)",
+                                    "description": "Miongozo ya zamani ya Kiswahili ya karne ya 13.",
+                                    "aria": "Jifunze zaidi kuhusu Magofu ya Kaole huko Bagamoyo"
+                                },
+                                "mikindani": {
+                                    "title": "Mikindani (Mtwara)",
+                                    "description": "Haiba ya kikoloni pwani.",
+                                    "aria": "Jifunze zaidi kuhusu Mikindani huko Mtwara"
+                                },
+                                "ujiji": {
+                                    "title": "Ujiji (Kigoma)",
+                                    "description": "Ambapo Stanley alikutana na Livingstone.",
+                                    "aria": "Jifunze zaidi kuhusu Ujiji huko Kigoma"
+                                },
+                                "maasai": {
+                                    "title": "Vijiji vya Wamaasai (Arusha na Manyara)",
+                                    "description": "Mila za wazi za watu wa Wamaasai.",
+                                    "aria": "Jifunze zaidi kuhusu Vijiji vya Wamaasai huko Arusha na Manyara"
+                                },
+                                "hadzabe": {
+                                    "title": "Hadzabe na Datoga (Ziwa Eyasi)",
+                                    "description": "Njia za kale za wawindaji-wakusanyaji.",
+                                    "aria": "Jifunze zaidi kuhusu Hadzabe na Datoga huko Ziwa Eyasi"
+                                },
+                                "sukuma": {
+                                    "title": "Makumbusho ya Sukuma (Mwanza)",
+                                    "description": "Hazina za urithi wa Sukuma.",
+                                    "aria": "Jifunze zaidi kuhusu Makumbusho ya Sukuma huko Mwanza"
+                                },
+                                "makonde": {
+                                    "title": "Vijiji vya Makonde (Mtwara na Lindi)",
+                                    "description": "Mabwana wa uchongaji wa mbao wa kina.",
+                                    "aria": "Jifunze zaidi kuhusu Vijiji vya Makonde huko Mtwara na Lindi"
+                                },
+                                "ikombe": {
+                                    "title": "Kijiji cha Ikombe (Rukwa)",
+                                    "description": "Urithi tajiri wa kabila la Fipa.",
+                                    "aria": "Jifunze zaidi kuhusu Kijiji cha Ikombe huko Rukwa"
+                                }
+                            }
+                        },
+                        "footer": {
+                            "copyright": "© {{year}} Wendo Safari. Haki Zote Zimehifadhiwa."
+                        },
+                        news: {
+                            title: 'Habari na Sasisho',
+                            description: 'Endelea kusasishwa na habari za hivi punde na matangazo kutoka Wendo African Safaris.'
+                        },
+                        "special-safaris": {
+                            "title": "Safari za Kipekee",
+                            "description": "Sherehekea matukio maalum ya maisha au anza safari ya kipekee na safari zetu zilizopangwa.",
+                            "occasions": {
+                                "title": "Siku ya Kuzaliwa, Maadhimisho ya Miaka, Mahafali na Safari ya Harusi",
+                                "description": "Safari zisizosahaulika na mshangao kwa wanandoa au vikundi vinavyosherehekea matukio maalum."
+                            },
+                            "single-travellers": {
+                                "title": "Wasafiri wa Peke Yake",
+                                "description": "Safari za peke yako zilizopangwa kwa ajili ya kuchunguza asili kwa kasi yako mwenyewe."
+                            },
+                            "family-safari": {
+                                "title": "Safari ya Familia ya Kipekee",
+                                "description": "Safari zilizopangwa kwa familia zenye vijana, na shughuli za pekee."
+                            },
+                            "accessible-safari": {
+                                "title": "Watu Wenye Ulemavu na Wagonjwa",
+                                "description": "Safari zinazoweza kufikiwa na huduma za pekee na msaada wa kimatibabu."
+                            }
+                        }
+                    }
+                },
+                de: {
+                    translation: {
+                        "nav": {
+                            "home": "Startseite",
+                            "destinations": "Reiseziele",
+                            "trips": "Reisen",
+                            "about": "Über uns",
+                            "contact": "Kontakt",
+                            news: 'Neuigkeiten',
+                        },
+                        "hero": {
+                            "title": "Ihr Tor zu den Wundern Nordtansanias",
+                            "subtitle": "Erkunden Sie atemberaubende Safaris, beeindruckende Landschaften und ein reiches kulturelles Erbe mit erfahrenen Führern.",
+                            "description": "Von den legendären Serengeti-Ebenen, dem Mantra-See, Tarangire, dem Arusha-Nationalpark, dem Kilimandscharo bis zu den üppigen Hochländern des Ngorongoro-Kraters ist jede Reise mit uns darauf ausgelegt, die atemberaubendsten und vielfältigsten Ökosysteme der Welt zu erkunden."
+                        },
+                        "destinations": {
+                            "title": "Unsere Reiseziele",
+                            "description": "Wendo African Safaris ist spezialisiert auf Safaris in den berühmtesten Nationalparks und Reservaten Nordtansanias.",
+                            "serengeti": {
+                                "title": "Serengeti-Nationalpark",
+                                "description": "Erleben Sie die beeindruckende Große Migration und weite Savannen voller Wildtiere."
+                            },
+                            "ngorongoro": {
+                                "title": "Ngorongoro-Schutzgebiet",
+                                "description": "Erkunden Sie den Ngorongoro-Krater, ein UNESCO-Welterbe mit vielfältigen Ökosystemen."
+                            },
+                            "tarangire": {
+                                "title": "Tarangire-Nationalpark",
+                                "description": "Entdecken Sie ein Paradies für Elefantenherden und ikonische Baobab-Bäume."
+                            },
+                            "manyara": {
+                                "title": "Lake Manyara-Nationalpark",
+                                "description": "Staunen Sie über baumkletternde Löwen und lebendige Vogelwelt entlang des Sees."
+                            },
+                            "arusha": {
+                                "title": "Arusha-Nationalpark",
+                                "description": "Erleben Sie vielfältige Landschaften von Wäldern bis hin zu Vulkankratern."
+                            },
+                            "kilimanjaro": {
+                                "title": "Kilimandscharo",
+                                "description": "Begeben Sie sich auf das Abenteuer Ihres Lebens und erklimmen Sie Afrikas höchsten Gipfel."
+                            }
+                        },
+                        "trips": {
+                            "title": "Unsere Reisepakete",
+                            "description": "Erkunden Sie unsere sorgfältig gestalteten Safari-Reisen durch Nordtansania und darüber hinaus. Jede Reise bietet einzigartige Erlebnisse, die auf Ihren Abenteuerstil zugeschnitten sind.",
+                            "dates": "Daten",
+                            "duration": "Dauer",
+                            "customizable": "Anpassbar",
+                            "north-tanzania-circuit": {
+                                "title": "Nordtansania-Rundreise-Safari",
+                                "duration": "8 Tage / 7 Nächte"
+                            },
+                            "zanzibar-dar-es-salaam": {
+                                "title": "Sansibar und Dar-es-Salaam Strand-Safari",
+                                "duration": "5 Tage / 4 Nächte"
+                            },
+                            "serengeti-authenticity": {
+                                "title": "5-Tage-Serengeti-Authentizitäts-Safari",
+                                "duration": "5 Tage / 4 Nächte"
+                            },
+                            "special_safaris": {
+                                "title": "Besondere Safaris",
+                                "duration": "5 Tage / 4 Nächte"
+                            },
+                            "photography": {
+                                "title": "Fotografie-Safaris",
+                                "duration": "5 Tage / 4 Nächte"
+                            },
+                            "domestic_safaris": {
+                                "title": "Inlandssafaris",
+                                "duration": "5 Tage / 4 Nächte"
+                            }
+                        },
+                        "adventure": {
+                            "title": "Bist du bereit für ein Abenteuer?",
+                            "description": "Bereit, den Safari deiner Träume zu erleben? Lass Wendo African Safaris dich auf eine Reise durch die spektakulärsten Ziele Nordtansanias mitnehmen. Egal, ob du deinen ersten Safari planst oder für ein weiteres Abenteuer zurückkehrst, wir sind hier, um deine Traumreise wahr werden zu lassen.",
+                            "youtube": "Auf YouTube ansehen",
+                            "youtube_title": "Wendo African Safaris Video"
+                        },
+                        "sustainability": {
+                            "title": "Unser Engagement für Nachhaltigkeit",
+                            "description": "Wendo African Safaris ist stark dem verantwortungsvollen Tourismus verpflichtet. Wir streben danach, unseren ökologischen Fußabdruck zu minimieren und gleichzeitig den positiven Einfluss auf lokale Gemeinschaften zu maximieren. Unsere Nachhaltigkeitsinitiativen umfassen:",
+                            "initiatives": {
+                                "conservation": "Unterstützung von Naturschutzprojekten zum Schutz gefährdeter Arten und zur Erhaltung der einzigartigen Ökosysteme Tansanias.",
+                                "communities": "Zusammenarbeit mit lokalen Gemeinschaften zur Förderung des kulturellen Erhalts und zur Schaffung wirtschaftlicher Möglichkeiten.",
+                                "eco-practices": "Einführung umweltfreundlicher Praktiken in unseren Betrieben, einschließlich der Reduzierung von Abfällen und der Förderung erneuerbarer Energien.",
+                                "education": "Aufklärung unserer Gäste über die Bedeutung des Naturschutzes und verantwortungsvollen Reisens."
+                            }
+                        },
+                        "plan-your-adventure": {
+                            "title": "Plane dein Abenteuer",
+                            "description": "Bereit, den Safari deiner Träume zu erleben? Lass Wendo African Safaris dich auf eine Reise durch die spektakulärsten Ziele Nordtansanias mitnehmen. Egal, ob du deinen ersten Safari planst oder für ein weiteres Abenteuer zurückkehrst, wir sind hier, um deine Traumreise wahr werden zu lassen."
+                        }, "contact": {
+                            "title": "Kontaktieren Sie uns",
+                            "description": "Haben Sie Fragen oder benötigen Sie Hilfe bei der Planung Ihrer Reise? Wir freuen uns darauf, von Ihnen zu hören!",
+                            "email_label": "E-Mail",
+                            "phone_label": "Telefon",
+                            "website_label": "Website",
+                            "social_label": "Soziale Medien",
+                            "social_instagram": "Folgen Sie uns auf Instagram",
+                            "social_facebook": "Folgen Sie uns auf Facebook",
+                            "social_twitter": "Folgen Sie uns auf Twitter",
+                            "social_youtube": "Sehen Sie uns auf YouTube",
+                            "social_whatsapp": "Kontaktieren Sie uns auf WhatsApp",
+                            "social_telegram": "Treten Sie uns auf Telegram bei",
+                            "form_name": "Ihr Name",
+                            "form_email": "Ihre E-Mail",
+                            "form_phone": "Ihre Telefonnummer",
+                            "form_message": "Ihre Nachricht",
+                            "form_submit": "Nachricht senden"
+                        },
+                        "about": {
+                            "title": "Über uns",
+                            "description1": "Willkommen bei Wendo African Safaris, Ihrem erstklassigen Partner für unvergessliche Safari-Erlebnisse in den atemberaubenden Landschaften Nordtansanias. Wir sind stolz darauf, in einer Region ansässig zu sein, die einige der weltweit bekanntesten Reiseziele beherbergt, darunter die Serengeti, der Ngorongoro-Krater und der Kilimandscharo. Mit einem Namen, der vom Swahili-Wort für „Reise“ inspiriert ist, widmet sich Wendo African Safaris der Gestaltung persönlicher Abenteuer, die unsere Gäste wie nie zuvor mit der Schönheit, Kultur und Tierwelt Tansanias verbinden.",
+                            "description2": "Bei Wendo African Safaris glauben wir, dass Reisen mehr ist als nur Sightseeing – es geht um Eintauchen, Verwandlung und Verbindung. Mit jahrelanger Erfahrung, einem engagierten Expertenteam und einer tiefen Leidenschaft für Tansanias unvergleichliches natürliches und kulturelles Erbe bieten wir maßgeschneiderte Erlebnisse, die bleibende Erinnerungen hinterlassen.",
+                            "mission_title": "Unsere Mission",
+                            "mission_description": "Außergewöhnliche Safari-Erlebnisse zu bieten, die die natürliche Schönheit, die vielfältige Tierwelt und die reichen kulturellen Traditionen Nordtansanias präsentieren, während wir nachhaltigen Tourismus fördern und lokale Gemeinschaften unterstützen.",
+                            "vision_title": "Unsere Vision",
+                            "vision_description": "Als führendes Safari-Unternehmen in Nordtansania anerkannt zu werden, bekannt für unseren außergewöhnlichen Service, unser Engagement für den Naturschutz und transformative Reiseerlebnisse, die Liebe zur Natur und Kultur wecken."
+                        },
+                        "cultural": {
+                            "title": "Entdecken Sie Tansanias kulturelle Schätze",
+                            "description": "Reisen Sie durch Zeit und Tradition mit Tansanias atemberaubenden Kulturerbestätten, von antiken Ruinen bis hin zu lebendigen Dörfern.",
+                            "unesco_title": "UNESCO-Welterbe-Juwelen",
+                            "prehistory_title": "Fenster in die Urgeschichte",
+                            "trading_title": "Zeitlose Handelszentren",
+                            "villages_title": "Lebende Traditionen",
+                            "sites": {
+                                "stone-town": {
+                                    "title": "Stone Town (Sansibar)",
+                                    "description": "Eine faszinierende Mischung aus Swahili-Kultur und historischem Handel.",
+                                    "aria": "Erfahren Sie mehr über Stone Town auf Sansibar"
+                                },
+                                "kondoa": {
+                                    "title": "Kondoa-Felskunsthöhlen",
+                                    "description": "Echos der Menschheit aus dem Jahr 2000 v. Chr.",
+                                    "aria": "Erfahren Sie mehr über die Kondoa-Felskunsthöhlen"
+                                },
+                                "kilwa-songo": {
+                                    "title": "Kilwa Kisiwani & Songo Mnara",
+                                    "description": "Mittelalterliche Häfen, die Geschichten der Swahili-Küste flüstern.",
+                                    "aria": "Erfahren Sie mehr über Kilwa Kisiwani und Songo Mnara"
+                                },
+                                "olduvai": {
+                                    "title": "Olduvai-Schlucht (Ngorongoro)",
+                                    "description": "Wiege der Menschheit mit alten Fossilien.",
+                                    "aria": "Erfahren Sie mehr über die Olduvai-Schlucht in Ngorongoro"
+                                },
+                                "laetoli": {
+                                    "title": "Laetoli-Fußspuren (Ngorongoro)",
+                                    "description": "3,6 Millionen Jahre alte Schritte unserer Vorfahren.",
+                                    "aria": "Erfahren Sie mehr über die Laetoli-Fußspuren in Ngorongoro"
+                                },
+                                "isimila": {
+                                    "title": "Steinzeitstätte Isimila (Iringa)",
+                                    "description": "Relikte von Werkzeugen und hoch aufragenden Felsensäulen.",
+                                    "aria": "Erfahren Sie mehr über die Steinzeitstätte Isimila in Iringa"
+                                },
+                                "bagamoyo": {
+                                    "title": "Stadt Bagamoyo",
+                                    "description": "Ein eindrucksvolles Erbe von Handel und Geschichte.",
+                                    "aria": "Erfahren Sie mehr über die Stadt Bagamoyo"
+                                },
+                                "kaole": {
+                                    "title": "Kaole-Ruinen (Bagamoyo)",
+                                    "description": "Flüstern einer Swahili-Vergangenheit aus dem 13. Jahrhundert.",
+                                    "aria": "Erfahren Sie mehr über die Kaole-Ruinen in Bagamoyo"
+                                },
+                                "mikindani": {
+                                    "title": "Mikindani (Mtwara)",
+                                    "description": "Kolonialer Charme an der Küste.",
+                                    "aria": "Erfahren Sie mehr über Mikindani in Mtwara"
+                                },
+                                "ujiji": {
+                                    "title": "Ujiji (Kigoma)",
+                                    "description": "Wo Stanley Livingstone traf.",
+                                    "aria": "Erfahren Sie mehr über Ujiji in Kigoma"
+                                },
+                                "maasai": {
+                                    "title": "Maasai-Dörfer (Arusha & Manyara)",
+                                    "description": "Lebendige Traditionen des Maasai-Volkes.",
+                                    "aria": "Erfahren Sie mehr über die Maasai-Dörfer in Arusha und Manyara"
+                                },
+                                "hadzabe": {
+                                    "title": "Hadzabe & Datoga (Eyasi-See)",
+                                    "description": "Uralte Lebensweisen von Jägern und Sammlern.",
+                                    "aria": "Erfahren Sie mehr über Hadzabe und Datoga am Eyasi-See"
+                                },
+                                "sukuma": {
+                                    "title": "Sukuma-Museum (Mwanza)",
+                                    "description": "Schätze des Sukuma-Erbes.",
+                                    "aria": "Erfahren Sie mehr über das Sukuma-Museum in Mwanza"
+                                },
+                                "makonde": {
+                                    "title": "Makonde-Dörfer (Mtwara & Lindi)",
+                                    "description": "Meister der kunstvollen Holzschnitzerei.",
+                                    "aria": "Erfahren Sie mehr über die Makonde-Dörfer in Mtwara und Lindi"
+                                },
+                                "ikombe": {
+                                    "title": "Ikombe-Dorf (Rukwa)",
+                                    "description": "Reiches Erbe des Fipa-Stammes.",
+                                    "aria": "Erfahren Sie mehr über das Ikombe-Dorf in Rukwa"
+                                }
+                            }
+                        },
+                        "footer": {
+                            "copyright": "© {{year}} Wendo Safari. Alle Rechte vorbehalten."
+                        },
+                        news: {
+                            title: 'Neuigkeiten und Updates',
+                            description: 'Bleiben Sie auf dem Laufenden mit den neuesten Nachrichten und Ankündigungen von Wendo African Safaris.'
+                        },
+                        "special-safaris": {
+                            "title": "Besondere Safaris",
+                            "description": "Feiern Sie besondere Momente im Leben oder begeben Sie sich auf ein einzigartiges Abenteuer mit unseren maßgeschneiderten Safaris.",
+                            "occasions": {
+                                "title": "Geburtstag, Jubiläum, Abschluss & Flitterwochen",
+                                "description": "Unvergessliche Safaris mit Überraschungen für Paare oder Gruppen, die besondere Anlässe feiern."
+                            },
+                            "single-travellers": {
+                                "title": "Einzelreisende",
+                                "description": "Solo-Abenteuer, die für die Erkundung der Natur in Ihrem eigenen Tempo konzipiert sind."
+                            },
+                            "family-safari": {
+                                "title": "Besondere Familiensafari",
+                                "description": "Maßgeschneiderte Safaris für Familien mit Teenagern, mit besonderen Aktivitäten."
+                            },
+                            "accessible-safari": {
+                                "title": "Menschen mit Behinderungen & Kranke",
+                                "description": "Barrierefreie Safaris mit spezialisierter Betreuung und medizinischer Unterstützung."
+                            }
+                        }
+                    }
+                },
+                zh: {
+                    translation: {
+                        "nav": {
+                            "home": "首页",
+                            "destinations": "目的地",
+                            "trips": "旅行",
+                            "about": "关于",
+                            "contact": "联系",
+                            news: '新闻',
+                        },
+                        "hero": {
+                            "title": "您通往坦桑尼亚北部奇迹的门户",
+                            "subtitle": "与专业导游一起探索令人叹为观止的野生动物园、壮丽的风景和丰富的文化遗产。",
+                            "description": "从传奇的塞伦盖蒂平原、曼特拉湖、塔兰吉雷、阿鲁沙国家公园、乞力马扎罗山到恩戈罗恩戈罗火山口的郁郁葱葱的高地，我们的每一次旅行都旨在探索世界上最壮观和多样化的生态系统。"
+                        },
+                        "destinations": {
+                            "title": "我们的目的地",
+                            "description": "Wendo African Safaris 专注于坦桑尼亚北部最著名的国家公园和保护区的野生动物园。",
+                            "serengeti": {
+                                "title": "塞伦盖蒂国家公园",
+                                "description": "见证令人叹为观止的大迁徙和充满野生动物的广阔草原。"
+                            },
+                            "ngorongoro": {
+                                "title": "恩戈罗恩戈罗保护区",
+                                "description": "探索恩戈罗恩戈罗火山口，这是一个拥有多样生态系统的联合国教科文组织世界遗产地。"
+                            },
+                            "tarangire": {
+                                "title": "塔兰吉雷国家公园",
+                                "description": "发现大象群和标志性猴面包树的避风港。"
+                            },
+                            "manyara": {
+                                "title": "曼亚拉湖国家公园",
+                                "description": "惊叹于爬树的狮子和湖边充满活力的鸟类生活。"
+                            },
+                            "arusha": {
+                                "title": "阿鲁沙国家公园",
+                                "description": "体验从森林到火山口的多样化景观。"
+                            },
+                            "kilimanjaro": {
+                                "title": "乞力马扎罗山",
+                                "description": "踏上一生难忘的冒险，攀登非洲最高峰。"
+                            }
+                        },
+                        "trips": {
+                            "title": "我们的旅行套餐",
+                            "description": "探索我们精心设计的坦桑尼亚北部及周边地区的野生动物旅行。每段旅程都提供根据您的冒险风格量身定制的独特体验。",
+                            "dates": "日期",
+                            "duration": "时长",
+                            "customizable": "可定制",
+                            "north-tanzania-circuit": {
+                                "title": "坦桑尼亚北部环线野生动物之旅",
+                                "duration": "8天 / 7晚"
+                            },
+                            "zanzibar-dar-es-salaam": {
+                                "title": "桑给巴尔和达累斯萨拉姆海滩野生动物之旅",
+                                "duration": "5天 / 4晚"
+                            },
+                            "serengeti-authenticity": {
+                                "title": "5天塞伦盖蒂正宗野生动物之旅",
+                                "duration": "5天 / 4晚"
+                            },
+                            "special_safaris": {
+                                "title": "特色Safari",
+                                "duration": "5天 / 4晚"
+                            },
+                            "photography": {
+                                "title": "摄影Safari",
+                                "duration": "5天 / 4晚"
+                            },
+                            "domestic_safaris": {
+                                "title": "国内Safari",
+                                "duration": "5天 / 4晚"
+                            }
+                        },
+                        "adventure": {
+                            "title": "您准备好冒险了吗？",
+                            "description": "准备好开启您梦想中的野生动物之旅了吗？让 Wendo African Safaris 带您穿越坦桑尼亚北部最壮观的景点。无论您是计划第一次野生动物之旅还是再次冒险，我们都在这里让您的梦想之旅成真。",
+                            "youtube": "在 YouTube 上观看",
+                            "youtube_title": "Wendo African Safaris 视频"
+                        },
+                        "sustainability": {
+                            "title": "我们的可持续承诺",
+                            "description": "Wendo African Safaris 致力于负责任的旅游业。我们努力将环境足迹降到最低，同时最大化对当地社区的积极影响。我们的可持续举措包括：",
+                            "initiatives": {
+                                "conservation": "支持保护项目，以保护濒危物种并维护坦桑尼亚独特的生态系统。",
+                                "communities": "与当地社区合作，促进文化保护并提供经济机会。",
+                                "eco-practices": "在我们的运营中采用环保做法，包括减少浪费和推广可再生能源。",
+                                "education": "教育我们的客人了解保护和负责任旅行的重要性。"
+                            }
+                        },
+                        "plan-your-adventure": {
+                            "title": "计划您的冒险",
+                            "description": "准备好开启您梦想中的野生动物之旅了吗？让 Wendo African Safaris 带您穿越坦桑尼亚北部最壮观的景点。无论您是计划第一次野生动物之旅还是再次冒险，我们都在这里让您的梦想之旅成真。"
+                        },
+                        "contact": {
+                            "title": "联系我们",
+                            "description": "有问题或需要帮助规划您的旅行？我们很期待您的消息！",
+                            "email_label": "电子邮件",
+                            "phone_label": "电话",
+                            "website_label": "网站",
+                            "social_label": "社交媒体",
+                            "social_instagram": "在Instagram上关注我们",
+                            "social_facebook": "在Facebook上关注我们",
+                            "social_twitter": "在Twitter上关注我们",
+                            "social_youtube": "在YouTube上观看我们",
+                            "social_whatsapp": "在WhatsApp上联系我们",
+                            "social_telegram": "在Telegram上加入我们",
+                            "form_name": "您的姓名",
+                            "form_email": "您的电子邮件",
+                            "form_phone": "您的电话号码",
+                            "form_message": "您的消息",
+                            "form_submit": "发送消息"
+                        },
+                        "about": {
+                            "title": "关于我们",
+                            "description1": "欢迎体验Wendo African Safari，您在坦桑尼亚北部壮丽景观中享受难忘 safari 体验的首选合作伙伴。我们为扎根于这片拥有世界上最具标志性目的地的地区感到自豪，包括塞伦盖蒂、恩戈罗恩戈罗火山口和乞力马扎罗山。以斯瓦希里语“旅程”一词为灵感命名的Wendo African Safari，致力于打造个性化冒险，让我们的客人以前所未有的方式与坦桑尼亚的美丽、文化和野生动物建立联系。",
+                            "description2": "在Wendo African Safari，我们相信旅行不仅仅是观光——它关乎沉浸、转变和连接。凭借多年的经验、专业的团队以及对坦桑尼亚无与伦比的自然和文化遗产的深厚热爱，我们提供定制化的体验，留下持久的回忆。",
+                            "mission_title": "我们的使命",
+                            "mission_description": "提供卓越的 safari 体验，展示坦桑尼亚北部的自然美景、多样的野生动物和丰富的文化传统，同时促进可持续旅游并支持当地社区。",
+                            "vision_title": "我们的愿景",
+                            "vision_description": "被公认为坦桑尼亚北部的领先 safari 公司，以卓越的服务、对保护的承诺以及激发对自然和文化热爱的变革性旅行体验而闻名。"
+                        },
+                        "cultural": {
+                            "title": "揭开坦桑尼亚的文化宝藏",
+                            "description": "通过坦桑尼亚令人叹为观止的遗产遗址，穿越时间与传统，从古老遗迹到充满活力的村庄。",
+                            "unesco_title": "联合国教科文组织世界遗产瑰宝",
+                            "prehistory_title": "通往史前的窗口",
+                            "trading_title": "永恒的贸易中心",
+                            "villages_title": "活着的传统",
+                            "sites": {
+                                "stone-town": {
+                                    "title": "石头城（桑给巴尔）",
+                                    "description": "斯瓦希里文化与历史贸易的迷人融合。",
+                                    "aria": "了解更多关于桑给巴尔石头城的信息"
+                                },
+                                "kondoa": {
+                                    "title": "孔多亚岩画洞穴",
+                                    "description": "公元前2000年的人类回声。",
+                                    "aria": "了解更多关于孔多亚岩画洞穴的信息"
+                                },
+                                "kilwa-songo": {
+                                    "title": "基尔瓦基西瓦尼与松戈姆纳拉",
+                                    "description": "中世纪港口，低语着斯瓦希里海岸的故事。",
+                                    "aria": "了解更多关于基尔瓦基西瓦尼与松戈姆纳拉的信息"
+                                },
+                                "olduvai": {
+                                    "title": "奥杜瓦伊峡谷（恩戈罗恩戈罗）",
+                                    "description": "人类的摇篮，拥有古老化石。",
+                                    "aria": "了解更多关于恩戈罗恩戈罗奥杜瓦伊峡谷的信息"
+                                },
+                                "laetoli": {
+                                    "title": "莱托利足迹（恩戈罗恩戈罗）",
+                                    "description": "360万年前我们祖先的足迹。",
+                                    "aria": "了解更多关于恩戈罗恩戈罗莱托利足迹的信息"
+                                },
+                                "isimila": {
+                                    "title": "伊西米拉石器时代遗址（伊林加）",
+                                    "description": "工具遗物和高耸的岩柱。",
+                                    "aria": "了解更多关于伊林加伊西米拉石器时代遗址的信息"
+                                },
+                                "bagamoyo": {
+                                    "title": "巴加莫约镇",
+                                    "description": "贸易与历史的深刻遗产。",
+                                    "aria": "了解更多关于巴加莫约镇的信息"
+                                },
+                                "kaole": {
+                                    "title": "卡奥莱遗迹（巴加莫约）",
+                                    "description": "13世纪斯瓦希里过去的低语。",
+                                    "aria": "了解更多关于巴加莫约卡奥莱遗迹的信息"
+                                },
+                                "mikindani": {
+                                    "title": "米金达尼（姆特瓦拉）",
+                                    "description": "海岸的殖民魅力。",
+                                    "aria": "了解更多关于姆特瓦拉米金达尼的信息"
+                                },
+                                "ujiji": {
+                                    "title": "乌吉吉（基戈马）",
+                                    "description": "斯坦利与利文斯通相遇的地方。",
+                                    "aria": "了解更多关于基戈马乌吉吉的信息"
+                                },
+                                "maasai": {
+                                    "title": "马赛村（阿鲁沙与曼亚拉）",
+                                    "description": "马赛人民的生动传统。",
+                                    "aria": "了解更多关于阿鲁沙与曼亚拉马赛村的信息"
+                                },
+                                "hadzabe": {
+                                    "title": "哈扎贝与达托加（艾亚西湖）",
+                                    "description": "古老的狩猎采集生活方式。",
+                                    "aria": "了解更多关于艾亚西湖哈扎贝与达托加的信息"
+                                },
+                                "sukuma": {
+                                    "title": "苏库马博物馆（姆万扎）",
+                                    "description": "苏库马遗产的宝藏。",
+                                    "aria": "了解更多关于姆万扎苏库马博物馆的信息"
+                                },
+                                "makonde": {
+                                    "title": "马孔德村（姆特瓦拉与林迪）",
+                                    "description": "精美木雕的大师。",
+                                    "aria": "了解更多关于姆特瓦拉与林迪马孔德村的信息"
+                                },
+                                "ikombe": {
+                                    "title": "伊孔贝村（鲁夸）",
+                                    "description": "菲帕部落的丰富遗产。",
+                                    "aria": "了解更多关于鲁夸伊孔贝村的信息"
+                                }
+                            }
+                        },
+                        "footer": {
+                            "copyright": "© {{year}} Wendo Safari。保留所有权利。"
+                        },
+                        news: {
+                            title: '新闻与更新',
+                            description: '随时了解Wendo African Safari的最新新闻和公告。'
+                        },
+                        "special-safaris": {
+                            "title": "特别野生动物园",
+                            "description": "庆祝人生中的特殊时刻，或踏上一次独特的冒险之旅，体验我们量身定制的野生动物园。",
+                            "occasions": {
+                                "title": "生日、周年纪念、毕业典礼与蜜月",
+                                "description": "为庆祝特殊场合的夫妇或团体打造充满惊喜的难忘野生动物园。"
+                            },
+                            "single-travellers": {
+                                "title": "独自旅行者",
+                                "description": "为探索自然而设计的独自冒险之旅，以您自己的节奏进行。"
+                            },
+                            "family-safari": {
+                                "title": "特别家庭野生动物园",
+                                "description": "为有青少年的家庭量身定制的野生动物园，包含特别活动。"
+                            },
+                            "accessible-safari": {
+                                "title": "残疾人与病患",
+                                "description": "提供专门护理和医疗支持的可无障碍野生动物园。"
+                            }
+                        }
+                    }
+                }
+            },
+
+            interpolation: {
+                format: function (value, format, lng) {
+                    if (format === 'year') return new Date().getFullYear();
+                    return value;
+                }
+            }
+        }, function (err, t) {
+            if (err) {
+                console.error('i18next initialization failed:', err);
+                return;
+            }
+
+
+
+            console.log('i18next initialized, rendering content...');
+            // Initial content update
+            updateContent();
+            renderDestinations(); // Render destinations on page load
+            updateTripImageAlts();
+            updateYouTubeIframeTitle();
+            fetchNews();
+            // Fetch and display news (for #news section)
+            async function fetchNews() {
+                try {
+                    const newsGrid = document.getElementById('news-grid');
+                    if (!newsGrid) return; // Skip if not on a page with news-grid
+                    newsGrid.innerHTML = ''; // Clear existing content
+
+                    const currentLng = i18next.language || 'en';
+                    const newsQuery = query(collection(db, 'news'), orderBy('timestamp', 'desc'));
+                    const querySnapshot = await getDocs(newsQuery);
+
+                    if (querySnapshot.empty) {
+                        newsGrid.innerHTML = '<p class="text-gray-700 col-span-full text-center">No news items available.</p>';
+                        return;
+                    }
+
+                    querySnapshot.forEach((doc) => {
+                        const newsItem = doc.data();
+                        const title = newsItem.title?.[currentLng] || newsItem.title?.en;
+                        const content = newsItem.content?.[currentLng] || newsItem.content?.en;
+
+                        const newsCard = `
+                <div class="bg-white rounded-lg shadow-lg overflow-hidden transform hover:scale-105 transition-transform duration-300">
+                    ${newsItem.image ? `<img src="${newsItem.image}" alt="${title}" class="w-full h-48 object-cover">` : ''}
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold text-green-900 mb-2">${title}</h3>
+                        <p class="text-gray-600 mb-4">${content}</p>
+                        <p class="text-sm text-gray-500">${new Date(newsItem.timestamp?.toDate()).toLocaleDateString(currentLng)}</p>
+                    </div>
+                </div>
+            `;
+                        newsGrid.innerHTML += newsCard;
+                    });
+                } catch (error) {
+                    console.error('Error fetching news:', error);
+                    document.getElementById('news-grid').innerHTML = '<p class="text-red-600 col-span-full text-center">Failed to load news.</p>';
+                }
+            }
+
+            // Fetch news on page load
+            document.addEventListener('DOMContentLoaded', fetchNews);
+
+            // Handle language switch
+            document.getElementById('language-select').addEventListener('change', function (event) {
+                const selectedLanguage = event.target.value;
+                i18next.changeLanguage(selectedLanguage, function (err, t) {
+                    if (err) {
+                        console.error('Language change error:', err);
+                        return;
+                    }
+                    localStorage.setItem('language', selectedLanguage);
+                    console.log('Language changed to:', selectedLanguage);
+                    updateContent();
+                    renderDestinations();
+                    updateTripImageAlts();
+                    updateYouTubeIframeTitle();
+                });
+            });
+            document.getElementById('language-select-desktop').addEventListener('change', function (event) {
+                const selectedLanguage = event.target.value;
+                i18next.changeLanguage(selectedLanguage, function (err, t) {
+                    if (err) {
+                        console.error('Language change error:', err);
+                        return;
+                    }
+                    localStorage.setItem('language', selectedLanguage);
+                    console.log('Language changed to:', selectedLanguage);
+                    updateContent();
+                    renderDestinations();
+                    updateTripImageAlts();
+                    updateYouTubeIframeTitle();
+                });
+            });
+
+            function updateContent() {
+                document.querySelectorAll('[data-i18n]').forEach(element => {
+                    const key = element.getAttribute('data-i18n');
+                    const attrMatch = key.match(/^\[([^\]]+)\](.+)$/);
+                    if (attrMatch) {
+                        const attr = attrMatch[1];
+                        const translationKey = attrMatch[2];
+                        let translation = i18next.t(translationKey);
+                        if (translationKey === 'footer.copyright') {
+                            translation = translation.replace('{{year}}', new Date().getFullYear());
+                        }
+                        element.setAttribute(attr, translation);
+                    } else {
+                        let translation = i18next.t(key);
+                        if (key === 'footer.copyright') {
+                            translation = translation.replace('{{year}}', new Date().getFullYear());
+                        }
+                        element.innerHTML = translation;
+                    }
+                });
+                console.log('Done');
+                renderDestinations();
+
+            }
+
+            function updateYouTubeIframeTitle() {
+                const iframe = document.querySelector('iframe[src*="youtube.com"]');
+                if (iframe) {
+                    iframe.title = i18next.t('adventure.youtube_title');
+                }
+            }
+
+            function updateTripImageAlts() {
+                console.log('Done3');
+                const tripImages = [
+                    { selector: 'a[href*="north-tanzania-circuit"] video', alt: 'trips.north-tanzania-circuit.title' },
+                    { selector: 'a[href*="zanzibar-dar-es-salaam"] img', alt: 'trips.zanzibar-dar-es-salaam.title' },
+                    { selector: 'a[href*="serengeti-authenticity"] img', alt: 'trips.serengeti-authenticity.title' }
+                ];
+                tripImages.forEach(item => {
+                    const element = document.querySelector(item.selector);
+                    if (element) {
+                        element.alt = i18next.t(item.alt, { defaultValue: 'Trip Image' });
+                    }
+                });
+            }
+
+            function renderDestinations() {
+                console.log('Done2');
+                console.log('Rendering destinations:', destinations);
+                const destinationsGrid = document.getElementById('destinations-grid');
+                if (!destinationsGrid) {
+                    console.error('Destinations grid element not found!');
+                    return;
+                }
+                destinationsGrid.innerHTML = ''; // Clear existing cards
+
+                if (!destinations || destinations.length === 0) {
+                    console.warn('Destinations array is empty or undefined');
+                    destinationsGrid.innerHTML = '<p class="text-red-600">No destinations available.</p>';
+                    return;
+                }
+
+                destinations.forEach(destination => {
+                    console.log('Processing destination:', destination.id);
+                    const card = document.createElement('a');
+                    card.href = `destination-detail.html?dest=${destination.id}`;
+                    card.classList.add('destination-card', 'bg-white/80', 'backdrop-blur-md', 'rounded-3xl', 'shadow-lg', 'transition', 'duration-300', 'hover:scale-105', 'hover:shadow-2xl', 'overflow-hidden', 'block');
+
+                    let mediaElement;
+                    if (destination.isVideo) {
+                        mediaElement = document.createElement('video');
+                        mediaElement.src = destination.image;
+                        mediaElement.muted = true;
+                        mediaElement.loop = true;
+                        mediaElement.autoplay = true;
+                        mediaElement.alt = i18next.t(`destinations.${destination.id}.title`, { defaultValue: destination.id });
+                    } else {
+                        mediaElement = document.createElement('img');
+                        mediaElement.src = destination.image;
+                        mediaElement.alt = i18next.t(`destinations.${destination.id}.title`, { defaultValue: destination.id });
+                        mediaElement.loading = "lazy";
+                    }
+                    mediaElement.classList.add('w-full', 'h-56', 'object-cover', 'rounded-t-2xl');
+                    mediaElement.onerror = () => {
+                        console.warn(`Media failed to load for ${destination.id}: ${destination.image}`);
+                        mediaElement.src = 'https://via.placeholder.com/400x300?text=Image+Not+Available';
+                    };
+
+                    const content = document.createElement('div');
+                    content.classList.add('p-2');
+                    content.innerHTML = `
+                <h3 class="text-xl font-semibold text-green-900 mb-2">${i18next.t(`destinations.${destination.id}.title`, { defaultValue: destination.id })}</h3>
+                <p class="text-green-700">${i18next.t(`destinations.${destination.id}.description`, { defaultValue: 'No description available.' })}</p>
+            `;
+
+                    card.appendChild(mediaElement);
+                    card.appendChild(content);
+                    destinationsGrid.appendChild(card);
+                });
+                console.log('Destinations rendered successfully');
+            }
+
+            async function fetchNews() {
+                try {
+                    const newsGrid = document.getElementById('news-grid');
+                    newsGrid.innerHTML = ''; // Clear existing content
+
+                    // Get current language
+                    const currentLng = i18next.language || 'en';
+
+                    // Query news collection, ordered by timestamp (newest first)
+                    const newsQuery = query(collection(db, 'news'), orderBy('timestamp', 'desc'));
+                    const querySnapshot = await getDocs(newsQuery);
+
+                    querySnapshot.forEach((doc) => {
+                        const newsItem = doc.data();
+                        const title = newsItem.title?.[currentLng] || newsItem.title?.en; // Fallback to English
+                        const content = newsItem.content?.[currentLng] || newsItem.content?.en; // Fallback to English
+
+                        const newsCard = `
+                <div class="bg-white rounded-lg shadow-lg overflow-hidden transform hover:scale-105 transition-transform duration-300">
+                    ${newsItem.image ? `<img src="${newsItem.image}" alt="${title}" class="w-full h-48 object-cover">` : ''}
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold text-green-900 mb-2">${title}</h3>
+                        <p class="text-gray-600 mb-4">${content}</p>
+                        <p class="text-sm text-gray-500">${new Date(newsItem.timestamp?.toDate()).toLocaleDateString(currentLng)}</p>
+                    </div>
+                </div>
+            `;
+                        newsGrid.innerHTML += newsCard;
+                    });
+
+                    // Update static content with i18next
+                    updateContent();
+                } catch (error) {
+                    console.error("Error fetching news:", error);
+                }
+            }
+
+
+
+            // Call fetchNews when the page loads
+            document.addEventListener('DOMContentLoaded', fetchNews);
+
+
+        });
+
+        // Mobile menu toggle
+        // document.getElementById('menu-toggle').addEventListener('click', function () {
+        //     const mobileMenu = document.getElementById('mobile-menu');
+        //     mobileMenu.classList.toggle('hidden');
+        // });
+
+        // Mobile menu toggle
+        // document.getElementById('menu-toggle').addEventListener('click', function () {
+        //     const mobileMenu = document.getElementById('mobile-menu');
+        //     mobileMenu.classList.toggle('hidden');
+        // });
+
+        // Import addDoc and serverTimestamp
+
+        // Function to handle news form submission
+
+    </script>
+</body>
+
+</html>

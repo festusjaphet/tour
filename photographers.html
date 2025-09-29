@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wendo African Safaris - Photographers</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <script src="https://unpkg.com/i18next@23.15.1/dist/umd/i18next.min.js"></script>
+    <style>
+        body {
+            background-color: rgb(111, 57, 36);
+        }
+
+        .nav-transparent {
+            background: linear-gradient(to right, rgba(164, 255, 193, 0.585), transparent, rgba(6, 78, 29, 0.585));
+            transition: background 0.3s ease-in-out;
+        }
+
+        .nav-solid {
+            background: linear-gradient(to right, rgb(111, 57, 36), rgb(111, 57, 36), rgb(6, 78, 29));
+        }
+
+        .nav-link {
+            transition: color 0.3s;
+        }
+
+        .nav-link.active {
+            color: #4CAF50 !important;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 50;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 1rem;
+            padding: 2rem;
+            max-width: 600px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            position: relative;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            cursor: pointer;
+            font-size: 1.5rem;
+        }
+
+        .photo-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .photo-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .photo-card img {
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+
+        .photo-card:hover img {
+            opacity: 0.9;
+            transform: scale(1.05);
+        }
+
+        .photo-card::before {
+            content: '\f083';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            color: #4CAF50;
+            font-size: 1.5rem;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .photo-card:hover::before {
+            opacity: 1;
+        }
+
+        .hero {
+            position: relative;
+            width: 100%;
+            height: 60vh;
+            overflow: hidden;
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4));
+        }
+
+        .hero img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .hero-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: white;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .fade-in {
+            animation: fadeIn 1s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero {
+                height: 40vh;
+            }
+
+            .hero-text h1 {
+                font-size: 1.5rem;
+            }
+
+            .hero-text p {
+                font-size: 0.9rem;
+            }
+
+            .photo-card {
+                transform: none;
+            }
+
+            .photo-card:hover {
+                transform: scale(1.02);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation Bar -->
+    <!-- Navigation Bar -->
+    <nav id="navbar" class="nav-transparent text-white fixed w-full top-0 z-50">
+        <div class="container mx-auto flex justify-between items-center py-4 px-4">
+
+            <a href="#home" class="flex items-center space-x-2">
+                <img loading="lazy" src="assets/image1.png" alt="Wendo Safari Logo" class="size-20">
+                <img loading="lazy" src="assets/wendo.png" alt="Wendo Safari Logo" class="h-12">
+            </a>
+
+            <div class="flex items-center space-x-4">
+                <ul class="hidden md:flex space-x-6">
+                    <li><a href="index.html#home " class="nav-link hover:text-green-400 font-semibold"
+                            data-i18n="nav.home">Home</a></li>
+                    <li><a href="index.html#destinations" class="nav-link hover:text-green-400 font-semibold"
+                            data-i18n="nav.destinations">Destinations</a></li>
+                    <li><a href="index.html#Trips" class="nav-link hover:text-green-400 font-semibold"
+                            data-i18n="nav.trips">Trips</a></li>
+                    <li><a href="add-news.html" class="nav-link hover:text-green-400 font-semibold"
+                            data-i18n="nav.news">News</a></li>
+                    <li><a href="index.html#about" class="nav-link hover:text-green-400 font-semibold"
+                            data-i18n="nav.about">About</a></li>
+                    <li><a href="index.html#contact" class="nav-link hover:text-green-400 font-semibold"
+                            data-i18n="nav.contact">Contact</a></li>
+                    <li>
+                        <select id="language-select-desktop"
+                            class="bg-green-500 text-white rounded-md focus:outline-none p-2">
+                            <option value="en">English</option>
+                            <option value="fr">Français</option>
+                            <option value="es">Español</option>
+                            <option value="sw">Kiswahili</option>
+                            <option value="de">Deutsch</option>
+                            <option value="zh">中文</option>
+                        </select>
+                    </li>
+                </ul>
+                <button id="menu-toggle"
+                    class="md:hidden focus:outline-none transform transition-transform duration-300 hover:scale-110">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16m-7 6h7"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <div id="mobile-menu" class="hidden md:hidden absolute top-16 w-full">
+            <div class="backdrop-blur-sm bg-green-500/70 rounded-lg p-4 shadow-md">
+                <ul class="space-y-4 text-center">
+                    <li><a href="#home" class="block hover:text-green-300" data-i18n="nav.home">Home</a></li>
+                    <li><a href="#destinations" class="block hover:text-green-300"
+                            data-i18n="nav.destinations">Destinations</a></li>
+                    <li><a href="#Trips" class="block hover:text-green-300" data-i18n="nav.trips">Trips</a></li>
+                    <li><a href="add-news.html" class="block hover:text-green-300" data-i18n="nav.news">News</a></li>
+                    <li><a href="#about" class="block hover:text-green-300" data-i18n="nav.about">About</a></li>
+                    <li><a href="#contact" class="block hover:text-green-300" data-i18n="nav.contact">Contact</a></li>
+                    <li>
+                        <select id="language-select" class="bg-green-500 text-white rounded-md p-2 focus:outline-none">
+                            <option value="en">English</option>
+                            <option value="fr">Français</option>
+                            <option value="es">Español</option>
+                            <option value="sw">Kiswahili</option>
+                            <option value="de">Deutsch</option>
+                            <option value="zh">中文</option>
+                        </select>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div
+        class="absolute inset-0 w-full h-full bg-[url('assets/background.jpeg')] bg-cover bg-center opacity-80 blur-sm">
+    </div>
+    <!-- Hero Section -->
+    <section class="hero fade-in">
+        <img src="https://disabledaccessibletravel.com/wp-content/uploads/Hero-visual-Safari-12-day-Holiday.jpg"
+            loading="lazy">
+        <div class="hero-text ">
+            <h1 class="text-4xl md:text-5xl font-bold mb-4" data-i18n="photographers.hero.title">Capture the Wild</h1>
+            <p class="text-lg md:text-xl max-w-2xl mx-auto" data-i18n="photographers.hero.description">Join our
+                photography safaris in Northern Tanzania to immortalize stunning wildlife, breathtaking landscapes, and
+                vibrant cultures with expert guidance.</p>
+        </div>
+    </section>
+
+    <!-- Photography Packages Section -->
+    <section id="photographers"
+        class="container mx-auto py-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-10 fade-in">
+        <div class="photo-card bg-white/80 backdrop-blur-md rounded-3xl shadow-lg overflow-hidden"
+            data-trip="wildlife-photography">
+            <div class="relative w-full h-60">
+                <img src="https://www.venchatravel.com/posts_images/thumbnail3/thumb_850_47_photographic-safari.jpg" alt="Wildlife Photography"
+                    loading="lazy" class="absolute inset-0 w-full h-full object-cover rounded-t-2xl">
+            </div>
+            <div class="p-6 cursor-pointer">
+                <h3 class="text-xl font-semibold text-gray-900 mb-2"
+                    data-i18n="photographers.wildlife-photography.title">Wildlife Photography Safari</h3>
+                <p class="text-gray-700" data-i18n="photographers.wildlife-photography.brief">Capture iconic African
+                    wildlife in their natural habitat with professional guidance.</p>
+            </div>
+        </div>
+        <div class="photo-card bg-white/80 backdrop-blur-md rounded-3xl shadow-lg overflow-hidden"
+            data-trip="landscape-photography">
+            <div class="relative w-full h-60">
+                <img src="https://thumbs.dreamstime.com/b/wild-african-elephant-savannah-serengeti-national-park-wildlife-tanzania-landscape-140341678.jpg" alt="Landscape Photography"
+                    loading="lazy" class="absolute inset-0 w-full h-full object-cover rounded-t-2xl">
+            </div>
+            <div class="p-6 cursor-pointer">
+                <h3 class="text-xl font-semibold text-gray-900 mb-2"
+                    data-i18n="photographers.landscape-photography.title">Landscape & Scenic Photography</h3>
+                <p class="text-gray-700" data-i18n="photographers.landscape-photography.brief">Photograph Tanzania’s
+                    stunning savannas, mountains, and sunsets.</p>
+            </div>
+        </div>
+        <div class="photo-card bg-white/80 backdrop-blur-md rounded-3xl shadow-lg overflow-hidden"
+            data-trip="cultural-photography">
+            <div class="relative w-full h-60">
+                <img src="https://serengetinationalparksafaris.com/wp-content/uploads/2022/06/tanzania-photographic2.jpg" alt="Cultural Photography"
+                    loading="lazy" class="absolute inset-0 w-full h-full object-cover rounded-t-2xl">
+            </div>
+            <div class="p-6 cursor-pointer">
+                <h3 class="text-xl font-semibold text-gray-900 mb-2"
+                    data-i18n="photographers.cultural-photography.title">Cultural Photography Safari</h3>
+                <p class="text-gray-700" data-i18n="photographers.cultural-photography.brief">Document the vibrant
+                    traditions and daily life of local communities.</p>
+            </div>
+        </div>
+        <div class="photo-card bg-white/80 backdrop-blur-md rounded-3xl shadow-lg overflow-hidden"
+            data-trip="night-sky-photography">
+            <div class="relative w-full h-60">
+                <img src="https://www.easytravel.co.tz/wp-content/uploads/2024/02/tanzania-night-1024x576.jpg" alt="Night Sky Photography"
+                    loading="lazy" class="absolute inset-0 w-full h-full object-cover rounded-t-2xl">
+            </div>
+            <div class="p-6 cursor-pointer">
+                <h3 class="text-xl font-semibold text-gray-900 mb-2"
+                    data-i18n="photographers.night-sky-photography.title">Night Sky Photography</h3>
+                <p class="text-gray-700" data-i18n="photographers.night-sky-photography.brief">Capture the stars and
+                    Milky Way in Tanzania’s pristine skies.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal -->
+    <div id="tripModal" class="modal">
+        <div class="modal-content">
+            <span class="modal-close">×</span>
+            <h2 id="modalTitle" class="text-2xl font-bold mb-4"></h2>
+            <img id="modalImage" src="" alt="Trip Image" class="w-full h-64 object-cover rounded-lg mb-4">
+            <p id="modalDescription" class="text-gray-700"></p>
+        </div>
+    </div>
+
+    <script>
+        // Initialize i18next
+        i18next.init({
+            lng: 'en',
+            resources: {
+                en: {
+                    translation: {
+                        'nav.home': 'Home',
+                        'nav.destinations': 'Destinations',
+                        'nav.trips': 'Trips',
+                        'nav.photographers': 'Photographers',
+                        'nav.news': 'News',
+                        'nav.about': 'About',
+                        'nav.contact': 'Contact',
+                        'photographers.hero.title': 'Capture the Wild',
+                        'photographers.hero.description': 'Join our photography safaris in Northern Tanzania to immortalize stunning wildlife, breathtaking landscapes, and vibrant cultures with expert guidance.',
+                        'photographers.wildlife-photography.title': 'Wildlife Photography Safari',
+                        'photographers.wildlife-photography.brief': 'Capture iconic African wildlife in their natural habitat with professional guidance.',
+                        'photographers.wildlife-photography.description': 'Embark on a journey through Tanzania’s premier national parks, such as Serengeti and Ngorongoro, to photograph majestic animals like lions, elephants, and cheetahs. Our expert guides, skilled in both photography and wildlife, will position you for the perfect shot, offering tips on lighting, composition, and camera settings.',
+                        'photographers.landscape-photography.title': 'Landscape & Scenic Photography',
+                        'photographers.landscape-photography.brief': 'Photograph Tanzania’s stunning savannas, mountains, and sunsets.',
+                        'photographers.landscape-photography.description': 'Explore the dramatic landscapes of Northern Tanzania, from the vast Serengeti plains to the towering Kilimanjaro. Our safaris are timed to capture golden hour light and serene sunsets, with guidance on wide-angle photography and long-exposure techniques to create breathtaking images.',
+                        'photographers.cultural-photography.title': 'Cultural Photography Safari',
+                        'photographers.cultural-photography.brief': 'Document the vibrant traditions and daily life of local communities.',
+                        'photographers.cultural-photography.description': 'Immerse yourself in the rich cultures of Tanzania’s Maasai, Hadzabe, and other communities. With respectful access to villages and ceremonies, you’ll capture authentic portraits and candid moments, guided by local experts to ensure ethical and impactful photography.',
+                        'photographers.night-sky-photography.title': 'Night Sky Photography',
+                        'photographers.night-sky-photography.brief': 'Capture the stars and Milky Way in Tanzania’s pristine skies.',
+                        'photographers.night-sky-photography.description': 'Experience the magic of Tanzania’s clear, unpolluted night skies. Our night sky safaris take you to remote locations for astrophotography, with workshops on capturing star trails, the Milky Way, and celestial events, supported by professional photographers.'
+                    }
+                },
+                fr: {
+                    translation: {
+                        'nav.home': 'Accueil',
+                        'nav.destinations': 'Destinations',
+                        'nav.trips': 'Voyages',
+                        'nav.photographers': 'Photographes',
+                        'nav.news': 'Actualités',
+                        'nav.about': 'À propos',
+                        'nav.contact': 'Contact',
+                        'photographers.hero.title': 'Capturer la nature sauvage',
+                        'photographers.hero.description': 'Rejoignez nos safaris photographiques dans le nord de la Tanzanie pour immortaliser une faune spectaculaire, des paysages époustouflants et des cultures vibrantes avec des conseils d’experts.',
+                        'photographers.wildlife-photography.title': 'Safari de photographie animalière',
+                        'photographers.wildlife-photography.brief': 'Photographiez la faune africaine emblématique dans son habitat naturel avec des conseils professionnels.',
+                        'photographers.wildlife-photography.description': 'Partez à l’aventure dans les parcs nationaux de Tanzanie, comme le Serengeti et Ngorongoro, pour photographier des animaux majestueux tels que les lions, les éléphants et les guépards. Nos guides experts, compétents en photographie et en faune, vous positionneront pour le cliché parfait, avec des conseils sur l’éclairage, la composition et les réglages de l’appareil.',
+                        'photographers.landscape-photography.title': 'Photographie de paysages et de scènes',
+                        'photographers.landscape-photography.brief': 'Photographiez les savanes, montagnes et couchers de soleil époustouflants de la Tanzanie.',
+                        'photographers.landscape-photography.description': 'Explorez les paysages spectaculaires du nord de la Tanzanie, des vastes plaines du Serengeti au majestueux Kilimandjaro. Nos safaris sont programmés pour capturer la lumière de l’heure dorée et les couchers de soleil sereins, avec des conseils sur la photographie grand-angle et les techniques de longue exposition pour créer des images à couper le souffle.',
+                        'photographers.cultural-photography.title': 'Safari de photographie culturelle',
+                        'photographers.cultural-photography.brief': 'Documentez les traditions vibrantes et la vie quotidienne des communautés locales.',
+                        'photographers.cultural-photography.description': 'Plongez dans les cultures riches des communautés Maasai, Hadzabe et autres en Tanzanie. Avec un accès respectueux aux villages et aux cérémonies, vous capturerez des portraits authentiques et des moments spontanés, guidés par des experts locaux pour une photographie éthique et impactante.',
+                        'photographers.night-sky-photography.title': 'Photographie du ciel nocturne',
+                        'photographers.night-sky-photography.brief': 'Capturez les étoiles et la Voie lactée dans les cieux purs de la Tanzanie.',
+                        'photographers.night-sky-photography.description': 'Découvrez la magie des cieux nocturnes clairs et non pollués de la Tanzanie. Nos safaris de ciel nocturne vous emmènent dans des lieux isolés pour l’astrophotographie, avec des ateliers sur la capture des traînées d’étoiles, de la Voie lactée et des événements célestes, accompagnés par des photographes professionnels.'
+                    }
+                },
+                es: {
+                    translation: {
+                        'nav.home': 'Inicio',
+                        'nav.destinations': 'Destinos',
+                        'nav.trips': 'Viajes',
+                        'nav.photographers': 'Fotógrafos',
+                        'nav.news': 'Noticias',
+                        'nav.about': 'Acerca de',
+                        'nav.contact': 'Contacto',
+                        'photographers.hero.title': 'Captura la naturaleza',
+                        'photographers.hero.description': 'Únete a nuestros safaris fotográficos en el norte de Tanzania para inmortalizar fauna espectacular, paisajes impresionantes y culturas vibrantes con guía experta.',
+                        'photographers.wildlife-photography.title': 'Safari de fotografía de fauna',
+                        'photographers.wildlife-photography.brief': 'Fotografía la fauna africana icónica en su hábitat natural con orientación profesional.',
+                        'photographers.wildlife-photography.description': 'Embárcate en una aventura a través de los parques nacionales de Tanzania, como Serengeti y Ngorongoro, para fotografiar animales majestuosos como leones, elefantes y guepardos. Nuestros guías expertos, hábiles en fotografía y vida silvestre, te posicionarán para la toma perfecta, ofreciendo consejos sobre iluminación, composición y ajustes de cámara.',
+                        'photographers.landscape-photography.title': 'Fotografía de paisajes y escenarios',
+                        'photographers.landscape-photography.brief': 'Fotografía las impresionantes sabanas, montañas y atardeceres de Tanzania.',
+                        'photographers.landscape-photography.description': 'Explora los paisajes dramáticos del norte de Tanzania, desde las vastas llanuras del Serengeti hasta el imponente Kilimanjaro. Nuestros safaris están programados para capturar la luz de la hora dorada y los atardeceres serenos, con orientación sobre fotografía de gran angular y técnicas de exposición larga para crear imágenes impresionantes.',
+                        'photographers.cultural-photography.title': 'Safari de fotografía cultural',
+                        'photographers.cultural-photography.brief': 'Documenta las vibrantes tradiciones y la vida diaria de las comunidades locales.',
+                        'photographers.cultural-photography.description': 'Sumérgete en las ricas culturas de las comunidades Maasai, Hadzabe y otras en Tanzania. Con acceso respetuoso a aldeas y ceremonias, capturarás retratos auténticos y momentos espontáneos, guiado por expertos locales para garantizar una fotografía ética e impactante.',
+                        'photographers.night-sky-photography.title': 'Fotografía del cielo nocturno',
+                        'photographers.night-sky-photography.brief': 'Captura las estrellas y la Vía Láctea en los cielos prístinos de Tanzania.',
+                        'photographers.night-sky-photography.description': 'Experimenta la magia de los cielos nocturnos claros y sin contaminación de Tanzania. Nuestros safaris de cielo nocturno te llevan a lugares remotos para la astrofotografía, con talleres sobre la captura de estelas de estrellas, la Vía Láctea y eventos celestes, apoyados por fotógrafos profesionales.'
+                    }
+                },
+                sw: {
+                    translation: {
+                        'nav.home': 'Nyumbani',
+                        'nav.destinations': 'Maeneo',
+                        'nav.trips': 'Safari',
+                        'nav.photographers': 'Wapiga Picha',
+                        'nav.news': 'Habari',
+                        'nav.about': 'Kuhusu',
+                        'nav.contact': 'Mawasiliano',
+                        'photographers.hero.title': 'Piga Picha za Pori',
+                        'photographers.hero.description': 'Jiunge na safari zetu za upigaji picha kaskazini mwa Tanzania ili kuweka kumbukumbu za wanyamapori wa kustaajabisha, mandhari ya kupendeza na tamaduni za kupendeza kwa mwongozo wa kitaalamu.',
+                        'photographers.wildlife-photography.title': 'Safari ya Upigaji Picha za Wanyamapori',
+                        'photographers.wildlife-photography.brief': 'Piga picha za wanyamapori wa Kiafrika wa kipekee katika makazi yao ya asili kwa mwongozo wa kitaalamu.',
+                        'photographers.wildlife-photography.description': 'Anza safari kupitia mbuga za kitaifa za Tanzania, kama Serengeti na Ngorongoro, ili kupiga picha za wanyama wa kifahari kama simba, tembo na duma. Waelekezi wetu wa kitaalamu, waliobobea katika upigaji picha na wanyamapori, watakuweka katika nafasi bora ya kupiga picha, wakikupa vidokezo vya taa, muundo na mipangilio ya kamera.',
+                        'photographers.landscape-photography.title': 'Upigaji Picha za Mandhari na za Kupendeza',
+                        'photographers.landscape-photography.brief': 'Piga picha za savana za Tanzania za kustaajabisha, milima na machweo ya jua.',
+                        'photographers.landscape-photography.description': 'Chunguza mandhari ya kushangaza ya kaskazini mwa Tanzania, kutoka nyika za Serengeti hadi Kilimanjaro ya juu. Safari zetu zimepangwa ili kupiga picha za mwanga wa saa ya dhahabu na machweo ya amani, na mwongozo wa upigaji picha wa pembe pana na mbinu za kufichua kwa muda mrefu ili kuunda picha za kustaajabisha.',
+                        'photographers.wildlife-photography.title': 'Safari ya Upigaji Picha za Wanyamapori',
+                        'photographers.wildlife-photography.brief': 'Piga picha za wanyamapori wa Kiafrika wa kipekee katika makazi yao ya asili kwa mwongozo wa kitaalamu.',
+                        'photographers.wildlife-photography.description': 'Anza safari kupitia mbuga za kitaifa za Tanzania, kama Serengeti na Ngorongoro, ili kupiga picha za wanyama wa kifahari kama simba, tembo na duma. Waelekezi wetu wa kitaalamu, waliobobea katika upigaji picha na wanyamapori, watakuweka katika nafasi bora ya kupiga picha, wakikupa vidokezo vya taa, muundo na mipangilio ya kamera.',
+                        'photographers.cultural-photography.title': 'Safari ya Upigaji Picha za Utamaduni',
+                        'photographers.cultural-photography.brief': 'Rekodi tamaduni za kupendeza na maisha ya kila siku ya jamii za mitaa.',
+                        'photographers.cultural-photography.description': 'Jizamishe katika tamaduni za tajiri za jamii za Maasai, Hadzabe na nyinginezo nchini Tanzania. Kwa upatikanaji wa heshima kwa vijiji na sherehe, utapiga picha za picha za kweli na nyakati za moja kwa moja, ukiongozwa na wataalamu wa mitaa ili kuhakikisha upigaji picha wa maadili na wa athari.',
+                        'photographers.night-sky-photography.title': 'Upigaji Picha za Anga za Usiku',
+                        'photographers.night-sky-photography.brief': 'Piga picha za nyota na Njia ya Maziwa katika anga safi za Tanzania.',
+                        'photographers.night-sky-photography.description': 'Pata uzoefu wa uchawi wa anga za usiku safi na zisizo na uchafuzi wa Tanzania. Safari zetu za anga za usiku zinakupeleka kwenye maeneo ya mbali kwa upigaji picha wa nyota, na warsha za kupiga picha za nyota, Njia ya Maziwa na matukio ya angani, zikisaidiwa na wapiga picha wa kitaalamu.'
+                    }
+                },
+                de: {
+                    translation: {
+                        'nav.home': 'Startseite',
+                        'nav.destinations': 'Reiseziele',
+                        'nav.trips': 'Reisen',
+                        'nav.photographers': 'Fotografen',
+                        'nav.news': 'Neuigkeiten',
+                        'nav.about': 'Über uns',
+                        'nav.contact': 'Kontakt',
+                        'photographers.hero.title': 'Die Wildnis einfangen',
+                        'photographers.hero.description': 'Nehmen Sie an unseren Fotosafaris im Norden Tansanias teil, um atemberaubende Tierwelt, beeindruckende Landschaften und lebendige Kulturen mit fachkundiger Anleitung festzuhalten.',
+                        'photographers.wildlife-photography.title': 'Fotosafari für Tierfotografie',
+                        'photographers.wildlife-photography.brief': 'Fotografieren Sie ikonische afrikanische Tierwelt in ihrem natürlichen Lebensraum mit professioneller Anleitung.',
+                        'photographers.wildlife-photography.description': 'Begeben Sie sich auf eine Reise durch Tansanias erstklassige Nationalparks wie Serengeti und Ngorongoro, um majestätische Tiere wie Löwen, Elefanten und Geparden zu fotografieren. Unsere erfahrenen Guides, die sowohl in Fotografie als auch in Tierwelt versiert sind, positionieren Sie für den perfekten Schuss und geben Tipps zu Beleuchtung, Komposition und Kameraeinstellungen.',
+                        'photographers.landscape-photography.title': 'Landschafts- und Szenenfotografie',
+                        'photographers.landscape-photography.brief': 'Fotografieren Sie Tansanias atemberaubende Savannen, Berge und Sonnenuntergänge.',
+                        'photographers.landscape-photography.description': 'Erkunden Sie die dramatischen Landschaften des Nordens Tansanias, von den weiten Ebenen des Serengeti bis zum majestätischen Kilimandscharo. Unsere Safaris sind so getimt, dass Sie das Licht der goldenen Stunde und ruhige Sonnenuntergänge einfangen, mit Anleitung zu Weitwinkel-Fotografie und Langzeitbelichtungstechniken für atemberaubende Bilder.',
+                        'photographers.cultural-photography.title': 'Fotosafari für Kulturfotografie',
+                        'photographers.cultural-photography.brief': 'Dokumentieren Sie die lebendigen Traditionen und das tägliche Leben lokaler Gemeinschaften.',
+                        'photographers.cultural-photography.description': 'Tauchen Sie ein in die reichen Kulturen der Maasai, Hadzabe und anderer Gemeinschaften Tansanias. Mit respektvollem Zugang zu Dörfern und Zeremonien werden Sie authentische Porträts und spontane Momente einfangen, geleitet von lokalen Experten, um eine ethische und wirkungsvolle Fotografie zu gewährleisten.',
+                        'photographers.night-sky-photography.title': 'Nachtfotografie',
+                        'photographers.night-sky-photography.brief': 'Fangen Sie Sterne und die Milchstraße in Tansanias unberührten Himmeln ein.',
+                        'photographers.night-sky-photography.description': 'Erleben Sie die Magie der klaren, unverschmutzten Nachthimmel Tansanias. Unsere Nachtsafaris führen Sie zu abgelegenen Orten für Astrofotografie, mit Workshops zur Aufnahme von Sternenspuren, der Milchstraße und himmlischen Ereignissen, unterstützt von professionellen Fotografen.'
+                    }
+                },
+                zh: {
+                    translation: {
+                        'nav.home': '首页',
+                        'nav.destinations': '目的地',
+                        'nav.trips': '旅行',
+                        'nav.photographers': '摄影师',
+                        'nav.news': '新闻',
+                        'nav.about': '关于我们',
+                        'nav.contact': '联系我们',
+                        'photographers.hero.title': '捕捉野性',
+                        'photographers.hero.description': '加入我们在坦桑尼亚北部的摄影Safari，捕捉壮观的野生动物、惊艳的风景和充满活力的文化，得到专家的指导。',
+                        'photographers.wildlife-photography.title': '野生动物摄影Safari',
+                        'photographers.wildlife-photography.brief': '在专业指导下，拍摄自然栖息地中的标志性非洲野生动物。',
+                        'photographers.wildlife-photography.description': '穿越坦桑尼亚顶级国家公园，如塞伦盖蒂和恩戈罗恩戈罗，拍摄狮子、大象和猎豹等壮丽动物。我们的专家导游精通摄影和野生动物知识，将为您定位最佳拍摄点，并提供有关光线、构图和相机设置的建议。',
+                        'photographers.landscape-photography.title': '风景与场景摄影',
+                        'photographers.landscape-photography.brief': '拍摄坦桑尼亚壮观的草原、山脉和日落。',
+                        'photographers.landscape-photography.description': '探索坦桑尼亚北部引人注目的风景，从广袤的塞伦盖蒂平原到雄伟的乞力马扎罗。我们的Safari定于黄金时段和宁静的日落时分，指导您使用广角摄影和长曝光技术，创造令人叹为观止的图像。',
+                        'photographers.cultural-photography.title': '文化摄影Safari',
+                        'photographers.cultural-photography.brief': '记录当地社区的生动传统和日常生活。',
+                        'photographers.cultural-photography.description': '沉浸在坦桑尼亚马赛人、哈扎比人和其他社区的丰富文化中。通过对村庄和仪式的尊重访问，您将捕捉到真实的肖像和自然瞬间，在当地专家的指导下，确保摄影具有道德性和影响力。',
+                        'photographers.night-sky-photography.title': '夜空摄影',
+                        'photographers.night-sky-photography.brief': '在坦桑尼亚纯净的天空中捕捉星星和银河。',
+                        'photographers.night-sky-photography.description': '体验坦桑尼亚清澈、无污染夜空的魔力。我们的夜空Safari带您到偏远地点进行天文摄影，提供拍摄星轨、银河和天文事件的研讨会，由专业摄影师支持。'
+                    }
+                }
+            }
+        }, () => {
+            applyTranslations();
+        });
+
+        // Apply translations to elements
+        function applyTranslations() {
+            document.querySelectorAll('[data-i18n]').forEach(element => {
+                const key = element.getAttribute('data-i18n');
+                element.textContent = i18next.t(key);
+            });
+        }
+
+        // Language switcher
+        const languageSelects = document.querySelectorAll('#language-select, #language-select-desktop');
+        languageSelects.forEach(select => {
+            select.addEventListener('change', (e) => {
+                const newLang = e.target.value;
+                i18next.changeLanguage(newLang, () => {
+                    applyTranslations();
+                    updateModalContent();
+                });
+            });
+        });
+
+        // Modal handling
+        const modal = document.getElementById('tripModal');
+        const modalTitle = document.getElementById('modalTitle');
+        const modalImage = document.getElementById('modalImage');
+        const modalDescription = document.getElementById('modalDescription');
+        const closeModal = document.querySelector('.modal-close');
+        let currentTrip = '';
+
+        function updateModalContent() {
+            if (currentTrip) {
+                modalTitle.textContent = i18next.t(`photographers.${currentTrip}.title`);
+                modalDescription.textContent = i18next.t(`photographers.${currentTrip}.description`);
+            }
+        }
+
+        document.querySelectorAll('.photo-card').forEach(card => {
+            card.addEventListener('click', () => {
+                currentTrip = card.getAttribute('data-trip');
+                modalTitle.textContent = i18next.t(`photographers.${currentTrip}.title`);
+                modalImage.src = card.querySelector('img').src;
+                modalImage.alt = card.querySelector('img').alt;
+                modalDescription.textContent = i18next.t(`photographers.${currentTrip}.description`);
+                modal.style.display = 'flex';
+            });
+        });
+
+        closeModal.addEventListener('click', () => {
+            modal.style.display = 'none';
+            currentTrip = '';
+        });
+
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.style.display = 'none';
+                currentTrip = '';
+            }
+        });
+
+        // Mobile menu toggle
+        document.addEventListener('DOMContentLoaded', () => {
+            const toggleButton = document.getElementById('menu-toggle');
+            const mobileMenu = document.getElementById('mobile-menu');
+            toggleButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+        });
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.remove('nav-transparent');
+                navbar.classList.add('nav-solid');
+            } else {
+                navbar.classList.remove('nav-solid');
+                navbar.classList.add('nav-transparent');
+            }
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,375 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Site Detail - Tanzania Cultural Sites</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        .fade-in { animation: fadeIn 1s ease-in; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    </style>
+       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+       <style>
+           body {
+               background: linear-gradient(to right, #f0fdf4, #fefce8, #f0fdf4);
+               font-family: 'Arial', sans-serif;
+           }
+           .dest-hero {
+               position: relative;
+               width: 100%;
+               height: 40vh;
+               overflow: hidden;
+               border-radius: 1.5rem;
+               box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+               transition: transform 0.3s ease;
+           }
+           .dest-hero:hover {
+               transform: scale(1.02);
+           }
+           .dest-hero img,
+           .dest-hero video {
+               width: 100%;
+               height: 100%;
+               object-fit: cover;
+           }
+           
+           .nav-shadow {
+               box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+           }
+           .section-title {
+               text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+           }
+           .dest-card {
+               background: rgba(255, 255, 255, 0.9);
+               border-radius: 1.5rem;
+               box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+               transition: transform 0.3s ease, box-shadow 0.3s ease;
+           }
+           .dest-card:hover {
+               transform: translateY(-5px);
+               box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+           }
+           .form-card {
+               background: linear-gradient(to right, #d1fae5, #fefcbf);
+               border-radius: 1.5rem;
+               padding: 2rem;
+               box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+           }
+           .form-input {
+               border: 1px solid #d1d5db;
+               border-radius: 0.5rem;
+               padding: 0.75rem;
+               width: 100%;
+               transition: border-color 0.3s ease, box-shadow 0.3s ease;
+           }
+           .form-input:focus {
+               border-color: #f59e0b;
+               box-shadow: 0 0 5px rgba(245, 158, 11, 0.5);
+               outline: none;
+           }
+           .form-label {
+               font-weight: 500;
+               color: #374151;
+               margin-bottom: 0.5rem;
+               
+           }
+       </style>
+</head>
+<body class="bg-gradient-to-r from-green-50 via-amber-100 to-green-50 text-gray-800">
+    <nav class="bg-green-900 text-white py-4 fixed w-full top-0 z-50 nav-shadow">
+        <div class="container mx-auto px-6 flex justify-between items-center">
+            <a href="index.html" class="flex items-center space-x-2 transform transition-transform hover:scale-105">
+                <img loading="lazy" src="assets/image1.png" alt="Wendo Safari Logo" class="size-12">
+                <img loading="lazy" src="assets/wendo.png" alt="Wendo Safari Logo" class="h-8">
+            </a>
+            <a href="index.html#cultural" class="text-lg hover:text-green-400 transition-colors duration-300">Back to Home</a>
+        </div>
+    </nav>
+    <section class="py-20 bg-gradient-to-r from-amber-50 via-yellow-100 to-amber-50 text-center p-4 mx-auto py-16 px-4">
+        <div id="site-detail" class="bg-white bg-opacity-60 rounded-xl shadow-lg p-8 fade-in">
+            <h1 class="text-4xl font-bold text-gray-800 mb-6" id="site-title">Loading...</h1>
+            <img id="site-image" src="" alt="Site Image" class="w-full h-full object-cover rounded-lg mb-6" onerror="this.src='https://via.placeholder.com/1200x800?text=Image+Not+Available';">
+            <p id="site-description" class="text-gray-700 leading-relaxed mb-6"></p>
+            <div class="mb-6">
+                <h3 class="text-2xl font-semibold text-gray-800 mb-4">Gallery</h3>
+                <div id="site-gallery" class="grid grid-cols-1 sm:grid-cols-2 gap-4"></div>
+            </div>
+
+        </div>
+    </section>
+
+    <script>
+        const sites = {
+            "stone-town": {
+                title: "Stone Town (Zanzibar)",
+                image: "https://www.foreverafricasafari.com/wp-content/uploads/2022/08/fuerte-stone-town-zanzibar.jpg",
+                description: "Stone Town, located on Zanzibar Island, is a UNESCO World Heritage Site inscribed in 2000. This historic town exemplifies a fusion of Swahili, Arab, Indian, and European cultures, evident in its narrow winding streets, coral stone buildings, and bustling markets. Key landmarks include the Old Fort, built by Omani Arabs in the 17th century, the House of Wonders, a former sultan’s palace, and the former slave market site, now a poignant memorial. Once a thriving center for spice and slave trade, Stone Town’s architecture features intricately carved wooden doors and verandas, reflecting its rich trading history along the Indian Ocean coast. ",
+                gallery: ["https://blog.tanzaniaodyssey.com/wp-content/uploads/2013/03/Birds-Eye-Stone-Town.jpg", "https://blog.tanzaniaodyssey.com/wp-content/uploads/2013/03/Boat-1.jpg"],
+                video: "https://www.youtube.com/watch?v=F9GDrzlWq9Q&pp=ygUTc3RvbmUgdG93biB6YW56aWJhcg%3D%3D"
+            },
+            "kondoa": {
+                title: "Kondoa Rock Art Caves",
+                image: "https://www.tanzaniatourism.com/images/uploads/Kondoa_Rock_Art_Site_07.jpg",
+                description: "The Kondoa Rock-Art Sites, inscribed as a UNESCO World Heritage Site in 2006, consist of over 150 natural rock shelters in central Tanzania adorned with ancient paintings. Dating back to around 2,000 BCE, these artworks were created by hunter-gatherer communities and depict animals (giraffes, elephants), human figures, and abstract symbols. The paintings, executed in red and white pigments, offer a window into prehistoric life, rituals, and beliefs. Located in the Kondoa region, the sites span a vast area and are preserved amidst rugged landscapes, making them one of Africa’s most significant rock art collections.",
+                gallery: ["https://serengetinationalparksafaris.com/wp-content/uploads/2023/02/dtybca.jpg"],
+                video: "https://www.youtube.com/embed/7vX8z5Z3vQw"
+            },
+            "kilwa-songo": {
+                title: "Kilwa Kisiwani & Songo Mnara Ruins",
+                image: "https://whc.unesco.org/uploads/thumbs/news_1147-1200-630-20140617202313.jpg",
+                description: "Inscribed in 1981 as a UNESCO World Heritage Site, the ruins of Kilwa Kisiwani and Songo Mnara on Tanzania’s southern coast are remnants of two prosperous Swahili trading ports from the 9th to 19th centuries. Kilwa Kisiwani, once a powerful sultanate, controlled gold trade routes to Zimbabwe and minted its own coins. Notable structures include the Great Mosque (11th century), the Husuni Kubwa palace, and coral-stone houses. Songo Mnara, a smaller island, features well-preserved domestic architecture. These sites showcase Swahili engineering and their role as a cultural bridge between Africa, Arabia, and Asia.",
+                gallery: ["https://www.tawa.go.tz/storage/app/uploads/public/627/272/141/627272141216e703775833.jpg", "https://www.focuseastafricatours.com/wp-content/uploads/kilwa.jpg"],
+                video: "https://www.youtube.com/embed/XkKz8z5J5vE"
+            },
+            "olduvai": {
+                title: "Olduvai Gorge (Ngorongoro)",
+                image: "https://www.ncaa.go.tz/wp-content/uploads/2022/08/Olduvai-Gorge3.jpg",
+                description: "Olduvai Gorge, within the Ngorongoro Conservation Area, is one of the world’s most important paleoanthropological sites. Known as the 'Cradle of Mankind,' it has yielded fossils of early hominids like Homo habilis and Paranthropus boisei, discovered by Louis and Mary Leakey in the mid-20th century. Spanning nearly 2 million years of human evolution, the gorge’s layered sediment preserves tools, bones, and evidence of early human activity. Its dramatic landscape, cut by erosion, reveals a geological timeline studied globally, complemented by the nearby Olduvai Gorge Museum.",
+                gallery: ["https://www.shadowsofafrica.com/media/catalog/product/cache/1/image/900x/040ec09b1e35df139433887a97daa66f/o/l/olduvai_gorge4.jpg"],
+                video: "https://www.youtube.com/embed/0ZCaQJ74pNU"
+            },
+            "laetoli": {
+                title: "Laetoli Footprints (Ngorongoro)",
+                image: "https://www.tanzaniatourism.com/images/uploads/Laetoli_Footprints_NCA_3.jpg",
+                description: "The Laetoli Footprints, discovered in 1976 by Mary Leakey near Ngorongoro, are a remarkable archaeological find: 3.6-million-year-old impressions of Australopithecus afarensis preserved in volcanic ash. These 70 footprints, stretching over 27 meters, provide the earliest evidence of bipedalism in human ancestors. The site includes tracks of three individuals—likely a family—walking upright, offering profound insights into human evolution. Protected under a conservation cover, Laetoli remains a testament to our ancient origins, with replicas displayed in museums worldwide.",
+                gallery: ["https://www.africanmeccasafaris.com/wp-content/uploads/laetolifootprints.jpg"],
+                video: "https://www.youtube.com/embed/5z5z5z5z5z5"
+            },
+            "isimila": {
+                title: "Isimila Stone Age Site (Iringa)",
+                image: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9f/Isimila.jpg/1200px-Isimila.jpg",
+                description: "Located near Iringa, the Isimila Stone Age Site dates back over 60,000 years, featuring an array of Acheulean stone tools like hand axes and cleavers. Discovered in the 1950s, the site’s erosion-carved sandstone pillars add a striking natural element to its archaeological significance. Excavations reveal evidence of early human habitation, including animal bones suggesting hunting practices. Isimila offers a rare glimpse into the Middle Stone Age in East Africa, blending natural beauty with prehistoric history.",
+                gallery: ["https://www.tanzania-experience.com/wp-content/uploads/2016/01/isimila-stone-age-featured.jpg"],
+                video: "https://www.youtube.com/embed/3z3z3z3z3z3"
+            },
+            "bagamoyo": {
+                title: "Bagamoyo Town",
+                image: "https://safarispartners.com/images/destinations/bagamoyo.jpg",
+                description: "Bagamoyo, a coastal town north of Dar es Salaam, was a pivotal 19th-century hub for the slave and ivory trade under Arab and German rule. Its name, meaning 'lay down your heart,' reflects the despair of enslaved people. Key sites include the Holy Ghost Mission (1870s), with its church and museum, the German Boma (administrative building), and the Kaole Ruins nearby. Bagamoyo’s colonial architecture and historical significance make it a poignant cultural landmark.",
+                gallery: ["https://cdn-ajfhi.nitrocdn.com/KGztweKcUtUgsFQkUHxObgZRMXOaBfJI/assets/images/optimized/rev-fbb238a/tanzania-specialist.com/wp-content/uploads/2023/07/Bagamoyo-3.jpg"],
+                video: "https://www.youtube.com/embed/4z4z4z4z4z4"
+            },
+            "kaole": {
+                title: "Kaole Ruins (Bagamoyo)",
+                image: "https://www.tanzaniatourism.com/images/uploads/Bagamoyo/Kaole_Ruins_Bagamoyo_03.jpg",
+                description: "Just south of Bagamoyo, the Kaole Ruins date to the 13th century, showcasing Swahili coastal civilization. The site features a well-preserved mosque, Persian-influenced tombs with baobab trees, and remnants of a thriving trade settlement. Once linked to Kilwa’s trade network, Kaole’s coral stone structures reflect Islamic and Persian architectural styles, offering insights into early coastal culture and commerce before its decline in the 16th century.",
+                gallery: ["https://upload.wikimedia.org/wikipedia/commons/0/00/13th_century_Kaole_mosque.jpg"],
+                video: "https://www.youtube.com/embed/5z5z5z5z5z5"
+            },
+            "mikindani": {
+                title: "Mikindani (Mtwara)",
+                image: "https://mikindani.com/wp-content/uploads/2015/08/Bay-6.jpg",
+                description: "Mikindani, a coastal town in Mtwara, flourished as a Swahili trading port before becoming a German colonial outpost in the late 19th century. The German Boma, a fortified administrative building, stands as a centerpiece, alongside Arab-influenced houses and a historic slave market site. Its picturesque bay and quiet streets preserve a blend of Swahili, Arab, and European heritage, making it a lesser-known gem of Tanzania’s coast.",
+                gallery: ["https://www.exploretanzania.nl/wp-content/uploads/2020/09/Mikindani-960x605-1.jpg"],
+                video: "https://www.youtube.com/embed/6z6z6z6z6z6"
+            },
+            "ujiji": {
+                title: "Ujiji (Kigoma)",
+                image: "https://upload.wikimedia.org/wikipedia/commons/a/a1/Kigoma_Railway_Station%2C_Kigoma_Ward.jpg",
+                description: "Ujiji, on Lake Tanganyika, is famed for the 1871 meeting of Henry Morton Stanley and Dr. David Livingstone, marked by a monument under a mango tree. An Arab-Swahili trading post in the 19th century, it facilitated the exchange of goods across Central Africa. The Livingstone Museum and nearby traditional houses highlight its historical role and multicultural past, set against the scenic lakeshore.",
+                gallery: ["https://upload.wikimedia.org/wikipedia/commons/thumb/b/be/Ujiji_2012_Tamino.jpg/640px-Ujiji_2012_Tamino.jpg"],
+                video: "https://www.youtube.com/embed/7z7z7z7z7z7"
+            },
+            "maasai": {
+                title: "Maasai Villages (Arusha & Manyara)",
+                image: "https://cdn-ajfhi.nitrocdn.com/KGztweKcUtUgsFQkUHxObgZRMXOaBfJI/assets/images/optimized/rev-fbb238a/tanzania-specialist.com/wp-content/uploads/2023/08/visit-maasai-village-1.jpg",
+                description: "Scattered across Arusha and Manyara regions, Maasai villages offer an immersive experience into the pastoral lifestyle of the Maasai people. Known for their distinctive red attire, intricate beadwork, and warrior traditions, the Maasai maintain semi-nomadic cattle-herding practices. Visitors can witness traditional dances like the Adumu (jumping dance), explore mud-and-dung bomas (homesteads), and learn about their resilience amidst modernization.",
+                gallery: ["https://www.arushacityguide.com/wp-content/uploads/2023/08/Arusha-Maasai-Village-Tour.jpg"],
+                video: "https://www.youtube.com/embed/8z8z8z8z8z8"
+            },
+            "hadzabe": {
+                title: "Hadzabe & Datoga Tribes (Lake Eyasi)",
+                image: "https://www.shadowsofafrica.com/media/catalog/product/cache/1/image/900x/040ec09b1e35df139433887a97daa66f/h/a/hadzabe_in_tanzania_2.jpg",
+                description: "Near Lake Eyasi, the Hadzabe and Datoga tribes represent some of Africa’s last hunter-gatherer and pastoralist communities. The Hadzabe, numbering fewer than 1,000, hunt with bows and arrows, living off the land with minimal possessions. The Datoga, skilled metalworkers, craft tools and jewelry. Their traditional lifestyles, language (click-based for Hadzabe), and coexistence with nature offer a rare look at ancient survival methods.",
+                gallery: ["https://idreamofafrica.com/wp-content/uploads/2018/04/hadza-of-lake-eyasi.jpg"],
+                video: "https://www.youtube.com/embed/9z9z9z9z9z9"
+            },
+            "sukuma": {
+                title: "Sukuma Museum (Bujora, Mwanza)",
+                image: "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/06/57/73/b7/sukuma-village-museum.jpg?w=1200&h=-1&s=1",
+                description: "Located in Bujora near Mwanza, the Sukuma Museum celebrates the culture of Tanzania’s largest ethnic group, the Sukuma. Established in 1968, it features traditional houses, royal regalia, and artifacts like drums used in the Bagika dance. The museum preserves Sukuma history, including their farming and fishing traditions, and hosts performances of the famous snake dance, showcasing their vibrant heritage.",
+                gallery: ["https://sukumamuseum.org/wp-content/uploads/royal-pavilion-5.4-1.jpg"],
+                video: "https://www.youtube.com/embed/0a0a0a0a0a0"
+            },
+            "makonde": {
+                title: "Makonde Carving Villages (Mtwara & Lindi)",
+                image: "https://www.blackwoodconservation.org/wp-content/uploads/2019/04/Mak-Instrument-Players.jpg",
+                description: "In southern Tanzania’s Mtwara and Lindi regions, Makonde villages are renowned for their intricate wood carvings. The Makonde people craft Ujamaa (family tree) sculptures and abstract figures from ebony, a tradition dating back centuries. These artworks often depict spirits, ancestors, or social themes, sold globally. Visitors can observe artisans at work and explore their matrilineal culture amidst rural settings.",
+                gallery: ["https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiTCtzUmzGt-FMVOfdODM8uPfpPxf33yRnHVZqjkmOHQbGNFxMbPAI2gKJb2mDAKf-sgubLd3SzMxxlI2uHXQqyfrCyNez0jFCLodDMWFJBp22cYA4_IPiXe2cwBp7ej3qSQVyLV2rf1aoJ/s640/makondecarver2.jpg"],
+                video: "https://www.youtube.com/embed/1b1b1b1b1b1"
+            },
+            "ikombe": {
+                title: "Ikombe Cultural Village (Rukwa)",
+                image: "https://dailynews.co.tz/wp-content/uploads/2022/09/rukwa.jpg",
+                description: "Ikombe, in the Rukwa region, preserves the traditions of the Fipa people, known for their unique plateau homeland. The village features traditional huts, storytelling sessions, and crafts like pottery and basket weaving. The Fipa’s agricultural heritage, including millet farming, and their oral histories of migration from Central Africa, enrich this cultural experience amidst a scenic landscape.",
+                gallery: ["https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTEzWfWaqgdlVWGfBcSaK0htjshVCPF33i_ZQ&s"],
+                video: "https://www.youtube.com/embed/2c2c2c2c2c2"
+            },
+            "german-boma": {
+                title: "German Boma (Bagamoyo & Iringa)",
+                image: "https://www.tanzaniatourism.com/images/uploads/Bagamoyo/German_Old_Boma_Bagamoyo_04.jpg",
+                description: "Built during German colonial rule (1885–1919), the German Bomas in Bagamoyo and Iringa served as administrative and military headquarters. These sturdy stone buildings, like the Mikindani Boma (used here for imagery), feature European design with thick walls and arched windows. In Bagamoyo, it oversaw coastal trade; in Iringa, it controlled inland regions. Today, they stand as relics of Tanzania’s colonial past, often repurposed for local use.",
+                gallery: ["https://www.traveladventures.org/countries/tanzania/images/bagamoyo03.jpg"],
+                video: "https://www.youtube.com/embed/3d3d3d3d3d3"
+            },
+            "askari": {
+                title: "Askari Monument (Dar es Salaam)",
+                image: "https://appsaf.apieproject.com/news/wp-content/uploads/sites/29/2023/07/askari4-97cf8429cf61dd8d1e9eced76d9f9e01.jpeg",
+                description: "The Askari Monument, unveiled in 1927 in Dar es Salaam, honors African soldiers (askaris) who fought for Britain in World War I. This bronze statue, depicting a rifle-bearing soldier, stands at a busy roundabout, symbolizing colonial sacrifice. Crafted by James Alexander Stevenson, it reflects both tribute and the complex legacy of colonial rule in Tanzania, surrounded by modern urban life.",
+                gallery: ["https://dynamic-media-cdn.tripadvisor.com/media/photo-o/28/62/c5/db/caption.jpg?w=900&h=500&s=1"],
+                video: "https://www.youtube.com/embed/4e4e4e4e4e4"
+            },
+            "azania": {
+                title: "Azania Front Lutheran Church (Dar es Salaam)",
+                image: "https://www.azaniafront.org/sites/default/files/styles/max660/public/dar_es_salaam-azania_sea_view%20%281%29.jpg?itok=V-9jbJSC",
+                description: "Built in 1898 by German missionaries, Azania Front Lutheran Church in Dar es Salaam is a striking Gothic-style edifice with a red-tiled roof and pointed arches. Overlooking the harbor, it was the first permanent church in the city, serving German settlers and later the local Lutheran community. Its historical significance and architectural beauty make it a landmark of colonial and religious heritage.",
+                gallery: ["https://img1.advisor.travel/fs440x440px-Azania_Front_Lutheran_Church_16.jpg"],
+                video: "https://www.youtube.com/embed/5f5f5f5f5f5"
+            },
+            "old-fort": {
+                title: "Old Fort (Zanzibar)",
+                image: "https://media.tacdn.com/media/attractions-splice-spp-674x446/0b/2d/0e/09.jpg",
+                description: "The Old Fort, or Ngome Kongwe, in Zanzibar’s Stone Town was constructed in the late 17th century by Omani Arabs to defend against Portuguese attacks. This coral stone fortress, with its thick walls and cannons, later served as a prison and railway terminal. Today, it hosts cultural events, including the Zanzibar International Film Festival, blending history with modern vibrancy.",
+                gallery: ["https://media02.stockfood.com/largepreviews/MjIxMTExODM2OQ==/71326399-Old-Fort-AKA-Arab-Fort-or-Ngome-Kongwe-Stone-Town-Zanzibar-Unguja-Island-Tanzania.jpg"],
+                video: "https://www.youtube.com/embed/6g6g6g6g6g6"
+            },
+            "st-joseph": {
+                title: "St. Joseph’s Cathedral (Dar es Salaam)",
+                image: "https://3rdworldarchitecture.wordpress.com/wp-content/uploads/2018/05/tz_daressalaam_stjoseph_church.jpg",
+                description: "St. Joseph’s Cathedral, completed in 1897 by German missionaries, is a Gothic-style Catholic church in Dar es Salaam. Its twin spires, stained glass windows, and ornate interior reflect European architectural influence. Located near the harbor, it remains an active place of worship and a historical symbol of Tanzania’s colonial Christian heritage, drawing visitors for its serene beauty.",
+                gallery: ["https://travel-buddies.com/wp-content/uploads/2024/12/1_dar-es-salaam-history-and-architectural-tours.jpg"],
+                video: "https://www.youtube.com/embed/7h7h7h7h7h7"
+            },
+            "national-museum": {
+                title: "National Museum (Dar es Salaam)",
+                image: "https://momaa.org/wp-content/uploads/2019/09/nmt-1024x568.png",
+                description: "The National Museum and House of Culture in Dar es Salaam, founded in 1940, chronicles Tanzania’s rich history. Exhibits include Leakey’s Olduvai Gorge fossils, Swahili artifacts, and relics from the independence struggle, housed in a building donated by King George V. Its ethnological and archaeological collections, alongside colonial-era displays, make it a comprehensive cultural repository.",
+                gallery: ["https://www.nmt.go.tz/uploads/historical-centers/98a47a7c044d4032f7074ebbf31841c3.jpeg"],
+                video: "https://www.youtube.com/embed/8i8i8i8i8i8"
+            },
+            "village-museum": {
+                title: "Village Museum (Dar es Salaam)",
+                image: "https://www.urtrips.com/wp-content/uploads/2023/04/Makumbusho-Village-Museum-Dar-ES-Salaam_2.jpg",
+                description: "The Village Museum in Dar es Salaam is an open-air exhibit showcasing traditional houses from over 20 Tanzanian tribes, built with authentic materials like mud and thatch. Established in 1967, it offers live demonstrations of crafts, dances, and daily life, preserving the country’s diverse indigenous cultures. Set in a lush garden, it’s an educational and immersive experience.",
+                gallery: ["https://www.goshen.edu/wp-content/uploads/sites/20/2017/01/FJXS2812.jpg"],
+                video: "https://www.youtube.com/embed/9j9j9j9j9j9"
+            },
+            "nyerere-museum": {
+                title: "Nyerere Museum (Butiama, Mara)",
+                image: "https://gamilytours.wordpress.com/wp-content/uploads/2016/11/nyerere-museum.jpg?w=640",
+                description: "The Nyerere Museum in Butiama, Julius Nyerere’s birthplace, honors Tanzania’s first president (Mwalimu). Opened in 1999, it displays his personal belongings, photographs, and documents from his leadership during the independence movement and socialist Ujamaa policy. The site includes his family home and grave, offering a personal look at a national hero.",
+                gallery: ["https://upload.wikimedia.org/wikipedia/commons/6/6c/Butiama_Museum.jpg"],
+                video: "https://www.youtube.com/embed/0k0k0k0k0k0"
+            },
+            "nyerere-memorial": {
+                title: "Mwalimu Nyerere Memorial House (Zanzibar)",
+                image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRlgoHgOhXB6xtNbdI4FxV1yeYv3yqZssiCjg&s",
+                description: "The Mwalimu Nyerere Memorial House in Zanzibar commemorates Julius Nyerere’s contributions to Tanzania’s unity and independence. This modest residence, where he once stayed, features exhibits of his writings, photos, and memorabilia. It highlights his role in merging Tanganyika and Zanzibar into Tanzania, emphasizing his legacy of peace and equality.",
+                gallery: ["https://i0.wp.com/www.tanzania1.com/wp-content/uploads/2013/06/Nyerere-Memorial.png?fit=800%2C500&ssl=1"],
+                video: "https://www.youtube.com/embed/1l1l1l1l1l1"
+            },
+            "arusha": {
+                title: "Arusha Cultural Heritage Centre",
+                image: "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1a/82/3d/ef/caption.jpg?w=1200&h=-1&s=1",
+                description: "The Arusha Cultural Heritage Centre is a vibrant hub for Tanzanian art and history, featuring galleries of sculptures, paintings, and artifacts from across the country. Established in 1994, it showcases Maasai beadwork, Makonde carvings, and historical exhibits in a striking triangular building. It also serves as a marketplace for local crafts, blending culture with commerce.",
+                gallery: ["https://i0.wp.com/www.bestoftanzaniasafaris.com/wp-content/uploads/2023/06/cultural-heritate-center-arusha.jpg?resize=980%2C550"],
+                video: "https://www.youtube.com/embed/2m2m2m2m2m2"
+            },
+            "balai": {
+                title: "Balai Hindu Temple (Zanzibar & Dar es Salaam)",
+                image: "https://cdn.myportfolio.com/238f99c5-741c-4350-bad9-3ed13e2a2bbc/f79efd83-a70f-42f6-8ea1-c81eca9b81b4_rwc_90x0x1424x1068x1424.jpg?h=0f58bd2f070e6d233c76ce6c1e710b99",
+                description: "The Balai Hindu Temples in Zanzibar and Dar es Salaam serve Tanzania’s Indian diaspora, reflecting their cultural and spiritual heritage. Built in the early 20th century, these temples feature ornate carvings and vibrant interiors typical of South Indian architecture. They host festivals like Diwali and remain active worship sites, symbolizing the diversity of Tanzania’s urban communities.",
+                gallery: ["https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTnReionHkAzZOfh4XucgOV1sDkYE5_5eav-Q&s"],
+                video: "https://www.youtube.com/embed/3n3n3n3n3n3"
+            },
+            "kizimkazi": {
+                title: "Kizimkazi Mosque (Zanzibar)",
+                image: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/Kizimkazi01.jpg/1200px-Kizimkazi01.jpg",
+                description: "The Kizimkazi Mosque, built in 1107 on Zanzibar’s southern coast, is one of East Africa’s oldest Islamic structures. Commissioned by Persian settlers, its mihrab bears Kufic inscriptions, a rare feature in the region. Restored over centuries, it reflects Swahili architectural simplicity and early Muslim influence, set near a village known for dolphin sightings.",
+                gallery: ["https://img1.advisor.travel/1200x630px-Kizimkazi_Mosque_10.jpg"],
+                video: "https://www.youtube.com/embed/4o4o4o4o4o4"
+            }
+        };
+
+        const urlParams = new URLSearchParams(window.location.search);
+        const siteId = urlParams.get('site');
+        const site = sites[siteId] || { title: "Site Not Found", image: "https://via.placeholder.com/1200x800?text=Site+Not+Found", description: "The requested site could not be found.", gallery: [], video: "" };
+
+        document.getElementById("site-title").textContent = site.title;
+        document.getElementById("site-image").src = site.image;
+        document.getElementById("site-description").textContent = site.description;
+        
+        const gallery = document.getElementById("site-gallery");
+        site.gallery.forEach(imgSrc => {
+            const img = document.createElement("img");
+            img.src = imgSrc;
+            img.alt = `${site.title} Gallery Image`;
+            img.className = "w-full h-full object-cover rounded-lg";
+            img.onerror = () => img.src = "https://via.placeholder.com/750x500?text=Gallery+Image+Not+Available";
+            gallery.appendChild(img);
+        });
+
+        const videoIframe = document.getElementById("site-video").querySelector("iframe");
+        videoIframe.src = site.video || "https://www.youtube.com/embed/dQw4w9WgXcQ"; // Fallback to a default video if none available
+    </script>
+</body>
+</html>
+
+
+
+
+ -->
+ <!DOCTYPE html>
+ <html lang="en">
+ <head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title data-i18n="page.title">Site Detail - Tanzania Cultural Sites</title>
+     <script src="https://cdn.tailwindcss.com"></script>
+     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+     <style>
+         .fade-in { animation: fadeIn 1s ease-in; }
+         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+         .nav-shadow { box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); }
+     </style>
+ </head>
+ <body class="bg-gradient-to-r from-green-50 via-amber-100 to-green-50 text-gray-800">
+     <nav class="bg-green-900 text-white py-4 fixed w-full top-0 z-50 nav-shadow">
+         <div class="container mx-auto px-6 flex justify-between items-center">
+             <a href="index.html" class="flex items-center space-x-2 transform transition-transform hover:scale-105">
+                 <img loading="lazy" src="assets/image1.png" alt="Wendo Safari Logo" class="size-12">
+                 <img loading="lazy" src="assets/wendo.png" alt="Wendo Safari Logo" class="h-8">
+             </a>
+             <a href="index.html#cultural" class="text-lg hover:text-green-400 transition-colors duration-300" data-i18n="nav.back">Back to Home</a>
+         </div>
+     </nav>
+ 
+     <section class="py-20 bg-gradient-to-r from-amber-50 via-yellow-100 to-amber-50 text-center p-4 mx-auto py-16 px-4">
+         <div id="site-detail" class="bg-white bg-opacity-60 rounded-xl shadow-lg p-8 fade-in">
+             <h1 class="text-4xl font-bold text-gray-800 mb-6" id="site-title">Loading...</h1>
+             <img id="site-image" src="" alt="Site Image" class="w-full h-96 object-cover rounded-lg mb-6" onerror="this.src='https://via.placeholder.com/1200x800?text=Image+Not+Available';">
+             <p id="site-description" class="text-gray-700 leading-relaxed mb-6"></p>
+             <div class="mb-6">
+                 <h3 class="text-2xl font-semibold text-gray-800 mb-4" data-i18n="gallery.title">Gallery</h3>
+                 <div id="site-gallery" class="grid grid-cols-1 sm:grid-cols-2 gap-4"></div>
+             </div>
+             <div class="mb-6">
+                 <h3 class="text-2xl font-semibold text-gray-800 mb-4" data-i18n="video.title">Video</h3>
+                 <div id="site-video" class="relative" style="padding-top: 56.25%;">
+                     <iframe class="absolute top-0 left-0 w-full h-full rounded-lg" src="" frameborder="0" allowfullscreen></iframe>
+                 </div>
+             </div>
+         </div>
+     </section>
+ 
+     <footer class="bg-green-900 text-white py-6 text-center">
+         <p data-i18n="footer.copyright">© {{year}} Wendo Safari. All rights reserved.</p>
+     </footer>
+ 
+     <script src="https://cdn.jsdelivr.net/npm/i18next@23.16.0/dist/umd/i18next.min.js"></script>
+     <script type="module" src="detail.js"></script>
+ </body>
+ </html>

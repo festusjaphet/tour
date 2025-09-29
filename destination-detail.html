@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n="page.title">Destination Details - Wendo African Safaris</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <script src="https://unpkg.com/i18next@23.15.1/dist/umd/i18next.min.js"></script>
+   <style>
+        body {
+            background: linear-gradient(to right, #f0fdf4, #fefce8, #f0fdf4);
+            font-family: 'Arial', sans-serif;
+        }
+
+        .dest-hero {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+            border-radius: 1.5rem;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .dest-hero:hover {
+            transform: scale(1.02);
+        }
+
+        .dest-hero img,
+        .dest-hero video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+
+
+        .nav-transparent {
+            background: linear-gradient(to right, rgba(164, 255, 193, 0.585), transparent, rgba(6, 78, 29, 0.585));
+            transition: background 0.3s ease-in-out;
+        }
+
+        .nav-solid {
+            background: linear-gradient(to right, rgb(111, 57, 36), rgb(111, 57, 36), rgb(6, 78, 29));
+            /* background: rgb(111, 57, 36); */
+        }
+
+        .nav-link {
+            transition: color 0.3s;
+        }
+
+        .nav-link.active {
+            color: #4CAF50 !important;
+        }
+
+        .nav-shadow {
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .section-title {
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .detail-card {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 1.5rem;
+            padding: 2rem;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .detail-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .form-card,
+        .comments-card {
+            background: linear-gradient(to right, #d1fae5, #fefcbf);
+            border-radius: 1.5rem;
+            padding: 2rem;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-input {
+            border: 1px solid #d1d5db;
+            border-radius: 0.5rem;
+            padding: 0.75rem;
+            width: 100%;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .form-input:focus {
+            border-color: #f59e0b;
+            box-shadow: 0 0 5px rgba(245, 158, 11, 0.5);
+            outline: none;
+        }
+
+        .form-label {
+            font-weight: 500;
+            color: #374151;
+            margin-bottom: 0.5rem;
+        }
+
+        .comment-item {
+            border-bottom: 1px solid #e5e7eb;
+            padding: 1rem 0;
+        }
+
+        .comment-item:last-child {
+            border-bottom: none;
+        }
+    </style>
+</head>
+
+<body class="bg-gradient-to-r from-green-50 via-amber-100 to-green-50 text-gray-800">
+    <nav id="navbar" class="nav-transparent text-white fixed w-full top-0 z-50 rounded-b">
+        <div class="container mx-auto flex justify-between items-center">
+            <a href="index.html#home" class="flex items-center space-x-2">
+                <img loading="lazy" src="assets/image1.png" alt="Wendo Safari Logo" class="size-20">
+                <img loading="lazy" src="assets/wendo.png" alt="Wendo Safari Logo" class="h-12">
+            </a>
+            <ul class="hidden md:flex space-x-6">
+                <li><a href="index.html#trips" class="block hover:text-green-300" data-i18n="nav.back">Back</a></li>
+            </ul>
+            <button id="menu-toggle" class="md:hidden focus:outline-none transform transition-transform duration-300 hover:scale-110">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16m-7 6h7"></path>
+                </svg>
+            </button>
+        </div>
+        <div id="mobile-menu" class="hidden md:hidden absolute top-16 w-full">
+            <div class="backdrop-blur-sm bg-green-500/70 rounded-lg p-4 shadow-md">
+                <ul class="space-y-4 text-center">
+                    <li><a href="index.html#trips" class="block hover:text-green-300" data-i18n="nav.back">Back</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- <section class="py-20 pt-32">
+        <div class="container mx-auto px-6">
+            <div class="dest-hero mb-8" id="dest-media"></div>
+            <h1 id="dest-title" class="text-4xl md:text-5xl font-bold text-gray-900 mb-6 text-center section-title">
+            </h1>
+            <div class="max-w-4xl mx-auto detail-card mb-8">
+                <div id="dest-details" class="space-y-6 text-lg"></div>
+            </div>
+
+            <div class="max-w mx-auto flex flex-col md:flex-row gap-8">
+                <div class="max-w-2xl w-full form-card">
+                    <h2 class="text-2xl font-semibold text-gray-900 mb-6 text-center section-title">Leave a Comment</h2>
+                    <form id="comment-form" class="space-y-6">
+                        <div>
+                            <label for="comment-name" class="form-label">Your Name (required)</label>
+                            <input type="text" id="comment-name" class="form-input" required>
+                        </div>
+                        <div>
+                            <label for="comment-text" class="form-label">Your Comment (required)</label>
+                            <textarea id="comment-text" class="form-input" rows="4" required></textarea>
+                        </div>
+                        <button type="submit"
+                            class="bg-amber-600 hover:bg-amber-700 px-6 py-3 text-white rounded w-full flex items-center justify-center transition-colors duration-300">
+                            <span id="submit-text">Submit Comment</span>
+                            <svg id="submit-spinner" class="hidden ml-2 w-5 h-5 animate-spin text-white"
+                                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor"
+                                    stroke-width="4"></circle>
+                                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path>
+                            </svg>
+                        </button>
+                    </form>
+                </div>
+
+                <div class="max-w-2xl w-full comments-card">
+                    <h2 class="text-2xl font-semibold text-gray-900 mb-6 text-center section-title">Comments</h2>
+                    <div id="comments-list" class="space-y-4"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-green-900 text-white py-6 text-center">
+        <p>© 2025 Wendo Safari. All rights reserved.</p>
+    </footer> -->
+    <section class="py-20 pt-32">
+        <div class="container mx-auto px-6">
+            <div class="dest-hero mb-8" id="dest-media"></div>
+            <h1 id="dest-title" class="text-4xl md:text-5xl font-bold text-gray-900 mb-6 text-center section-title">
+            </h1>
+            <div class="max-w-4xl mx-auto detail-card mb-8">
+                <div id="dest-details" class="space-y-6 text-lg"></div>
+            </div>
+            <div class="max-w mx-auto flex flex-col md:flex-row gap-8">
+                <div class="max-w-2xl w-full form-card">
+                    <h2 class="text-2xl font-semibold text-gray-900 mb-6 text-center section-title"
+                        data-i18n="comment_form.title">Leave a Comment</h2>
+                    <form id="comment-form" class="space-y-6">
+                        <div>
+                            <label for="comment-name" class="form-label" data-i18n="comment_form.name_label">Your Name
+                                (required)</label>
+                            <input type="text" id="comment-name" class="form-input" required>
+                        </div>
+                        <div>
+                            <label for="comment-text" class="form-label" data-i18n="comment_form.comment_label">Your
+                                Comment (required)</label>
+                            <textarea id="comment-text" class="form-input" rows="4" required></textarea>
+                        </div>
+                        <button type="submit"
+                            class="bg-amber-600 hover:bg-amber-700 px-6 py-3 text-white rounded w-full flex items-center justify-center transition-colors duration-300">
+                            <span id="submit-text" data-i18n="comment_form.submit">Submit Comment</span>
+                            <svg id="submit-spinner" class="hidden ml-2 w-5 h-5 animate-spin text-white"
+                                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor"
+                                    stroke-width="4"></circle>
+                                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path>
+                            </svg>
+                        </button>
+                    </form>
+                </div>
+                <div class="max-w-2xl w-full comments-card">
+                    <h2 class="text-2xl font-semibold text-gray-900 mb-6 text-center section-title"
+                        data-i18n="comments.title">Comments</h2>
+                    <div id="comments-list" class="space-y-4"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <footer class="bg-green-900 text-white py-6 text-center">
+        <p data-i18n="footer.copyright">© {{year}} Wendo Safari. All rights reserved.</p>
+    </footer>
+    <script type="module" src="destination-detail.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const toggleButton = document.getElementById('menu-toggle');
+            const mobileMenu = document.getElementById('mobile-menu');
+    
+            toggleButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+        });
+    </script>
+    
+</body>
+
+</html>

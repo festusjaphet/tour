@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wendo African Safaris - Domestic Safaris</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <script src="https://unpkg.com/i18next@23.15.1/dist/umd/i18next.min.js"></script>
+    <style>
+        body {
+            background-color: rgb(111, 57, 36);
+        }
+
+        .nav-transparent {
+            background: linear-gradient(to right, rgba(164, 255, 193, 0.585), transparent, rgba(6, 78, 29, 0.585));
+            transition: background 0.3s ease-in-out;
+        }
+
+        .nav-solid {
+            background: linear-gradient(to right, rgb(111, 57, 36), rgb(111, 57, 36), rgb(6, 78, 29));
+        }
+
+        .nav-link {
+            transition: color 0.3s;
+        }
+
+        .nav-link.active {
+            color: #4CAF50 !important;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 50;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 1rem;
+            padding: 2rem;
+            max-width: 600px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            position: relative;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            cursor: pointer;
+            font-size: 1.5rem;
+        }
+
+        .domestic-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .domestic-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .domestic-card img {
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+
+        .domestic-card:hover img {
+            opacity: 0.9;
+            transform: scale(1.05);
+        }
+
+        .domestic-card::before {
+            content: '\f0c0';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            color: #4CAF50;
+            font-size: 1.5rem;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .domestic-card:hover::before {
+            opacity: 1;
+        }
+
+        .hero {
+            position: relative;
+            width: 100%;
+            height: 60vh;
+            overflow: hidden;
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4));
+        }
+
+        .hero img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .hero-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: white;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .fade-in {
+            animation: fadeIn 1s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero {
+                height: 40vh;
+            }
+
+            .hero-text h1 {
+                font-size: 1.5rem;
+            }
+
+            .hero-text p {
+                font-size: 0.9rem;
+            }
+
+            .domestic-card {
+                transform: none;
+            }
+
+            .domestic-card:hover {
+                transform: scale(1.02);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div
+        class="absolute inset-0 w-full h-full bg-[url('assets/background.jpeg')] bg-cover bg-center opacity-80 blur-sm">
+    </div>
+    <nav id="navbar" class="nav-transparent text-white fixed w-full top-0 z-50">
+        <div class="container mx-auto flex justify-between items-center py-4 px-4">
+
+            <a href="#home" class="flex items-center space-x-2">
+                <img loading="lazy" src="assets/image1.png" alt="Wendo Safari Logo" class="size-20">
+                <img loading="lazy" src="assets/wendo.png" alt="Wendo Safari Logo" class="h-12">
+            </a>
+
+            <div class="flex items-center space-x-4">
+                <ul class="hidden md:flex space-x-6">
+                    <li><a href="index.html#home " class="nav-link hover:text-green-400 font-semibold"
+                            data-i18n="nav.home">Home</a></li>
+                    <li><a href="index.html#destinations" class="nav-link hover:text-green-400 font-semibold"
+                            data-i18n="nav.destinations">Destinations</a></li>
+                    <li><a href="index.html#Trips" class="nav-link hover:text-green-400 font-semibold"
+                            data-i18n="nav.trips">Trips</a></li>
+                    <li><a href="add-news.html" class="nav-link hover:text-green-400 font-semibold"
+                            data-i18n="nav.news">News</a></li>
+                    <li><a href="index.html#about" class="nav-link hover:text-green-400 font-semibold"
+                            data-i18n="nav.about">About</a></li>
+                    <li><a href="index.html#contact" class="nav-link hover:text-green-400 font-semibold"
+                            data-i18n="nav.contact">Contact</a></li>
+                    <li>
+                        <select id="language-select-desktop"
+                            class="bg-green-500 text-white rounded-md focus:outline-none p-2">
+                            <option value="en">English</option>
+                            <option value="fr">Français</option>
+                            <option value="es">Español</option>
+                            <option value="sw">Kiswahili</option>
+                            <option value="de">Deutsch</option>
+                            <option value="zh">中文</option>
+                        </select>
+                    </li>
+                </ul>
+                <button id="menu-toggle"
+                    class="md:hidden focus:outline-none transform transition-transform duration-300 hover:scale-110">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16m-7 6h7"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <div id="mobile-menu" class="hidden md:hidden absolute top-16 w-full">
+            <div class="backdrop-blur-sm bg-green-500/70 rounded-lg p-4 shadow-md">
+                <ul class="space-y-4 text-center">
+                    <li><a href="#home" class="block hover:text-green-300" data-i18n="nav.home">Home</a></li>
+                    <li><a href="#destinations" class="block hover:text-green-300"
+                            data-i18n="nav.destinations">Destinations</a></li>
+                    <li><a href="#Trips" class="block hover:text-green-300" data-i18n="nav.trips">Trips</a></li>
+                    <li><a href="add-news.html" class="block hover:text-green-300" data-i18n="nav.news">News</a></li>
+                    <li><a href="#about" class="block hover:text-green-300" data-i18n="nav.about">About</a></li>
+                    <li><a href="#contact" class="block hover:text-green-300" data-i18n="nav.contact">Contact</a></li>
+                    <li>
+                        <select id="language-select" class="bg-green-500 text-white rounded-md p-2 focus:outline-none">
+                            <option value="en">English</option>
+                            <option value="fr">Français</option>
+                            <option value="es">Español</option>
+                            <option value="sw">Kiswahili</option>
+                            <option value="de">Deutsch</option>
+                            <option value="zh">中文</option>
+                        </select>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero fade-in">
+        <img src="https://moreofafrica.com/wp-content/uploads/2020/06/Tanzania2.jpg" alt="Domestic Safari Hero"
+            loading="lazy">
+        <div class="hero-text">
+            <h1 class="text-4xl md:text-5xl font-bold mb-4" data-i18n="domestic.hero.title">Explore Tanzania Together
+            </h1>
+            <p class="text-lg md:text-xl max-w-2xl mx-auto" data-i18n="domestic.hero.description">Join family and
+                friends on affordable domestic safaris to discover Tanzania’s iconic wildlife, stunning landscapes, and
+                rich cultures.</p>
+        </div>
+    </section>
+
+    <!-- Domestic Safaris Section -->
+    <section id="domestic"
+        class="container mx-auto py-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-10 fade-in">
+        <div class="domestic-card bg-white/80 backdrop-blur-md rounded-3xl shadow-lg overflow-hidden"
+            data-trip="serengeti-family">
+            <div class="relative w-full h-60">
+                <img src="https://www.backroads.com/sites/default/files/styles/new_trip_page_hero_mobile/public/2023/TZI_PR%20andBeyond%20Lake%20Manyara%20Tree%20Lodge_sleepout-under-the-stars_1.jpg.webp?itok=Uzh2ldDW"
+                    alt="Serengeti Family Adventure" loading="lazy"
+                    class="absolute inset-0 w-full h-full object-cover rounded-t-2xl">
+            </div>
+            <div class="p-6 cursor-pointer">
+                <h3 class="text-xl font-semibold text-gray-900 mb-2" data-i18n="domestic.serengeti-family.title">
+                    Serengeti Family Adventure</h3>
+                <p class="text-gray-700" data-i18n="domestic.serengeti-family.brief">A fun-filled safari for families to
+                    explore Serengeti’s wildlife.</p>
+            </div>
+        </div>
+        <div class="domestic-card bg-white/80 backdrop-blur-md rounded-3xl shadow-lg overflow-hidden"
+            data-trip="zanzibar-coastal">
+            <div class="relative w-full h-60">
+                <img src="https://travelbird-images.imgix.net/ee/07/ee077e470936ea5e2d950ac7095ff41e?auto=compress%2Cformat&crop=faces%2Cedges%2Ccenter&fit=crop&h=450&w=675"
+                    alt="Zanzibar Coastal Escape" loading="lazy"
+                    class="absolute inset-0 w-full h-full object-cover rounded-t-2xl">
+            </div>
+            <div class="p-6 cursor-pointer">
+                <h3 class="text-xl font-semibold text-gray-900 mb-2" data-i18n="domestic.zanzibar-coastal.title">
+                    Zanzibar Coastal Escape</h3>
+                <p class="text-gray-700" data-i18n="domestic.zanzibar-coastal.brief">Relax and bond on Zanzibar’s
+                    pristine beaches and historic sites.</p>
+            </div>
+        </div>
+        <div class="domestic-card bg-white/80 backdrop-blur-md rounded-3xl shadow-lg overflow-hidden"
+            data-trip="kilimanjaro-cultural">
+            <div class="relative w-full h-60">
+                <img src="https://b1088268.smushcdn.com/1088268/wp-content/uploads/2022/11/climbing-mount-kilimanjaro-scaled-1.jpg?lossy=2&strip=1&webp=1"
+                    alt="Kilimanjaro Cultural Trek" loading="lazy"
+                    class="absolute inset-0 w-full h-full object-cover rounded-t-2xl">
+            </div>
+            <div class="p-6 cursor-pointer">
+                <h3 class="text-xl font-semibold text-gray-900 mb-2" data-i18n="domestic.kilimanjaro-cultural.title">
+                    Kilimanjaro Cultural Trek</h3>
+                <p class="text-gray-700" data-i18n="domestic.kilimanjaro-cultural.brief">Discover Chagga culture and
+                    scenic trails around Kilimanjaro.</p>
+            </div>
+        </div>
+        <div class="domestic-card bg-white/80 backdrop-blur-md rounded-3xl shadow-lg overflow-hidden"
+            data-trip="southern-circuit">
+            <div class="relative w-full h-60">
+                <img src="https://svai.co.tz/wp-content/uploads/2024/07/8-days-classic-discovery-beyond-safari-1-1.webp"
+                    alt="Southern Circuit Discovery" loading="lazy"
+                    class="absolute inset-0 w-full h-full object-cover rounded-t-2xl">
+            </div>
+            <div class="p-6 cursor-pointer">
+                <h3 class="text-xl font-semibold text-gray-900 mb-2" data-i18n="domestic.southern-circuit.title">
+                    Southern Circuit Discovery</h3>
+                <p class="text-gray-700" data-i18n="domestic.southern-circuit.brief">Explore the hidden gems of
+                    Tanzania’s southern parks as a group.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal -->
+    <div id="tripModal" class="modal">
+        <div class="modal-content">
+            <span class="modal-close">×</span>
+            <h2 id="modalTitle" class="text-2xl font-bold mb-4"></h2>
+            <img id="modalImage" src="" alt="Trip Image" class="w-full h-64 object-cover rounded-lg mb-4">
+            <p id="modalDescription" class="text-gray-700"></p>
+        </div>
+    </div>
+
+    <script>
+        // Initialize i18next
+        i18next.init({
+            lng: 'en',
+            resources: {
+                en: {
+                    translation: {
+                        'nav.home': 'Home',
+                        'nav.destinations': 'Destinations',
+                        'nav.trips': 'Trips',
+                        'nav.photographers': 'Photographers',
+                        'nav.domestic': 'Domestic Safaris',
+                        'nav.news': 'News',
+                        'nav.about': 'About',
+                        'nav.contact': 'Contact',
+                        'domestic.hero.title': 'Explore Tanzania Together',
+                        'domestic.hero.description': 'Join family and friends on affordable domestic safaris to discover Tanzania’s iconic wildlife, stunning landscapes, and rich cultures.',
+                        'domestic.serengeti-family.title': 'Serengeti Family Adventure',
+                        'domestic.serengeti-family.brief': 'A fun-filled safari for families to explore Serengeti’s wildlife.',
+                        'domestic.serengeti-family.description': 'Gather your family for an unforgettable adventure in the Serengeti National Park. This budget-friendly safari includes game drives to see lions, zebras, and wildebeests, with activities like storytelling and bush dinners to create lasting memories for kids and adults alike.',
+                        'domestic.zanzibar-coastal.title': 'Zanzibar Coastal Escape',
+                        'domestic.zanzibar-coastal.brief': 'Relax and bond on Zanzibar’s pristine beaches and historic sites.',
+                        'domestic.zanzibar-coastal.description': 'Perfect for groups and families, this coastal getaway to Zanzibar offers white sandy beaches, snorkeling in coral reefs, and tours of Stone Town’s historic alleys. Enjoy affordable accommodations and cultural experiences that bring everyone closer together.',
+                        'domestic.kilimanjaro-cultural.title': 'Kilimanjaro Cultural Trek',
+                        'domestic.kilimanjaro-cultural.brief': 'Discover Chagga culture and scenic trails around Kilimanjaro.',
+                        'domestic.kilimanjaro-cultural.description': 'Explore the foothills of Mount Kilimanjaro with your team or family, visiting Chagga villages, coffee farms, and waterfalls. This cultural trek combines light hiking, local storytelling, and traditional meals, offering a deep connection to Tanzania’s heritage.',
+                        'domestic.southern-circuit.title': 'Southern Circuit Discovery',
+                        'domestic.southern-circuit.brief': 'Explore the hidden gems of Tanzania’s southern parks as a group.',
+                        'domestic.southern-circuit.description': 'Venture to Tanzania’s less-traveled southern parks like Selous and Ruaha with your group. This safari offers affordable game drives, boat safaris, and walking tours to see elephants, hippos, and rare birds, ideal for teams seeking adventure and bonding.'
+                    }
+                },
+                fr: {
+                    translation: {
+                        'nav.home': 'Accueil',
+                        'nav.destinations': 'Destinations',
+                        'nav.trips': 'Voyages',
+                        'nav.photographers': 'Photographes',
+                        'nav.domestic': 'Safaris domestiques',
+                        'nav.news': 'Actualités',
+                        'nav.about': 'À propos',
+                        'nav.contact': 'Contact',
+                        'domestic.hero.title': 'Explorez la Tanzanie ensemble',
+                        'domestic.hero.description': 'Rejoignez famille et amis pour des safaris domestiques abordables afin de découvrir la faune emblématique, les paysages magnifiques et les cultures riches de la Tanzanie.',
+                        'domestic.serengeti-family.title': 'Aventure familiale au Serengeti',
+                        'domestic.serengeti-family.brief': 'Un safari amusant pour les familles pour explorer la faune du Serengeti.',
+                        'domestic.serengeti-family.description': 'Réunissez votre famille pour une aventure inoubliable dans le parc national du Serengeti. Ce safari économique comprend des safaris pour voir des lions, des zèbres et des gnous, avec des activités comme des contes et des dîners dans la brousse pour créer des souvenirs durables pour les enfants et les adultes.',
+                        'domestic.zanzibar-coastal.title': 'Évasion côtière à Zanzibar',
+                        'domestic.zanzibar-coastal.brief': 'Détendez-vous et créez des liens sur les plages immaculées et les sites historiques de Zanzibar.',
+                        'domestic.zanzibar-coastal.description': 'Idéal pour les groupes et les familles, cette escapade côtière à Zanzibar offre des plages de sable blanc, de la plongée avec tuba dans les récifs coralliens et des visites des ruelles historiques de Stone Town. Profitez d’hébergements abordables et d’expériences culturelles qui rapprochent tout le monde.',
+                        'domestic.kilimanjaro-cultural.title': 'Trek culturel du Kilimandjaro',
+                        'domestic.kilimanjaro-cultural.brief': 'Découvrez la culture Chagga et les sentiers pittoresques autour du Kilimandjaro.',
+                        'domestic.kilimanjaro-cultural.description': 'Explorez les contreforts du mont Kilimandjaro avec votre équipe ou votre famille, en visitant des villages Chagga, des fermes de café et des cascades. Ce trek culturel combine randonnée légère, récits locaux et repas traditionnels, offrant une connexion profonde avec l’héritage tanzanien.',
+                        'domestic.southern-circuit.title': 'Découverte du circuit sud',
+                        'domestic.southern-circuit.brief': 'Explorez les joyaux cachés des parcs du sud de la Tanzanie en groupe.',
+                        'domestic.southern-circuit.description': 'Aventurez-vous dans les parcs moins fréquentés du sud de la Tanzanie comme Selous et Ruaha avec votre groupe. Ce safari propose des safaris abordables, des safaris en bateau et des randonnées pour voir des éléphants, des hippopotames et des oiseaux rares, idéal pour les équipes en quête d’aventure et de cohésion.'
+                    }
+                },
+                es: {
+                    translation: {
+                        'nav.home': 'Inicio',
+                        'nav.destinations': 'Destinos',
+                        'nav.trips': 'Viajes',
+                        'nav.photographers': 'Fotógrafos',
+                        'nav.domestic': 'Safaris domésticos',
+                        'nav.news': 'Noticias',
+                        'nav.about': 'Acerca de',
+                        'nav.contact': 'Contacto',
+                        'domestic.hero.title': 'Explora Tanzania juntos',
+                        'domestic.hero.description': 'Únete a familiares y amigos en safaris domésticos asequibles para descubrir la fauna icónica, los paisajes impresionantes y las ricas culturas de Tanzania.',
+                        'domestic.serengeti-family.title': 'Aventura familiar en Serengeti',
+                        'domestic.serengeti-family.brief': 'Un safari divertido para familias para explorar la fauna del Serengeti.',
+                        'domestic.serengeti-family.description': 'Reúne a tu familia para una aventura inolvidable en el Parque Nacional del Serengeti. Este safari económico incluye recorridos para ver leones, cebras y ñus, con actividades como narración de cuentos y cenas en la sabana para crear recuerdos duraderos para niños y adultos.',
+                        'domestic.zanzibar-coastal.title': 'Escapada costera a Zanzíbar',
+                        'domestic.zanzibar-coastal.brief': 'Relájate y fortalece lazos en las playas vírgenes y sitios históricos de Zanzíbar.',
+                        'domestic.zanzibar-coastal.description': 'Perfecto para grupos y familias, esta escapada costera a Zanzíbar ofrece playas de arena blanca, esnórquel en arrecifes de coral y recorridos por los callejones históricos de Stone Town. Disfruta de alojamientos asequibles y experiencias culturales que unen a todos.',
+                        'domestic.kilimanjaro-cultural.title': 'Trekking cultural del Kilimanjaro',
+                        'domestic.kilimanjaro-cultural.brief': 'Descubre la cultura Chagga y los senderos escénicos alrededor del Kilimanjaro.',
+                        'domestic.kilimanjaro-cultural.description': 'Explora las faldas del monte Kilimanjaro con tu equipo o familia, visitando aldeas Chagga, fincas de café y cascadas. Este trekking cultural combina caminatas ligeras, narraciones locales y comidas tradicionales, ofreciendo una conexión profunda con el patrimonio tanzaniano.',
+                        'domestic.southern-circuit.title': 'Descubrimiento del circuito sur',
+                        'domestic.southern-circuit.brief': 'Explora las joyas ocultas de los parques del sur de Tanzania en grupo.',
+                        'domestic.southern-circuit.description': 'Aventúrate en los parques menos visitados del sur de Tanzania como Selous y Ruaha con tu grupo. Este safari ofrece recorridos asequibles, safaris en barco y caminatas para ver elefantes, hipopótamos y aves raras, ideal para equipos que buscan aventura y unión.'
+                    }
+                },
+                sw: {
+                    translation: {
+                        'nav.home': 'Nyumbani',
+                        'nav.destinations': 'Maeneo',
+                        'nav.trips': 'Safari',
+                        'nav.photographers': 'Wapiga Picha',
+                        'nav.domestic': 'Safari za Ndani',
+                        'nav.news': 'Habari',
+                        'nav.about': 'Kuhusu',
+                        'nav.contact': 'Mawasiliano',
+                        'domestic.hero.title': 'Chunguza Tanzania Pamoja',
+                        'domestic.hero.description': 'Jiunge na familia na marafiki kwenye safari za ndani za bei nafuu ili kugundua wanyamapori wa kipekee, mandhari ya kupendeza na tamaduni za tajiri za Tanzania.',
+                        'domestic.serengeti-family.title': 'Matukio ya Familia ya Serengeti',
+                        'domestic.serengeti-family.brief': 'Safari ya kufurahisha kwa familia kuchunguza wanyamapori wa Serengeti.',
+                        'domestic.serengeti-family.description': 'Kusanya familia yako kwa ajili ya tukio lisilosahaulika katika Hifadhi ya Taifa ya Serengeti. Safari hii ya bei nafuu inajumuisha safari za kumudu wanyama kama simba, pundamilia na nyumbu, pamoja na shughuli kama hadithi za hadithi na chakula cha jioni porini ili kuunda kumbukumbu za kudumu kwa watoto na wazazi.',
+                        'domestic.zanzibar-coastal.title': 'Mapumziko ya Pwani ya Zanzibar',
+                        'domestic.zanzibar-coastal.brief': 'Pumzika na uunganishe kwenye fukwe safi za Zanzibar na maeneo ya kihistoria.',
+                        'domestic.zanzibar-coastal.description': 'Inafaa kwa vikundi na familia, mapumziko haya ya pwani ya Zanzibar yanatoa fukwe za mchanga mweupe, kupiga mbizi kwenye miamba ya matumbawe na ziara za mitaa ya kihistoria ya Stone Town. Furahia malazi ya bei nafuu na uzoefu wa kitamaduni unaowakusanya wote pamoja.',
+                        'domestic.kilimanjaro-cultural.title': 'Safari ya Kitamaduni ya Kilimanjaro',
+                        'domestic.kilimanjaro-cultural.brief': 'Gundua tamaduni ya Wachagga na njia za kupendeza karibu na Kilimanjaro.',
+                        'domestic.kilimanjaro-cultural.description': 'Chunguza miteremko ya Mlima Kilimanjaro na timu yako au familia, ukitembelea vijiji vya Wachagga, mashamba ya kahawa na maporomoko ya maji. Safari hii ya kitamaduni inachanganya matembezi mepesi, hadithi za mitaa na chakula cha jadi, ikitoa uhusiano wa kina na urithi wa Tanzania.',
+                        'domestic.southern-circuit.title': 'Ugunduzi wa Mzunguko wa Kusini',
+                        'domestic.southern-circuit.brief': 'Chunguza maeneo yaliyofichika ya mbuga za kusini za Tanzania kama kundi.',
+                        'domestic.southern-circuit.description': 'Jiunge na safari kwenye mbuga zisizotembelewa sana za kusini za Tanzania kama Selous na Ruaha na kundi lako. Safari hii inatoa safari za bei nafuu, safari za boti na matembezi ya kutazama tembo, viboko na ndege wa nadra, bora kwa timu zinazotafuta tukio na umoja.'
+                    }
+                },
+                de: {
+                    translation: {
+                        'nav.home': 'Startseite',
+                        'nav.destinations': 'Reiseziele',
+                        'nav.trips': 'Reisen',
+                        'nav.photographers': 'Fotografen',
+                        'nav.domestic': 'Inlandssafaris',
+                        'nav.news': 'Neuigkeiten',
+                        'nav.about': 'Über uns',
+                        'nav.contact': 'Kontakt',
+                        'domestic.hero.title': 'Tansania gemeinsam erkunden',
+                        'domestic.hero.description': 'Schließen Sie sich Familie und Freunden an für erschwingliche Inlandssafaris, um Tansanias ikonische Tierwelt, atemberaubende Landschaften und reiche Kulturen zu entdecken.',
+                        'domestic.serengeti-family.title': 'Serengeti-Familienabenteuer',
+                        'domestic.serengeti-family.brief': 'Ein unterhaltsamer Safari für Familien, um die Tierwelt des Serengeti zu erkunden.',
+                        'domestic.serengeti-family.description': 'Versammeln Sie Ihre Familie für ein unvergessliches Abenteuer im Serengeti-Nationalpark. Dieser budgetfreundliche Safari umfasst Pirschfahrten, um Löwen, Zebras und Gnus zu sehen, mit Aktivitäten wie Geschichtenerzählen und Busch-Dinners, um bleibende Erinnerungen für Kinder und Erwachsene zu schaffen.',
+                        'domestic.zanzibar-coastal.title': 'Sansibar-Küstenflucht',
+                        'domestic.zanzibar-coastal.brief': 'Entspannen und verbinden Sie sich an Sansibars unberührten Stränden und historischen Stätten.',
+                        'domestic.zanzibar-coastal.description': 'Perfekt für Gruppen und Familien, bietet dieser Küstenausflug nach Sansibar weiße Sandstrände, Schnorcheln in Korallenriffen und Touren durch die historischen Gassen von Stone Town. Genießen Sie erschwingliche Unterkünfte und kulturelle Erlebnisse, die alle näher zusammenbringen.',
+                        'domestic.kilimanjaro-cultural.title': 'Kilimandscharo-Kulturtrek',
+                        'domestic.kilimanjaro-cultural.brief': 'Entdecken Sie die Chagga-Kultur und malerische Pfade rund um den Kilimandscharo.',
+                        'domestic.kilimanjaro-cultural.description': 'Erkunden Sie die Ausläufer des Kilimandscharo mit Ihrem Team oder Ihrer Familie, besuchen Sie Chagga-Dörfer, Kaffeefarmen und Wasserfälle. Dieser Kulturtrip kombiniert leichte Wanderungen, lokale Geschichten und traditionelle Mahlzeiten und bietet eine tiefe Verbindung zum tansanischen Erbe.',
+                        'domestic.southern-circuit.title': 'Entdeckung des südlichen Kreises',
+                        'domestic.southern-circuit.brief': 'Erkunden Sie die verborgenen Schätze der südlichen Parks Tansanias als Gruppe.',
+                        'domestic.southern-circuit.description': 'Begeben Sie sich mit Ihrer Gruppe in die weniger besuchten südlichen Parks Tansanias wie Selous und Ruaha. Dieser Safari bietet erschwingliche Pirschfahrten, Bootsafaris und Wanderungen, um Elefanten, Flusspferde und seltene Vögel zu sehen, ideal für Teams, die Abenteuer und Zusammenhalt suchen.'
+                    }
+                },
+                zh: {
+                    translation: {
+                        'nav.home': '首页',
+                        'nav.destinations': '目的地',
+                        'nav.trips': '旅行',
+                        'nav.photographers': '摄影师',
+                        'nav.domestic': '国内Safari',
+                        'nav.news': '新闻',
+                        'nav.about': '关于我们',
+                        'nav.contact': '联系我们',
+                        'domestic.hero.title': '一起探索坦桑尼亚',
+                        'domestic.hero.description': '与家人和朋友一起参加价格实惠的国内Safari，发现坦桑尼亚标志性的野生动物、壮丽的风景和丰富的文化。',
+                        'domestic.serengeti-family.title': '塞伦盖蒂家庭冒险',
+                        'domestic.serengeti-family.brief': '为家庭设计的充满乐趣的Safari，探索塞伦盖蒂的野生动物。',
+                        'domestic.serengeti-family.description': '召集您的家人，在塞伦盖蒂国家公园体验一次难忘的冒险。这个经济实惠的Safari包括观赏狮子、斑马和角马的游猎活动，以及讲故事和丛林晚餐等活动，为儿童和成人创造持久的回忆。',
+                        'domestic.zanzibar-coastal.title': '桑给巴尔海岸之旅',
+                        'domestic.zanzibar-coastal.brief': '在桑给巴尔的原始海滩和历史遗址上放松和联系。',
+                        'domestic.zanzibar-coastal.description': '适合团体和家庭，这个桑给巴尔海岸之旅提供白色沙滩、在珊瑚礁中浮潜，以及石头城历史小巷的游览。享受价格实惠的住宿和文化体验，让每个人更加亲近。',
+                        'domestic.kilimanjaro-cultural.title': '乞力马扎罗文化徒步',
+                        'domestic.kilimanjaro-cultural.brief': '发现乞力马扎罗周围的查加文化和风景优美的步道。',
+                        'domestic.kilimanjaro-cultural.description': '与您的团队或家人一起探索乞力马扎罗山脚，参观查加村庄、咖啡农场和瀑布。这个文化徒步结合了轻松的徒步旅行、当地故事和传统美食，提供与坦桑尼亚遗产的深厚联系。',
+                        'domestic.southern-circuit.title': '南部环线探秘',
+                        'domestic.southern-circuit.brief': '以团队形式探索坦桑尼亚南部公园的隐秘瑰宝。',
+                        'domestic.southern-circuit.description': '与您的团队一起前往坦桑尼亚南部较少游览的公园，如塞卢斯和鲁阿哈。这个Safari提供价格实惠的游猎、船上Safari和步行游览，观赏大象、河马和稀有鸟类，非常适合寻求冒险和团队凝聚力的团队。'
+                    }
+                }
+            }
+        }, () => {
+            applyTranslations();
+        });
+
+        // Apply translations to elements
+        function applyTranslations() {
+            document.querySelectorAll('[data-i18n]').forEach(element => {
+                const key = element.getAttribute('data-i18n');
+                element.textContent = i18next.t(key);
+            });
+        }
+
+        // Language switcher
+        const languageSelects = document.querySelectorAll('#language-select, #language-select-desktop');
+        languageSelects.forEach(select => {
+            select.addEventListener('change', (e) => {
+                const newLang = e.target.value;
+                i18next.changeLanguage(newLang, () => {
+                    applyTranslations();
+                    updateModalContent();
+                });
+            });
+        });
+
+        // Modal handling
+        const modal = document.getElementById('tripModal');
+        const modalTitle = document.getElementById('modalTitle');
+        const modalImage = document.getElementById('modalImage');
+        const modalDescription = document.getElementById('modalDescription');
+        const closeModal = document.querySelector('.modal-close');
+        let currentTrip = '';
+
+        function updateModalContent() {
+            if (currentTrip) {
+                modalTitle.textContent = i18next.t(`domestic.${currentTrip}.title`);
+                modalDescription.textContent = i18next.t(`domestic.${currentTrip}.description`);
+            }
+        }
+
+        document.querySelectorAll('.domestic-card').forEach(card => {
+            card.addEventListener('click', () => {
+                currentTrip = card.getAttribute('data-trip');
+                modalTitle.textContent = i18next.t(`domestic.${currentTrip}.title`);
+                modalImage.src = card.querySelector('img').src;
+                modalImage.alt = card.querySelector('img').alt;
+                modalDescription.textContent = i18next.t(`domestic.${currentTrip}.description`);
+                modal.style.display = 'flex';
+            });
+        });
+
+        closeModal.addEventListener('click', () => {
+            modal.style.display = 'none';
+            currentTrip = '';
+        });
+
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.style.display = 'none';
+                currentTrip = '';
+            }
+        });
+
+        // Mobile menu toggle
+        document.addEventListener('DOMContentLoaded', () => {
+            const toggleButton = document.getElementById('menu-toggle');
+            const mobileMenu = document.getElementById('mobile-menu');
+            toggleButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+        });
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.remove('nav-transparent');
+                navbar.classList.add('nav-solid');
+            } else {
+                navbar.classList.remove('nav-solid');
+                navbar.classList.add('nav-transparent');
+            }
+        });
+    </script>
+</body>
+
+</html>

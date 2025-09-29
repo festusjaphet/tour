@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wendo African Safaris - Local Tanzanian Adventures</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <script src="https://unpkg.com/i18next@23.15.1/dist/umd/i18next.min.js"></script>
+    <style>
+        body {
+            background-color: rgb(111, 57, 36);
+        }
+
+        .nav-transparent {
+            background: linear-gradient(to right, rgba(164, 255, 193, 0.585), transparent, rgba(6, 78, 29, 0.585));
+            transition: background 0.3s ease-in-out;
+        }
+
+        .nav-solid {
+            background: linear-gradient(to right, rgb(111, 57, 36), rgb(111, 57, 36), rgb(6, 78, 29));
+        }
+
+        .nav-link {
+            transition: color 0.3s;
+        }
+
+        .nav-link.active {
+            color: #4CAF50 !important;
+        }
+
+        .hero {
+            position: relative;
+            width: 100%;
+            height: 60vh;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(128, 9, 0, 0.4), rgba(0, 128, 0, 0.4));
+            /* Transparent green overlay */
+            z-index: 1;
+        }
+
+        .hero img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .hero-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: white;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+            z-index: 2;
+            /* Ensures text is above the overlay */
+        }
+
+        .fade-in {
+            animation: fadeIn 1s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero {
+                height: 40vh;
+            }
+
+            .hero-text h1 {
+                font-size: 1.5rem;
+            }
+
+            .hero-text p {
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="absolute inset-0 w-full h-full  bg-cover bg-center opacity-80 blur-sm"></div>
+    <nav id="navbar" class="nav-transparent text-white fixed w-full top-0 z-50">
+        <div class="container mx-auto flex justify-between items-center py-4 px-4">
+            <a href="#home" class="flex items-center space-x-2">
+                <img loading="lazy" src="assets/image1.png" alt="Wendo Safari Logo" class="size-20">
+                <img loading="lazy" src="assets/wendo.png" alt="Wendo Safari Logo" class="h-12">
+            </a>
+            <div class="flex items-center space-x-4">
+                <ul class="hidden md:flex space-x-6">
+                    <li><a href="index.html#home" class="nav-link hover:text-green-400 font-semibold"
+                            data-i18n="nav.home">Home</a></li>
+                    <li><a href="index.html#destinations" class="nav-link hover:text-green-400 font-semibold"
+                            data-i18n="nav.destinations">Destinations</a></li>
+                    <li><a href="index.html#Trips" class="nav-link hover:text-green-400 font-semibold"
+                            data-i18n="nav.trips">Trips</a></li>
+                    <li><a href="add-news.html" class="nav-link hover:text-green-400 font-semibold"
+                            data-i18n="nav.news">News</a></li>
+                    <li><a href="index.html#about" class="nav-link hover:text-green-400 font-semibold"
+                            data-i18n="nav.about">About</a></li>
+                    <li><a href="index.html#contact" class="nav-link hover:text-green-400 font-semibold"
+                            data-i18n="nav.contact">Contact</a></li>
+                    <li>
+                        <select id="language-select-desktop"
+                            class="bg-green-500 text-white rounded-md focus:outline-none p-2">
+                            <option value="en">English</option>
+                            <option value="fr">Français</option>
+                            <option value="es">Español</option>
+                            <option value="sw">Kiswahili</option>
+                            <option value="de">Deutsch</option>
+                            <option value="zh">中文</option>
+                        </select>
+                    </li>
+                </ul>
+                <button id="menu-toggle"
+                    class="md:hidden focus:outline-none transform transition-transform duration-300 hover:scale-110">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16m-7 6h7"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <div id="mobile-menu" class="hidden md:hidden absolute top-16 w-full">
+            <div class="backdrop-blur-sm bg-green-500/70 rounded-lg p-4 shadow-md">
+                <ul class="space-y-4 text-center">
+                    <li><a href="#home" class="block hover:text-green-300" data-i18n="nav.home">Home</a></li>
+                    <li><a href="#destinations" class="block hover:text-green-300"
+                            data-i18n="nav.destinations">Destinations</a></li>
+                    <li><a href="#Trips" class="block hover:text-green-300" data-i18n="nav.trips">Trips</a></li>
+                    <li><a href="add-news.html" class="block hover:text-green-300" data-i18n="nav.news">News</a></li>
+                    <li><a href="#about" class="block hover:text-green-300" data-i18n="nav.about">About</a></li>
+                    <li><a href="#contact" class="block hover:text-green-300" data-i18n="nav.contact">Contact</a></li>
+                    <li>
+                        <select id="language-select" class="bg-green-500 text-white rounded-md p-2 focus:outline-none">
+                            <option value="en">English</option>
+                            <option value="fr">Français</option>
+                            <option value="es">Español</option>
+                            <option value="sw">Kiswahili</option>
+                            <option value="de">Deutsch</option>
+                            <option value="zh">中文</option>
+                        </select>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <!-- <section class="hero fade-in">
+        <img src="https://moreofafrica.com/wp-content/uploads/2020/06/Tanzania2.jpg" alt="Tanzanian Adventures Hero" loading="lazy">
+        <div class="hero-text">
+            <h1 class="text-4xl md:text-5xl font-bold mb-4" data-i18n="domestic.hero.title">Discover Tanzania, Your Way</h1>
+            <p class="text-lg md:text-xl max-w-2xl mx-auto" data-i18n="domestic.hero.description">Wendo Safaris invites all Tanzanians—students, families, teams, and communities—to explore our nation’s wildlife, cultures, and landscapes at affordable prices.</p>
+        </div>
+    </section> -->
+    <section class="hero fade-in">
+        <div class="hero-image">
+            <img src="https://moreofafrica.com/wp-content/uploads/2020/06/Tanzania2.jpg" alt="Tanzanian Adventures Hero"
+                loading="lazy">
+        </div>
+        <div class="hero-text">
+            <h1 class="text-4xl md:text-5xl font-bold mb-4" data-i18n="domestic.hero.title">Discover Tanzania, Your Way
+            </h1>
+            <p class="text-lg md:text-xl max-w-2xl mx-auto" data-i18n="domestic.hero.description">Wendo Safaris invites
+                all Tanzanians—students, families, teams, and communities—to explore our nation’s wildlife, cultures,
+                and landscapes at affordable prices.</p>
+        </div>
+    </section>
+
+    <!-- Local Adventures Section -->
+    <section id="domestic"
+        class="container mx-auto py-10 px-4 bg-white/80 backdrop-blur-md rounded-3xl shadow-lg mt-10 fade-in">
+        <h2 class="text-3xl font-bold text-gray-900 mb-6 text-center" data-i18n="domestic.title">Affordable Adventures
+            for Every Tanzanian</h2>
+        <p class="text-gray-700 mb-4" data-i18n="domestic.description">
+            At Wendo Safaris, we’re passionate about bringing Tanzania’s breathtaking landscapes, vibrant cultures, and
+            thrilling wildlife to every Tanzanian. Our tailored adventures are designed for students, schools, families,
+            corporate teams, religious groups, and community organizations, fostering connection, learning, and pride in
+            our shared heritage. From the vast plains of the Serengeti to the turquoise shores of Zanzibar, we invite
+            you to explore Tanzania’s wonders in a way that suits your group’s spirit and interests.
+        </p>
+        <h3 class="text-xl font-semibold text-gray-900 mb-4" data-i18n="domestic.offerings.title">What We Offer</h3>
+        <ul class="list-disc list-inside text-gray-700 mb-4" data-i18n="domestic.offerings.description">
+            <li><strong>Serengeti Wildlife Safari</strong>: Gather your school or team for an unforgettable journey
+                through Serengeti National Park. Witness lions, elephants, and the great wildebeest migration during
+                thrilling game drives. Enjoy campfire storytelling under starlit skies, perfect for bonding and creating
+                lifelong memories.</li>
+            <li><strong>Zanzibar Coastal Retreat</strong>: Ideal for families and religious groups, unwind on Zanzibar’s
+                pristine white beaches. Snorkel vibrant coral reefs, wander through Stone Town’s historic Swahili
+                alleys, and savor local spices, blending relaxation with cultural discovery.</li>
+            <li><strong>Kilimanjaro Cultural Journey</strong>: Perfect for students and families, immerse yourself in
+                the Chagga communities at Kilimanjaro’s foothills. Visit coffee farms, marvel at cascading waterfalls,
+                and learn traditional crafts, fostering a deep connection to Tanzania’s cultural roots.</li>
+            <li><strong>Ngorongoro Eco-Adventure</strong>: Youth groups and corporate teams will love exploring the
+                Ngorongoro Crater, a UNESCO World Heritage Site. Spot rhinos, zebras, and flamingos while learning about
+                conservation efforts, combining adventure with environmental awareness.</li>
+            <li><strong>Arusha Budget Camping</strong>: Designed for student and community groups, camp under the stars
+                in Arusha National Park. Enjoy guided nature walks, birdwatching, and cozy campfire nights, offering an
+                affordable way to connect with Tanzania’s natural beauty.</li>
+            <li><strong>Lake Manyara Family Fun</strong>: Families and teams can marvel at tree-climbing lions and
+                flamingo-filled lakes. Share group picnics and guided tours, creating joyful moments in one of
+                Tanzania’s most scenic parks.</li>
+            <li><strong>Tarangire Elephant Expedition</strong>: Perfect for all groups, discover Tarangire National
+                Park’s majestic elephants and iconic baobab trees. Guided safaris and nature walks offer a blend of
+                adventure and education, ideal for schools and corporate outings.</li>
+            <li><strong>Bagamoyo Historical Escape</strong>: Religious groups and families can explore Bagamoyo’s rich
+                history, from ancient Swahili ruins to colonial landmarks. Visit local markets and enjoy coastal walks,
+                connecting with Tanzania’s storied past.</li>
+            <li><strong>Selous Game Reserve Adventure</strong>: For community groups and teams, venture into the vast
+                Selous Game Reserve. Experience boat safaris along the Rufiji River, spot hippos and crocodiles, and
+                enjoy bush camping for a true wilderness escape.</li>
+            <li><strong>Mikumi National Park Getaway</strong>: Affordable for students and families, Mikumi offers
+                close-up wildlife encounters with giraffes, zebras, and antelopes. Short game drives and group
+                activities make this perfect for quick, memorable trips.</li>
+            <li><strong>Pemba Island Marine Adventure</strong>: Ideal for youth and religious groups, dive into Pemba’s
+                turquoise waters for snorkeling and diving. Explore mangrove forests and local fishing villages,
+                blending adventure with cultural immersion.</li>
+            <li><strong>Mt. Meru Hiking Experience</strong>: Corporate teams and youth groups can tackle a guided trek
+                on Mt. Meru in Arusha National Park. Enjoy stunning views, diverse flora, and team-building challenges,
+                perfect for fostering unity and resilience.</li>
+        </ul>
+        <p class="text-gray-700" data-i18n="domestic.call_to_action">Book your group adventure today and celebrate
+            Tanzania’s beauty together! Contact us for customized packages tailored to your group’s needs and interests.
+        </p>
+    </section>
+
+   <script>
+// Initialize i18next
+i18next.init({
+    lng: 'en',
+    resources: {
+        en: {
+            translation: {
+                "nav.home": "Home",
+                "nav.destinations": "Destinations",
+                "nav.trips": "Trips",
+                "nav.news": "News",
+                "nav.about": "About",
+                "nav.contact": "Contact",
+                "domestic.hero.title": "Discover Tanzania, Your Way",
+                "domestic.hero.description": "Wendo Safaris invites all Tanzanians—students, families, teams, and communities—to explore our nation’s wildlife, cultures, and landscapes at affordable prices.",
+                "domestic.title": "Affordable Adventures for Every Tanzanian",
+                "domestic.description": "At Wendo Safaris, we’re passionate about bringing Tanzania’s breathtaking landscapes, vibrant cultures, and thrilling wildlife to every Tanzanian. Our tailored adventures are designed for students, schools, families, corporate teams, religious groups, and community organizations, fostering connection, learning, and pride in our shared heritage. From the vast plains of the Serengeti to the turquoise shores of Zanzibar, we invite you to explore Tanzania’s wonders in a way that suits your group’s spirit and interests.",
+                "domestic.offerings.title": "What We Offer",
+                "domestic.offerings.description": "<li><strong>Serengeti Wildlife Safari</strong>: Gather your school or team for an unforgettable journey through Serengeti National Park. Witness lions, elephants, and the great wildebeest migration during thrilling game drives. Enjoy campfire storytelling under starlit skies, perfect for bonding and creating lifelong memories.</li><li><strong>Zanzibar Coastal Retreat</strong>: Ideal for families and religious groups, unwind on Zanzibar’s pristine white beaches. Snorkel vibrant coral reefs, wander through Stone Town’s historic Swahili alleys, and savor local spices, blending relaxation with cultural discovery.</li><li><strong>Kilimanjaro Cultural Journey</strong>: Perfect for students and families, immerse yourself in the Chagga communities at Kilimanjaro’s foothills. Visit coffee farms, marvel at cascading waterfalls, and learn traditional crafts, fostering a deep connection to Tanzania’s cultural roots.</li><li><strong>Ngorongoro Eco-Adventure</strong>: Youth groups and corporate teams will love exploring the Ngorongoro Crater, a UNESCO World Heritage Site. Spot rhinos, zebras, and flamingos while learning about conservation efforts, combining adventure with environmental awareness.</li><li><strong>Arusha Budget Camping</strong>: Designed for student and community groups, camp under the stars in Arusha National Park. Enjoy guided nature walks, birdwatching, and cozy campfire nights, offering an affordable way to connect with Tanzania’s natural beauty.</li><li><strong>Lake Manyara Family Fun</strong>: Families and teams can marvel at tree-climbing lions and flamingo-filled lakes. Share group picnics and guided tours, creating joyful moments in one of Tanzania’s most scenic parks.</li><li><strong>Tarangire Elephant Expedition</strong>: Perfect for all groups, discover Tarangire National Park’s majestic elephants and iconic baobab trees. Guided safaris and nature walks offer a blend of adventure and education, ideal for schools and corporate outings.</li><li><strong>Bagamoyo Historical Escape</strong>: Religious groups and families can explore Bagamoyo’s rich history, from ancient Swahili ruins to colonial landmarks. Visit local markets and enjoy coastal walks, connecting with Tanzania’s storied past.</li><li><strong>Selous Game Reserve Adventure</strong>: For community groups and teams, venture into the vast Selous Game Reserve. Experience boat safaris along the Rufiji River, spot hippos and crocodiles, and enjoy bush camping for a true wilderness escape.</li><li><strong>Mikumi National Park Getaway</strong>: Affordable for students and families, Mikumi offers close-up wildlife encounters with giraffes, zebras, and antelopes. Short game drives and group activities make this perfect for quick, memorable trips.</li><li><strong>Pemba Island Marine Adventure</strong>: Ideal for youth and religious groups, dive into Pemba’s turquoise waters for snorkeling and diving. Explore mangrove forests and local fishing villages, blending adventure with cultural immersion.</li><li><strong>Mt. Meru Hiking Experience</strong>: Corporate teams and youth groups can tackle a guided trek on Mt. Meru in Arusha National Park. Enjoy stunning views, diverse flora, and team-building challenges, perfect for fostering unity and resilience.</li>",
+                "domestic.call_to_action": "Book your group adventure today and celebrate Tanzania’s beauty together! Contact us for customized packages tailored to your group’s needs and interests."
+            }
+        },
+        sw: {
+            translation: {
+                "nav.home": "Nyumbani",
+                "nav.destinations": "Maeneo",
+                "nav.trips": "Safari",
+                "nav.news": "Habari",
+                "nav.about": "Kuhusu",
+                "nav.contact": "Mawasiliano",
+                "domestic.hero.title": "Gundua Tanzania kwa Njia Yako",
+                "domestic.hero.description": "Wendo Safaris inakaribisha Watanzania wote—wanafunzi, familia, timu, na jamii—kuchunguza wanyamapori, tamaduni, na mandhari ya taifa letu kwa bei nafuu.",
+                "domestic.title": "Matukio ya Bei Nafuu kwa Kila Mtanzania",
+                "domestic.description": "Katika Wendo Safaris, tunapenda kuleta mandhari ya kupendeza ya Tanzania, tamaduni za uchangamfu, na wanyamapori wa kusisimua kwa kila Mtanzania. Matukio yetu yaliyoundwa kwa makusudi yanafaa kwa wanafunzi, shule, familia, timu za kampuni, vikundi vya kidini, na mashirika ya jamii, yakikuza ushirikiano, kujifunza, na fahari katika urithi wetu wa pamoja. Kutoka nyika za Serengeti hadi pwani za zumaridi za Zanzibar, tunakualika uchunguze maajabu ya Tanzania kwa njia inayofaa roho na maslahi ya kikundi chako.",
+                "domestic.offerings.title": "Tunachotoa",
+                "domestic.offerings.description": "<li><strong>Safari ya Wanyamapori ya Serengeti</strong>: Kusanya shule yako au timu kwa safari isiyosahaulika katika Hifadhi ya Taifa ya Serengeti. Shuhudia simba, tembo, na ng’ombe wa nyika wakati wa safari za wanyama za kusisimua. Furahia hadithi za moto wa kambi chini ya anga zenye nyota, zinazofaa kwa ushirikiano na kuunda kumbukumbu za maisha.</li><li><strong>Mapumziko ya Pwani ya Zanzibar</strong>: Yanafaa kwa familia na vikundi vya kidini, pumzika kwenye fukwe nyeupe za Zanzibar. Piga mbizi kwenye miamba ya matumbawe yenye rangi, tembea kwenye mitaa ya kihistoria ya Kiswahili ya Stone Town, na onja viungo vya ndani, vikichanganya mapumziko na ugunduzi wa kitamaduni.</li><li><strong>Safari ya Kitamaduni ya Kilimanjaro</strong>: Inafaa kwa wanafunzi na familia, jiingize katika jamii za Wachagga kwenye miteremko ya Kilimanjaro. Tembelea mashamba ya kahawa, vutiwa na maporomoko ya maji, na jifunze ufundi wa jadi, ukikuza uhusiano wa kina na mizizi ya kitamaduni ya Tanzania.</li><li><strong>Matukio ya Mazingira ya Ngorongoro</strong>: Vikundi vya vijana na timu za kampuni zitapenda kuchunguza Ngorongoro Crater, Eneo la Urithi wa Dunia wa UNESCO. Tazama vifaru, pundamilia, na flamingo huku ukijifunza kuhusu juhudi za uhifadhi, zikichanganya matukio na uelewa wa mazingira.</li><li><strong>Kambi ya Bajeti ya Arusha</strong>: Iliyoundwa kwa wanafunzi na vikundi vya jamii, piga hema chini ya nyota katika Hifadhi ya Taifa ya Arusha. Furahia matembezi ya asili yenye mwongozo, kutazama ndege, na usiku wa moto wa kambi, ikitoa njia ya bei nafuu ya kuungana na uzuri wa asili wa Tanzania.</li><li><strong>Furaha ya Familia ya Lake Manyara</strong>: Familia na timu zinaweza kustaajabu simba wanaopanda miti na ziwa zilizojaa flamingo. Shiriki pikniki za kikundi na ziara za kuongozwa, zikiunda nyakati za furaha katika moja ya mbuga za mandhari za Tanzania.</li><li><strong>Safari ya Tembo ya Tarangire</strong>: Inafaa kwa vikundi vyote, gundua tembo wa kifahari wa Hifadhi ya Taifa ya Tarangire na miti ya mibuyu ya kihistoria. Safari za kuongozwa na matembezi ya asili hutoa mchanganyiko wa matukio na elimu, yanafaa kwa shule na safari za kampuni.</li><li><strong>Mapumziko ya Kihistoria ya Bagamoyo</strong>: Vikundi vya kidini na familia zinaweza kuchunguza historia tajiri ya Bagamoyo, kutoka magofu ya kale ya Kiswahili hadi alama za kikoloni. Tembelea masoko ya ndani na furahia matembezi ya pwani, ukiungana na zamani za Tanzania.</li><li><strong>Matukio ya Hifadhi ya Selous</strong>: Kwa vikundi vya jamii na timu, jiingize katika Hifadhi ya Wanyamapori ya Selous. Pata uzoefu wa safari za boti kwenye Mto Rufiji, tazama viboko na mamba, na furahia kambi ya msituni kwa mapumziko ya kweli ya porini.</li><li><strong>Mapumziko ya Hifadhi ya Taifa ya Mikumi</strong>: Yanafaa kwa wanafunzi na familia, Mikumi inatoa mikutano ya karibu na wanyamapori kama twiga, pundamilia, na swala. Safari fupi za wanyama na shughuli za kikundi hufanya hii ifae kwa safari za kumbukumbu za haraka.</li><li><strong>Matukio ya Bahari ya Kisiwa cha Pemba</strong>: Yanafaa kwa vijana na vikundi vya kidini, zama kwenye maji ya zumaridi ya Pemba kwa kupiga mbizi na kuruka majini. Chunguza misitu ya mikoko na vijiji vya wavuvi wa ndani, ikichanganya matukio na uchukuzi wa kitamaduni.</li><li><strong>Uzoefu wa Kupanda Mlima Meru</strong>: Timu za kampuni na vikundi vya vijana wanaweza kukabiliana na matembezi ya kuongozwa kwenye Mlima Meru katika Hifadhi ya Taifa ya Arusha. Furahia maoni ya kustaajabisha, mimea anuwai, na changamoto za kujenga timu, zinazofaa kwa kukuza umoja na ustahimilivu.</li>",
+                "domestic.call_to_action": "Hifadhi tukio lako la kikundi leo na ushereheke uzuri wa Tanzania pamoja! Wasiliana nasi kwa vifurushi vilivyoboreshwa kwa mahitaji na maslahi ya kikundi chako."
+            }
+        },
+        fr: {
+            translation: {
+                "nav.home": "Accueil",
+                "nav.destinations": "Destinations",
+                "nav.trips": "Voyages",
+                "nav.news": "Actualités",
+                "nav.about": "À propos",
+                "nav.contact": "Contact",
+                "domestic.hero.title": "Découvrez la Tanzanie à votre façon",
+                "domestic.hero.description": "Wendo Safaris invite tous les Tanzaniens—étudiants, familles, équipes et communautés—à explorer la faune, les cultures et les paysages de notre nation à des prix abordables.",
+                "domestic.title": "Aventures abordables pour chaque Tanzanien",
+                "domestic.description": "Chez Wendo Safaris, nous sommes passionnés par l’idée de faire découvrir les paysages époustouflants, les cultures vibrantes et la faune excitante de la Tanzanie à chaque Tanzanien. Nos aventures sur mesure sont conçues pour les étudiants, les écoles, les familles, les équipes d’entreprise, les groupes religieux et les organisations communautaires, favorisant le lien, l’apprentissage et la fierté de notre patrimoine commun. Des vastes plaines du Serengeti aux rivages turquoise de Zanzibar, nous vous invitons à explorer les merveilles de la Tanzanie d’une manière qui correspond à l’esprit et aux intérêts de votre groupe.",
+                "domestic.offerings.title": "Ce que nous offrons",
+                "domestic.offerings.description": "<li><strong>Safari faunique au Serengeti</strong> : Rassemblez votre école ou équipe pour un voyage inoubliable à travers le parc national du Serengeti. Observez les lions, les éléphants et la grande migration des gnous lors de safaris palpitants. Profitez de contes autour du feu sous un ciel étoilé, parfait pour créer des liens et des souvenirs durables.</li><li><strong>Retraite côtière à Zanzibar</strong> : Idéal pour les familles et les groupes religieux, détendez-vous sur les plages blanches immaculées de Zanzibar. Plongez avec tuba dans les récifs coralliens vibrants, flânez dans les ruelles historiques swahilies de Stone Town et savourez les épices locales, mêlant détente et découverte culturelle.</li><li><strong>Voyage culturel au Kilimandjaro</strong> : Parfait pour les étudiants et les familles, plongez dans les communautés Chagga au pied du Kilimandjaro. Visitez des fermes de café, admirez des cascades et apprenez les métiers traditionnels, renforçant un lien profond avec les racines culturelles de la Tanzanie.</li><li><strong>Aventure écologique à Ngorongoro</strong> : Les groupes de jeunes et les équipes d’entreprise adoreront explorer le cratère de Ngorongoro, site du patrimoine mondial de l’UNESCO. Observez les rhinocéros, les zèbres et les flamants roses tout en apprenant les efforts de conservation, combinant aventure et sensibilisation environnementale.</li><li><strong>Camping économique à Arusha</strong> : Conçu pour les étudiants et les groupes communautaires, campez sous les étoiles dans le parc national d’Arusha. Profitez de promenades guidées dans la nature, d’observation des oiseaux et de soirées chaleureuses au coin du feu, offrant un moyen abordable de se connecter avec la beauté naturelle de la Tanzanie.</li><li><strong>Plaisir familial au lac Manyara</strong> : Les familles et les équipes peuvent s’émerveiller devant les lions grimpeurs d’arbres et les lacs remplis de flamants roses. Partagez des pique-niques de groupe et des visites guidées, créant des moments joyeux dans l’un des parcs les plus pittoresques de Tanzanie.</li><li><strong>Expédition des éléphants à Tarangire</strong> : Parfait pour tous les groupes, découvrez les éléphants majestueux du parc national de Tarangire et ses baobabs emblématiques. Les safaris guidés et les promenades dans la nature offrent un mélange d’aventure et d’éducation, idéal pour les écoles et les sorties d’entreprise.</li><li><strong>Escapade historique à Bagamoyo</strong> : Les groupes religieux et les familles peuvent explorer la riche histoire de Bagamoyo, des ruines swahilies anciennes aux monuments coloniaux. Visitez les marchés locaux et profitez des promenades côtières, en vous connectant avec le passé historique de la Tanzanie.</li><li><strong>Aventure dans la réserve de Selous</strong> : Pour les groupes communautaires et les équipes, aventurez-vous dans la vaste réserve de Selous. Profitez de safaris en bateau sur la rivière Rufiji, observez les hippopotames et les crocodiles, et savourez le camping dans la brousse pour une véritable évasion sauvage.</li><li><strong>Escapade au parc national de Mikumi</strong> : Abordable pour les étudiants et les familles, Mikumi offre des rencontres rapprochées avec des girafes, des zèbres et des antilopes. Les courtes safaris et activités de groupe en font un choix parfait pour des voyages rapides et mémorables.</li><li><strong>Aventure marine à l’île de Pemba</strong> : Idéal pour les jeunes et les groupes religieux, plongez dans les eaux turquoise de Pemba pour le snorkeling et la plongée. Explorez les forêts de mangroves et les villages de pêcheurs locaux, mêlant aventure et immersion culturelle.</li><li><strong>Expérience de randonnée au mont Meru</strong> : Les équipes d’entreprise et les groupes de jeunes peuvent entreprendre une randonnée guidée sur le mont Meru dans le parc national d’Arusha. Profitez de vues imprenables, d’une flore variée et de défis de consolidation d’équipe, parfaits pour favoriser l’unité et la résilience.</li>",
+                "domestic.call_to_action": "Réservez votre aventure de groupe aujourd’hui et célèbrez la beauté de la Tanzanie ensemble ! Contactez-nous pour des forfaits personnalisés adaptés aux besoins et intérêts de votre groupe."
+            }
+        },
+        es: {
+            translation: {
+                "nav.home": "Inicio",
+                "nav.destinations": "Destinos",
+                "nav.trips": "Viajes",
+                "nav.news": "Noticias",
+                "nav.about": "Acerca de",
+                "nav.contact": "Contacto",
+                "domestic.hero.title": "Descubre Tanzania a tu manera",
+                "domestic.hero.description": "Wendo Safaris invita a todos los tanzanos—estudiantes, familias, equipos y comunidades—a explorar la fauna, las culturas y los paisajes de nuestra nación a precios asequibles.",
+                "domestic.title": "Aventuras asequibles para cada tanzano",
+                "domestic.description": "En Wendo Safaris, estamos apasionados por llevar los paisajes impresionantes, las culturas vibrantes y la fauna emocionante de Tanzania a cada tanzano. Nuestras aventuras personalizadas están diseñadas para estudiantes, escuelas, familias, equipos corporativos, grupos religiosos y organizaciones comunitarias, fomentando la unión, el aprendizaje y el orgullo por nuestro patrimonio compartido. Desde las vastas llanuras del Serengeti hasta las costas turquesas de Zanzíbar, te invitamos a explorar las maravillas de Tanzania de una manera que se adapte al espíritu e intereses de tu grupo.",
+                "domestic.offerings.title": "Qué ofrecemos",
+                "domestic.offerings.description": "<li><strong>Safari de fauna en Serengeti</strong>: Reúne a tu escuela o equipo para un viaje inolvidable a través del Parque Nacional del Serengeti. Observa leones, elefantes y la gran migración de ñus durante emocionantes safaris. Disfruta de narraciones junto al fuego bajo cielos estrellados, perfecto para crear lazos y recuerdos duraderos.</li><li><strong>Retiro costero en Zanzíbar</strong>: Ideal para familias y grupos religiosos, relájate en las playas blancas prístinas de Zanzíbar. Haz esnórquel en vibrantes arrecifes de coral, pasea por los callejones históricos suajilis de Stone Town y saborea especias locales, combinando relajación con descubrimiento cultural.</li><li><strong>Viaje cultural al Kilimanjaro</strong>: Perfecto para estudiantes y familias, sumérgete en las comunidades Chagga al pie del Kilimanjaro. Visita fincas de café, maravíllate con cascadas y aprende oficios tradicionales, fomentando una conexión profunda con las raíces culturales de Tanzania.</li><li><strong>Aventura ecológica en Ngorongoro</strong>: Los grupos juveniles y equipos corporativos disfrutarán explorando el cráter de Ngorongoro, un sitio del patrimonio mundial de la UNESCO. Observa rinocerontes, cebras y flamencos mientras aprendes sobre los esfuerzos de conservación, combinando aventura con conciencia ambiental.</li><li><strong>Campamento económico en Arusha</strong>: Diseñado para estudiantes y grupos comunitarios, acampa bajo las estrellas en el Parque Nacional de Arusha. Disfruta de caminatas guiadas en la naturaleza, observación de aves y noches acogedoras junto al fuego, ofreciendo una forma asequible de conectar con la belleza natural de Tanzania.</li><li><strong>Diversión familiar en el lago Manyara</strong>: Las familias y equipos pueden maravillarse con los leones trepadores de árboles y los lagos llenos de flamencos. Comparte picnics de grupo y visitas guiadas, creando momentos alegres en uno de los parques más pintorescos de Tanzania.</li><li><strong>Expedición de elefantes en Tarangire</strong>: Perfecto para todos los grupos, descubre los elefantes majestuosos del Parque Nacional de Tarangire y sus icónicos baobabs. Los safaris guiados y las caminatas en la naturaleza ofrecen una mezcla de aventura y educación, ideal para escuelas y salidas corporativas.</li><li><strong>Escapada histórica a Bagamoyo</strong>: Los grupos religiosos y familias pueden explorar la rica historia de Bagamoyo, desde ruinas suajilis antiguas hasta monumentos coloniales. Visita mercados locales y disfruta de paseos costeros, conectando con el pasado histórico de Tanzania.</li><li><strong>Aventura en la reserva de Selous</strong>: Para grupos comunitarios y equipos, aventúrate en la vasta reserva de Selous. Disfruta de safaris en barco por el río Rufiji, observa hipopótamos y cocodrilos, y saborea el campamento en la selva para una verdadera escapada salvaje.</li><li><strong>Escapada al Parque Nacional de Mikumi</strong>: Asequible para estudiantes y familias, Mikumi ofrece encuentros cercanos con jirafas, cebras y antílopes. Los safaris cortos y las actividades de grupo lo hacen perfecto para viajes rápidos y memorables.</li><li><strong>Aventura marina en la isla de Pemba</strong>: Ideal para jóvenes y grupos religiosos, sumérgete en las aguas turquesas de Pemba para hacer esnórquel y buceo. Explora bosques de manglares y pueblos pesqueros locales, combinando aventura con inmersión cultural.</li><li><strong>Experiencia de senderismo en el monte Meru</strong>: Los equipos corporativos y los grupos juveniles pueden emprender una caminata guiada en el monte Meru en el Parque Nacional de Arusha. Disfruta de vistas impresionantes, flora diversa y desafíos de construcción de equipos, perfectos para fomentar la unidad y la resiliencia.</li>",
+                "domestic.call_to_action": "¡Reserva tu aventura grupal hoy y celebra la belleza de Tanzania juntos! Contáctanos para paquetes personalizados adaptados a las necesidades e intereses de tu grupo."
+            }
+        },
+        de: {
+            translation: {
+                "nav.home": "Startseite",
+                "nav.destinations": "Reiseziele",
+                "nav.trips": "Reisen",
+                "nav.news": "Neuigkeiten",
+                "nav.about": "Über uns",
+                "nav.contact": "Kontakt",
+                "domestic.hero.title": "Entdecke Tansania auf deine Weise",
+                "domestic.hero.description": "Wendo Safaris lädt alle Tansanier—Studenten, Familien, Teams und Gemeinschaften—ein, die Tierwelt, Kulturen und Landschaften unserer Nation zu erschwinglichen Preisen zu erkunden.",
+                "domestic.title": "Erschwingliche Abenteuer für jeden Tansanier",
+                "domestic.description": "Bei Wendo Safaris sind wir leidenschaftlich daran interessiert, die atemberaubenden Landschaften, lebendigen Kulturen und aufregende Tierwelt Tansanias jedem Tansanier näherzubringen. Unsere maßgeschneiderten Abenteuer sind für Studenten, Schulen, Familien, Unternehmens-Teams, religiöse Gruppen und Gemeinschaftsorganisationen konzipiert und fördern Zusammenhalt, Lernen und Stolz auf unser gemeinsames Erbe. Von den weiten Ebenen des Serengeti bis zu den türkisfarbenen Küsten Sansibars laden wir dich ein, die Wunder Tansanias auf eine Weise zu erkunden, die dem Geist und den Interessen deiner Gruppe entspricht.",
+                "domestic.offerings.title": "Was wir anbieten",
+                "domestic.offerings.description": "<li><strong>Serengeti-Wildtier-Safari</strong>: Versammle deine Schule oder dein Team für eine unvergessliche Reise durch den Serengeti-Nationalpark. Beobachte Löwen, Elefanten und die große Gnu-Migration bei aufregenden Pirschfahrten. Genieße Geschichtenerzählen am Lagerfeuer unter dem Sternenhimmel, perfekt für Zusammenhalt und bleibende Erinnerungen.</li><li><strong>Sansibar-Küstenretreat</strong>: Ideal für Familien und religiöse Gruppen, entspanne an den makellosen weißen Stränden Sansibars. Schnorchle in lebendigen Korallenriffen, schlendere durch die historischen Swahili-Gassen von Stone Town und genieße lokale Gewürze, die Entspannung mit kultureller Entdeckung verbinden.</li><li><strong>Kilimandscharo-Kulturreise</strong>: Perfekt für Studenten und Familien, tauche in die Chagga-Gemeinschaften am Fuße des Kilimandscharo ein. Besuche Kaffeefarmen, staune über Wasserfälle und lerne traditionelle Handwerke, um eine tiefe Verbindung zu den kulturellen Wurzeln Tansanias zu fördern.</li><li><strong>Ngorongoro-Öko-Abenteuer</strong>: Jugendgruppen und Unternehmens-Teams werden es lieben, den Ngorongoro-Krater, ein UNESCO-Welterbe, zu erkunden. Beobachte Nashörner, Zebras und Flamingos und erfahre mehr über Naturschutzbemühungen, die Abenteuer mit Umweltbewusstsein verbinden.</li><li><strong>Arusha-Budget-Camping</strong>: Für Studenten und Gemeinschaftsgruppen konzipiert, campe unter den Sternen im Arusha-Nationalpark. Genieße geführte Naturwanderungen, Vogelbeobachtung und gemütliche Lagerfeuernächte, die eine erschwingliche Möglichkeit bieten, sich mit der natürlichen Schönheit Tansanias zu verbinden.</li><li><strong>Familienspaß am Manyara-See</strong>: Familien und Teams können baumkletternde Löwen und flamingogeplagte Seen bestaunen. Teile Gruppenpicknicks und geführte Touren und schaffe fröhliche Momente in einem der malerischsten Parks Tansanias.</li><li><strong>Tarangire-Elefanten-Expedition</strong>: Perfekt für alle Gruppen, entdecke die majestätischen Elefanten des Tarangire-Nationalparks und seine ikonischen Baobabs. Geführte Safaris und Naturwanderungen bieten eine Mischung aus Abenteuer und Bildung, ideal für Schulen und Firmenausflüge.</li><li><strong>Bagamoyo-Historische-Eskapade</strong>: Religiöse Gruppen und Familien können die reiche Geschichte Bagamoyos erkunden, von alten Swahili-Ruinen bis zu kolonialen Wahrzeichen. Besuche lokale Märkte und genieße Küstenwanderungen, um dich mit der geschichtsträchtigen Vergangenheit Tansanias zu verbinden.</li><li><strong>Selous-Wildreservat-Abenteuer</strong>: Für Gemeinschaftsgruppen und Teams, wage dich in das weitläufige Selous-Wildreservat. Erlebe Bootssafaris auf dem Rufiji-Fluss, beobachte Flusspferde und Krokodile und genieße Buschcamping für eine echte Wildnis-Eskapade.</li><li><strong>Mikumi-Nationalpark-Ausflug</strong>: Erschwinglich für Studenten und Familien, bietet Mikumi hautnahe Begegnungen mit Giraffen, Zebras und Antilopen. Kurze Safaris und Gruppenaktivitäten machen es perfekt für schnelle, unvergessliche Reisen.</li><li><strong>Pemba-Insel-Marin-Abenteuer</strong>: Ideal für Jugendliche und religiöse Gruppen, tauche in die türkisfarbenen Gewässer Pembas zum Schnorcheln und Tauchen. Erkunde Mangrovenwälder und lokale Fischerdörfer, die Abenteuer mit kulturellem Eintauchen verbinden.</li><li><strong>Mt.-Meru-Wandererlebnis</strong>: Unternehmens-Teams und Jugendgruppen können eine geführte Wanderung auf dem Mt. Meru im Arusha-Nationalpark unternehmen. Genieße atemberaubende Ausblicke, vielfältige Flora und Teambuilding-Herausforderungen, perfekt zur Förderung von Einheit und Belastbarkeit.</li>",
+                "domestic.call_to_action": "Buche dein Gruppenabenteuer heute und feiere die Schönheit Tansanias gemeinsam! Kontaktiere uns für maßgeschneiderte Pakete, die auf die Bedürfnisse und Interessen deiner Gruppe zugeschnitten sind."
+            }
+        },
+        zh: {
+            translation: {
+                "nav.home": "首页",
+                "nav.destinations": "目的地",
+                "nav.trips": "旅行",
+                "nav.news": "新闻",
+                "nav.about": "关于我们",
+                "nav.contact": "联系我们",
+                "domestic.hero.title": "以你的方式探索坦桑尼亚",
+                "domestic.hero.description": "Wendo Safaris 邀请所有坦桑尼亚人—学生、家庭、团队和社区—以实惠的价格探索我们国家的野生动物、文化和风景。",
+                "domestic.title": "为每个坦桑尼亚人提供实惠的冒险",
+                "domestic.description": "在 Wendo Safaris，我们热衷于将坦桑尼亚令人叹为观止的风景、充满活力的文化和激动人心的野生动物带给每个坦桑尼亚人。我们量身定制的冒险活动专为学生、学校、家庭、企业团队、宗教团体和社区组织设计，促进团结、学习和对我们共同遗产的自豪感。从塞伦盖蒂的广阔平原到桑给巴尔的碧绿海岸，我们邀请你以适合你团队精神和兴趣的方式探索坦桑尼亚的奇迹。",
+                "domestic.offerings.title": "我们提供什么",
+                "domestic.offerings.description": "<li><strong>塞伦盖蒂野生动物 Safari</strong>：召集你的学校或团队，穿越塞伦盖蒂国家公园，体验一次难忘的旅程。在激动人心的游猎中目睹狮子、大象和角马大迁徙。在星空下的篝火旁享受讲故事的时光，非常适合团队凝聚和创造终生难忘的回忆。</li><li><strong>桑给巴尔海滨度假</strong>：适合家庭和宗教团体，在桑给巴尔原始的白色沙滩上放松身心。在充满活力的珊瑚礁中浮潜，漫步于石头城历史悠久的斯瓦希里小巷，品尝当地香料，将放松与文化探索相结合。</li><li><strong>乞力马扎罗文化之旅</strong>：非常适合学生和家庭，沉浸在乞力马扎罗山脚的查加社区中。参观咖啡农场，惊叹于瀑布，学习传统手工艺，培养与坦桑尼亚文化根源的深厚联系。</li><li><strong>恩戈罗恩戈罗生态冒险</strong>：青年团体和企业团队会喜欢探索恩戈罗恩戈罗火山口，这一联合国教科文组织世界遗产地。观察犀牛、斑马和火烈鸟，同时了解保护工作，将冒险与环保意识相结合。</li><li><strong>阿鲁沙预算露营</strong>：专为学生和社区团体设计，在阿鲁沙国家公园的星空下露营。享受有导游的自然步行、观鸟和温馨的篝火之夜，提供一种经济实惠的方式与坦桑尼亚的自然美景连接。</li><li><strong>曼亚拉湖家庭乐趣</strong>：家庭和团队可以惊叹于爬树狮子和充满火烈鸟的湖泊。分享团体野餐和导游游览，在坦桑尼亚最风景如画的公园之一创造欢乐时光。</li><li><strong>塔兰吉雷大象探险</strong>：适合所有团体，发现塔兰吉雷国家公园的雄伟大象和标志性的猴面包树。导游带领的游猎和自然步行提供冒险与教育的结合，非常适合学校和企业出游。</li><li><strong>巴加莫约历史之旅</strong>：宗教团体和家庭可以探索巴加莫约的丰富历史，从古老的斯瓦希里遗迹到殖民地标。参观当地市场，享受沿海步行，与坦桑尼亚的历史过去相连。</li><li><strong>塞卢斯野生动物保护区冒险</strong>：适合社区团体和团队，深入广阔的塞卢斯野生动物保护区。体验鲁菲吉河上的船 safari，观察河马和鳄鱼，享受丛林露营，体验真正的荒野逃逸。</li><li><strong>米库米国家公园短途旅行</strong>：适合学生和家庭，米库米提供与长颈鹿、斑马和羚羊的近距离接触。短途游猎和团体活动使其成为快速而难忘的旅行的完美选择。</li><li><strong>彭巴岛海洋冒险</strong>：适合青年和宗教团体，潜入彭巴岛的碧绿海水中进行浮潜和潜水。探索红树林和当地渔村，将冒险与文化沉浸相结合。</li><li><strong>梅鲁山徒步体验</strong>：企业团队和青年团体可以挑战阿鲁沙国家公园的梅鲁山导游徒步。享受壮丽的景色、多样的植物群和团队建设挑战，非常适合促进团结和韧性。</li>",
+                "domestic.call_to_action": "今天预订你的团体冒险，共同庆祝坦桑尼亚的美丽！联系我们获取根据你的团队需求和兴趣定制的套餐。"
+            }
+        }
+    }
+}, () => {
+    applyTranslations();
+});
+
+// Apply translations to elements
+function applyTranslations() {
+    document.querySelectorAll('[data-i18n]').forEach(element => {
+        const key = element.getAttribute('data-i18n');
+        if (key === 'domestic.offerings.description') {
+            element.innerHTML = i18next.t(key);
+        } else {
+            element.textContent = i18next.t(key);
+        }
+    });
+}
+
+// Language switcher
+const languageSelects = document.querySelectorAll('#language-select, #language-select-desktop');
+languageSelects.forEach(select => {
+    select.addEventListener('change', (e) => {
+        const newLang = e.target.value;
+        i18next.changeLanguage(newLang, () => {
+            applyTranslations();
+        });
+    });
+});
+
+// Mobile menu toggle
+document.addEventListener('DOMContentLoaded', () => {
+    const toggleButton = document.getElementById('menu-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
+    toggleButton.addEventListener('click', () => {
+        mobileMenu.classList.toggle('hidden');
+    });
+});
+
+// Navbar scroll effect
+window.addEventListener('scroll', () => {
+    const navbar = document.getElementById('navbar');
+    if (window.scrollY > 50) {
+        navbar.classList.remove('nav-transparent');
+        navbar.classList.add('nav-solid');
+    } else {
+        navbar.classList.remove('nav-solid');
+        navbar.classList.add('nav-transparent');
+    }
+});
+</script>
+</body>
+
+</html>
