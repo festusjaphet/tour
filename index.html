@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,16 +13,24 @@
         .fade-in {
             animation: fadeIn 1s ease-in;
         }
+
         @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
         }
+
         .hero {
             position: relative;
             width: 100%;
             height: 100vh;
             overflow: hidden;
         }
+
         .hero .chaa img,
         .hero .chaa video {
             position: absolute;
@@ -31,53 +40,67 @@
             opacity: 0;
             transition: opacity 1s ease-in-out;
         }
+
         .hero img.active,
         .hero video.active {
             opacity: 1;
         }
+
         .nav-transparent {
             transition: background 0.3s ease-in-out;
             background: linear-gradient(to right, rgba(255, 255, 255, 0.063), rgba(0, 0, 0, 0.413), rgb(0, 0, 0));
         }
+
         .nav-solid {
             background: linear-gradient(to right, rgb(255, 255, 255), rgb(0, 0, 0), rgb(0, 0, 0));
         }
+
         .nav-link {
             transition: color 0.3s;
         }
+
         .nav-link.active {
             color: #4CAF50 !important;
         }
+
         .site-card {
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
+
         .site-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
         }
+
         .site-card img {
             transition: opacity 0.3s ease;
         }
+
         .site-card:hover img {
             opacity: 0.9;
         }
+
         /* Ensure mobile menu visibility */
         #mobile-menu {
             display: none;
         }
+
         #mobile-menu.active {
             display: block;
         }
+
         /* Mobile-specific styles */
         @media (max-width: 768px) {
             header.hero {
                 height: auto;
                 padding: 20px;
             }
+
             .chaa {
                 position: relative;
                 height: auto;
             }
+
             .chaa img,
             .chaa video {
                 position: relative;
@@ -85,6 +108,7 @@
                 height: auto;
                 margin-bottom: 10px;
             }
+
             .absolute.left-4.top-1\/4 {
                 position: relative;
                 top: auto;
@@ -94,23 +118,27 @@
                 overflow-x: auto;
                 white-space: nowrap;
             }
+
             .absolute.left-4.top-1\/4 .grid {
                 display: flex;
                 flex-direction: row;
                 gap: 10px;
             }
-            .absolute.left-4.top-1\/4 .grid > div {
+
+            .absolute.left-4.top-1\/4 .grid>div {
                 flex-shrink: 0;
                 width: 150px;
                 height: 200px;
                 margin-bottom: 0;
             }
+
             .absolute.left-4.top-1\/4 .grid img,
             .absolute.left-4.top-1\/4 .grid video {
                 width: 100%;
                 height: 100%;
                 object-fit: cover;
             }
+
             .absolute.right-4.top-1\/4 {
                 position: relative;
                 top: auto;
@@ -119,20 +147,25 @@
                 padding: 10px;
                 text-align: center;
             }
+
             .absolute.right-4.top-1\/4 .max-w-xl {
                 max-width: 100%;
             }
+
             .absolute.right-4.top-1\/4 h1 {
                 font-size: 2rem;
             }
+
             .absolute.right-4.top-1\/4 p,
             .absolute.right-4.top-1\/4 h6 {
                 font-size: 1rem;
             }
+
             .absolute.right-4.top-1\/4 button {
                 width: 100%;
                 padding: 10px;
             }
+
             .youtube-btn {
                 background: linear-gradient(to right, #ff0000, #cc0000);
                 border: none;
@@ -140,13 +173,16 @@
                 position: relative;
                 transition: all 0.3s ease;
             }
+
             .youtube-btn:hover {
                 transform: translateY(-2px);
                 background: linear-gradient(to right, #e60000, #b30000);
             }
+
             .youtube-btn svg {
                 filter: drop-shadow(1px 1px 1px rgba(0, 0, 0, 0.2));
             }
+
             .youtube-btn::before {
                 content: '';
                 position: absolute;
@@ -159,31 +195,40 @@
                 transition: all 0.5s ease;
                 pointer-events: none;
             }
+
             .youtube-btn:hover::before {
                 top: -100%;
                 left: -100%;
             }
+
             #news-grid .bg-white {
                 background-color: white;
             }
+
             #news-grid .rounded-lg {
                 border-radius: 0.5rem;
             }
+
             #news-grid .shadow-lg {
                 box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
             }
+
             #news-grid .transform {
                 transition: transform 0.3s;
             }
+
             #news-grid .hover\:scale-105:hover {
                 transform: scale(1.05);
             }
         }
     </style>
 </head>
+
 <body>
     <div class="relative">
-        <div class="absolute inset-0 w-full h-full bg-[url('assets/background.jpeg')] bg-cover bg-center opacity-80 blur-sm z-0"></div>
+        <div
+            class="absolute inset-0 w-full h-full bg-[url('assets/background.jpeg')] bg-cover bg-center opacity-80 blur-sm z-0">
+        </div>
         <nav id="navbar" class="nav-transparent text-white fixed w-full top-0 z-50">
             <div class="container mx-auto flex justify-between items-center px-4 ">
                 <a href="#home" class="flex items-center space-x-2">
@@ -192,14 +237,22 @@
                 </a>
                 <div class="flex items-center space-x-4">
                     <ul class="hidden md:flex space-x-6">
-                        <li><a href="#home" class="nav-link hover:text-green-400 font-semibold" data-i18n="nav.home">Home</a></li>
-                        <li><a href="#destinations" class="nav-link hover:text-green-400 font-semibold" data-i18n="nav.destinations">Destinations</a></li>
-                        <li><a href="#Trips" class="nav-link hover:text-green-400 font-semibold" data-i18n="nav.trips">Trips</a></li>
-                        <li><a href="add-news.html" class="nav-link hover:text-green-400 font-semibold" data-i18n="nav.news">News</a></li>
-                        <li><a href="#about" class="nav-link hover:text-green-400 font-semibold" data-i18n="nav.about">About</a></li>
-                        <li><a href="#contact" class="nav-link hover:text-green-400 font-semibold" data-i18n="nav.contact">Contact</a></li>
-                        <li><a href="cultural.html" class="nav-link hover:text-green-400 font-semibold" data-i18n="nav.cultural">Cultural</a></li>
-                        <select id="language-select-desktop" class="bg-green-500 text-white rounded-md focus:outline-none px-2 py-1">
+                        <li><a href="#home" class="nav-link hover:text-green-400 font-semibold"
+                                data-i18n="nav.home">Home</a></li>
+                        <li><a href="#destinations" class="nav-link hover:text-green-400 font-semibold"
+                                data-i18n="nav.destinations">Destinations</a></li>
+                        <li><a href="#Trips" class="nav-link hover:text-green-400 font-semibold"
+                                data-i18n="nav.trips">Trips</a></li>
+                        <li><a href="add-news.html" class="nav-link hover:text-green-400 font-semibold"
+                                data-i18n="nav.news">News</a></li>
+                        <li><a href="#about" class="nav-link hover:text-green-400 font-semibold"
+                                data-i18n="nav.about">About</a></li>
+                        <li><a href="#contact" class="nav-link hover:text-green-400 font-semibold"
+                                data-i18n="nav.contact">Contact</a></li>
+                        <li><a href="cultural.html" class="nav-link hover:text-green-400 font-semibold"
+                                data-i18n="nav.cultural">Cultural</a></li>
+                        <select id="language-select-desktop"
+                            class="bg-green-500 text-white rounded-md focus:outline-none px-2 py-1">
                             <option value="en">English</option>
                             <option value="fr">Français</option>
                             <option value="es">Español</option>
@@ -208,10 +261,15 @@
                             <option value="zh">中文</option>
                         </select>
                     </ul>
-                    <button id="menu-toggle" class="md:hidden focus:outline-none transform transition-transform duration-300 hover:scale-110" aria-expanded="false">
-                        <svg class="w-6 h-6 menu-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <path class="menu-open" stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16m-7 6h7"></path>
-                            <path class="menu-close hidden" stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
+                    <button id="menu-toggle"
+                        class="md:hidden focus:outline-none transform transition-transform duration-300 hover:scale-110"
+                        aria-expanded="false">
+                        <svg class="w-6 h-6 menu-icon" fill="none" stroke="currentColor" stroke-width="2"
+                            viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path class="menu-open" stroke-linecap="round" stroke-linejoin="round"
+                                d="M4 6h16M4 12h16m-7 6h7"></path>
+                            <path class="menu-close hidden" stroke-linecap="round" stroke-linejoin="round"
+                                d="M6 18L18 6M6 6l12 12"></path>
                         </svg>
                     </button>
                 </div>
@@ -220,14 +278,19 @@
                 <div class="backdrop-blur-sm bg-green-500/70 rounded-lg p-4 shadow-md">
                     <ul class="space-y-4 text-center">
                         <li><a href="#home" class="block hover:text-green-300" data-i18n="nav.home">Home</a></li>
-                        <li><a href="#destinations" class="block hover:text-green-300" data-i18n="nav.destinations">Destinations</a></li>
+                        <li><a href="#destinations" class="block hover:text-green-300"
+                                data-i18n="nav.destinations">Destinations</a></li>
                         <li><a href="#Trips" class="block hover:text-green-300" data-i18n="nav.trips">Trips</a></li>
-                        <li><a href="add-news.html" class="block hover:text-green-300" data-i18n="nav.news">News</a></li>
+                        <li><a href="add-news.html" class="block hover:text-green-300" data-i18n="nav.news">News</a>
+                        </li>
                         <li><a href="#about" class="block hover:text-green-300" data-i18n="nav.about">About</a></li>
-                        <li><a href="#contact" class="block hover:text-green-300" data-i18n="nav.contact">Contact</a></li>
-                        <li><a href="cultural.html" class="block hover:text-green-300" data-i18n="nav.cultural">Cultural</a></li>
+                        <li><a href="#contact" class="block hover:text-green-300" data-i18n="nav.contact">Contact</a>
+                        </li>
+                        <li><a href="cultural.html" class="block hover:text-green-300"
+                                data-i18n="nav.cultural">Cultural</a></li>
                         <li>
-                            <select id="language-select" class="bg-green-500 text-white rounded-md p-2 focus:outline-none">
+                            <select id="language-select"
+                                class="bg-green-500 text-white rounded-md p-2 focus:outline-none">
                                 <option value="en">English</option>
                                 <option value="fr">Français</option>
                                 <option value="es">Español</option>
@@ -330,8 +393,7 @@
                 src="https://media.cnn.com/api/v1/images/stellar/prod/gettyimages-1474813790.jpeg?q=w_1110,c_fill"
                 alt="Zanzibar Beach"
                 class="tnz-carousel-item absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ease-in-out opacity-0">
-            <img loading="lazy"
-                src="https://www.serengetinationalpark.travel/images/animals-in-masai-mara.jpg"
+            <img loading="lazy" src="https://www.serengetinationalpark.travel/images/animals-in-masai-mara.jpg"
                 alt="Zanzibar Beach"
                 class="tnz-carousel-item absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ease-in-out opacity-0">
             <video src="assets/night.mp4" muted loop autoplay
@@ -440,15 +502,13 @@
 
         <div class="relative container mx-auto  z-10 rounded">
             <div class="container mx-auto ">
-                <!-- <div class="z-10 backdrop-blur-sm rounded-lg shadow-md bg-white bg-opacity-30"> -->
                 <h2 class="text-3xl md:text-5xl font-bold text-green-900 mb-8 drop-shadow-lg" data-i18n="trips.title">
                     Our Tour Packages</h2>
                 <p class="max-w-4xl mx-auto  font-bold leading-relaxed mb-8" data-i18n="trips.description">Explore our
                     carefully crafted safari trips across Northern
                     Tanzania and beyond. Each journey offers unique experiences tailored to your adventure style.
                 </p>
-                <!-- </div> -->
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5" id="trips-grid">
+                <div class="flex flex-col sm:grid sm:grid-cols-2 lg:grid-cols-3 gap-5 px-6" id="trips-grid">
                     <div
                         class="trip-card bg-white/80 backdrop-blur-md rounded shadow-lg transition duration-300 hover:scale-105 hover:shadow-2xl overflow-hidden">
                         <a href="trip-detail.html?trip=north-tanzania-circuit" class="block">
@@ -458,7 +518,7 @@
                                     muted loop autoplay
                                     class="absolute inset-0 w-full h-full object-cover rounded-t-2xl"></video>
                             </div>
-                            <div class="p-6">
+                            <div class="p-2">
                                 <h3 class="text-xl font-semibold text-gray-900 mb-2"
                                     data-i18n="trips.north-tanzania-circuit.title">North Tanzania Circuit Safari</h3>
                                 <p class="text-gray-700"><strong data-i18n="trips.dates">Dates:</strong> <span
@@ -613,48 +673,73 @@
             </div>
         </div>
     </section>
-    <section id="plan-your-adventure" class="py-16 bg-gradient-to-b from-green-100 to-green-200 text-center relative overflow-hidden">
-    <div class="container mx-auto px-4 relative z-10">
-        <h2 class="text-4xl md:text-5xl font-extrabold text-green-900 mb-4 animate-fade-in" data-i18n="plan-your-adventure.title">Plan Your Adventure</h2>
-        <div class="max-w-3xl mx-auto text-gray-800 mb-10">
-            <p class="text-lg md:text-xl leading-relaxed" data-i18n="plan-your-adventure.description">Ready to embark on the safari of your dreams? Let Wendo African Safari guide you through Northern Tanzania's breathtaking landscapes. From your first safari to a return adventure, we craft unforgettable journeys tailored just for you.</p>
-        </div>
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-4xl mx-auto">
-            <div class="relative group rounded-xl shadow-lg overflow-hidden transform transition-transform duration-300 hover:scale-105">
-                <video src="https://firebasestorage.googleapis.com/v0/b/feskilimo.appspot.com/o/Tour%2Fzebraz.mp4?alt=media&token=6b35f19b-d2fe-44e2-875a-66750c5b7b70" muted loop autoplay class="w-full h-64 md:h-80 object-cover"></video>
-                <div class="absolute inset-0 bg-black bg-opacity-20 group-hover:bg-opacity-10 transition-opacity duration-300"></div>
-                <div class="absolute bottom-4 left-4 text-white text-sm font-semibold">Explore Wildlife</div>
+    <section id="plan-your-adventure"
+        class="py-16 bg-gradient-to-b from-green-100 to-green-200 text-center relative overflow-hidden">
+        <div class="container mx-auto px-4 relative z-10">
+            <h2 class="text-4xl md:text-5xl font-extrabold text-green-900 mb-4 animate-fade-in"
+                data-i18n="plan-your-adventure.title">Plan Your Adventure</h2>
+            <div class="max-w-3xl mx-auto text-gray-800 mb-10">
+                <p class="text-lg md:text-xl leading-relaxed" data-i18n="plan-your-adventure.description">Ready to
+                    embark on the safari of your dreams? Let Wendo African Safari guide you through Northern Tanzania's
+                    breathtaking landscapes. From your first safari to a return adventure, we craft unforgettable
+                    journeys tailored just for you.</p>
             </div>
-            <div class="relative group rounded-xl shadow-lg overflow-hidden transform transition-transform duration-300 hover:scale-105">
-                <video src="assets/zan.mp4" muted loop autoplay class="w-full h-64 md:h-80 object-cover"></video>
-                <div class="absolute inset-0 bg-black bg-opacity-20 group-hover:bg-opacity-10 transition-opacity duration-300"></div>
-                <div class="absolute bottom-4 left-4 text-white text-sm font-semibold">Discover Zanzibar</div>
+            <div class="flex flex-col sm:grid sm:grid-cols-2 lg:grid-cols-3 gap-5 px-6">
+                <div
+                    class="relative group rounded-xl shadow-lg overflow-hidden transform transition-transform duration-300 hover:scale-105">
+                    <video
+                        src="https://firebasestorage.googleapis.com/v0/b/feskilimo.appspot.com/o/Tour%2Fzebraz.mp4?alt=media&token=6b35f19b-d2fe-44e2-875a-66750c5b7b70"
+                        muted loop autoplay class="w-full h-64 md:h-80 object-cover"></video>
+                    <div
+                        class="absolute inset-0 bg-black bg-opacity-20 group-hover:bg-opacity-10 transition-opacity duration-300">
+                    </div>
+                    <div class="absolute bottom-4 left-4 text-white text-sm font-semibold">Explore Wildlife</div>
+                </div>
+                <div
+                    class="relative group rounded-xl shadow-lg overflow-hidden transform transition-transform duration-300 hover:scale-105">
+                    <video src="assets/zan.mp4" muted loop autoplay class="w-full h-64 md:h-80 object-cover"></video>
+                    <div
+                        class="absolute inset-0 bg-black bg-opacity-20 group-hover:bg-opacity-10 transition-opacity duration-300">
+                    </div>
+                    <div class="absolute bottom-4 left-4 text-white text-sm font-semibold">Discover Zanzibar</div>
+                </div>
+            </div>
+            <div class="mt-10">
+                <a href="#contact"
+                    class="inline-block px-8 py-3 bg-green-600 text-white font-semibold rounded-full shadow-md hover:bg-green-700 transition-all duration-300 transform hover:scale-105"
+                    data-i18n="nav.contact">Start Planning Now</a>
             </div>
         </div>
-        <div class="mt-10">
-            <a href="#contact" class="inline-block px-8 py-3 bg-green-600 text-white font-semibold rounded-full shadow-md hover:bg-green-700 transition-all duration-300 transform hover:scale-105" data-i18n="nav.contact">Start Planning Now</a>
-        </div>
-    </div>
-    <div class="absolute inset-0 bg-gradient-to-r from-green-400/20 to-green-600/20 z-0"></div>
-    <style>
-        .animate-fade-in {
-            animation: fadeIn 1s ease-in;
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        @media (max-width: 640px) {
-            .grid {
-                grid-template-columns: 1fr;
+        <div class="absolute inset-0 bg-gradient-to-r from-green-400/20 to-green-600/20 z-0"></div>
+        <style>
+            .animate-fade-in {
+                animation: fadeIn 1s ease-in;
             }
-            .grid > div {
-                height: 50vh;
+
+            @keyframes fadeIn {
+                from {
+                    opacity: 0;
+                    transform: translateY(20px);
+                }
+
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
             }
-        }
-    </style>
-</section>
-<!-- <section id="plan-your-adventure" class="py-12 bg-green-50 text-center">
+
+            @media (max-width: 640px) {
+                .grid {
+                    grid-template-columns: 1fr;
+                }
+
+                .grid>div {
+                    height: 50vh;
+                }
+            }
+        </style>
+    </section>
+    <!-- <section id="plan-your-adventure" class="py-12 bg-green-50 text-center">
         <div class="container mx-auto px-4">
             <h2 class="text-3xl font-bold text-green-900 mb-6" data-i18n="plan-your-adventure.title">Plan Your Adventure
             </h2>
@@ -798,7 +883,7 @@
 
 
     <!-- i have all scripts dont put them here now -->
- <script type="module" src="dft.js"></script>
+    <script type="module" src="dft.js"></script>
     <script>
         const destinations = [
             {
@@ -889,7 +974,7 @@
                         // Trips
                         "trips": {
                             "title": "Our Tour Packages",
-                            "description": "Explore our carefully crafted safari trips across Northern Tanzania and beyond. Each journey offers unique experiences tailored to your adventure style.",
+                            "description": "Explore our safari trips across Northern Tanzania and beyond. Each journey offers unique experiences tailored to your adventure style.",
                             "dates": "Dates",
                             "duration": "Duration",
                             "customizable": "Customizable",

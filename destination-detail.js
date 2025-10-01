@@ -111,7 +111,7 @@ i18next.init({
                     arusha: {
                         title: "Arusha National Park",
                         shortDescription: "Experience diverse landscapes...",
-                        media: { type: "image", src: "assets/Arusha.jpeg" },
+                        media: { type: "image", src: "https://firebasestorage.googleapis.com/v0/b/feskilimo.appspot.com/o/Tour%2Fsimbatoto.jpeg?alt=media&token=e02c6f65-a951-45d8-a0c8-9d405861c43c" },
                         details: {
                             overview: "Arusha National Park, located just 25 kilometers from Arusha city, covers 552 square kilometers and offers a mix of forested slopes, alkaline lakes, and open savannah. Dominated by Mount Meru (4,566 meters), it’s a versatile destination for adventurers.",
                             highlights: [
