@@ -57,7 +57,7 @@
 //         exclusions: "Flights, optional activities, personal expenses",
 //         itinerary: [
 //             "Day 1: Arrival in Arusha, transfer to lodge",
-//             "Day 2: Full-day game drive in Serengeti",
+//             "Day 2: Transfer from lodge to airport for Serengeti and day game drives",
 //             "Day 3: Morning safari, Maasai village visit",
 //             "Day 4: Explore central Serengeti plains",
 //             "Day 5: Depart for Arusha"
@@ -255,7 +255,7 @@ i18next.init({
                         exclusions: "Flights, optional activities, personal expenses",
                         itinerary: [
                             "Day 1: Arrival in Arusha, transfer to lodge",
-                            "Day 2: Full-day game drive in Serengeti",
+                            "Day 2: Transfer from lodge to airport for Serengeti and day game drives",
                             "Day 3: Morning safari, Maasai village visit",
                             "Day 4: Explore central Serengeti plains",
                             "Day 5: Depart for Arusha"
