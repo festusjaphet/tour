@@ -107,26 +107,33 @@
 </head>
 
 <body>
-    
+
     <!-- Navigation Bar -->
     <nav id="navbar" class="nav-transparent text-white fixed w-full top-0 z-50">
         <div class="container mx-auto flex justify-between items-center py-4 px-4">
-            
+
             <a href="#home" class="flex items-center space-x-2">
                 <img loading="lazy" src="assets/image1.png" alt="Wendo Safari Logo" class="size-20">
                 <img loading="lazy" src="assets/wendo.png" alt="Wendo Safari Logo" class="h-12">
             </a>
-            
+
             <div class="flex items-center space-x-4">
                 <ul class="hidden md:flex space-x-6">
-                    <li><a href="index.html#home " class="nav-link hover:text-green-400 font-semibold" data-i18n="nav.home">Home</a></li>
-                    <li><a href="index.html#destinations" class="nav-link hover:text-green-400 font-semibold" data-i18n="nav.destinations">Destinations</a></li>
-                    <li><a href="index.html#Trips" class="nav-link hover:text-green-400 font-semibold" data-i18n="nav.trips">Trips</a></li>
-                    <li><a href="add-news.html" class="nav-link hover:text-green-400 font-semibold" data-i18n="nav.news">News</a></li>
-                    <li><a href="index.html#about" class="nav-link hover:text-green-400 font-semibold" data-i18n="nav.about">About</a></li>
-                    <li><a href="index.html#contact" class="nav-link hover:text-green-400 font-semibold" data-i18n="nav.contact">Contact</a></li>
+                    <li><a href="index.html#home " class="nav-link hover:text-green-400 font-semibold"
+                            data-i18n="nav.home">Home</a></li>
+                    <li><a href="index.html#destinations" class="nav-link hover:text-green-400 font-semibold"
+                            data-i18n="nav.destinations">Destinations</a></li>
+                    <li><a href="index.html#Trips" class="nav-link hover:text-green-400 font-semibold"
+                            data-i18n="nav.trips">Trips</a></li>
+                    <li><a href="add-news.html" class="nav-link hover:text-green-400 font-semibold"
+                            data-i18n="nav.news">News</a></li>
+                    <li><a href="index.html#about" class="nav-link hover:text-green-400 font-semibold"
+                            data-i18n="nav.about">About</a></li>
+                    <li><a href="index.html#contact" class="nav-link hover:text-green-400 font-semibold"
+                            data-i18n="nav.contact">Contact</a></li>
                     <li>
-                        <select id="language-select-desktop" class="bg-green-500 text-white rounded-md focus:outline-none p-2">
+                        <select id="language-select-desktop"
+                            class="bg-green-500 text-white rounded-md focus:outline-none p-2">
                             <option value="en">English</option>
                             <option value="fr">Français</option>
                             <option value="es">Español</option>
@@ -136,8 +143,10 @@
                         </select>
                     </li>
                 </ul>
-                <button id="menu-toggle" class="md:hidden focus:outline-none transform transition-transform duration-300 hover:scale-110">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <button id="menu-toggle"
+                    class="md:hidden focus:outline-none transform transition-transform duration-300 hover:scale-110">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16m-7 6h7"></path>
                     </svg>
                 </button>
@@ -147,7 +156,8 @@
             <div class="backdrop-blur-sm bg-green-500/70 rounded-lg p-4 shadow-md">
                 <ul class="space-y-4 text-center">
                     <li><a href="#home" class="block hover:text-green-300" data-i18n="nav.home">Home</a></li>
-                    <li><a href="#destinations" class="block hover:text-green-300" data-i18n="nav.destinations">Destinations</a></li>
+                    <li><a href="#destinations" class="block hover:text-green-300"
+                            data-i18n="nav.destinations">Destinations</a></li>
                     <li><a href="#Trips" class="block hover:text-green-300" data-i18n="nav.trips">Trips</a></li>
                     <li><a href="add-news.html" class="block hover:text-green-300" data-i18n="nav.news">News</a></li>
                     <li><a href="#about" class="block hover:text-green-300" data-i18n="nav.about">About</a></li>
@@ -168,47 +178,67 @@
     </nav>
 
     <!-- Trip Cards Section -->
-    <section id="Trips" class="container mx-auto py-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-20 fade-in">
+    <section id="Trips"
+        class="container mx-auto py-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-20 fade-in">
         <div
             class="absolute inset-0 w-full h-full bg-[url('assets/background.jpeg')] bg-cover bg-center opacity-80 blur-sm">
-        </div> <div class="trip-card site-card bg-white/80 backdrop-blur-md rounded-3xl shadow-lg overflow-hidden" data-trip="special-safaris">
+        </div>
+        <div class="trip-card site-card bg-white/80 backdrop-blur-md rounded-3xl shadow-lg overflow-hidden"
+            data-trip="special-safaris">
             <div class="relative w-full h-60">
-                <img src="assets/chui.jpg" alt="Special Safaris" loading="lazy" class="absolute inset-0 w-full h-full object-cover rounded-t-2xl">
+                <img src="assets/chui.jpg" alt="Special Safaris" loading="lazy"
+                    class="absolute inset-0 w-full h-full object-cover rounded-t-2xl">
             </div>
             <div class="p-6 cursor-pointer">
-                <h3 class="text-xl font-semibold text-gray-900 mb-2" data-i18n="trips.special-safaris.title">Special Occasion Safaris</h3>
-                <p class="text-gray-700" data-i18n="trips.special-safaris.brief">Tailored safaris for birthdays, anniversaries, graduations, and honeymooners.</p>
+                <h3 class="text-xl font-semibold text-gray-900 mb-2" data-i18n="trips.special-safaris.title">Special
+                    Occasion Safaris</h3>
+                <p class="text-gray-700" data-i18n="trips.special-safaris.brief">Tailored safaris for birthdays,
+                    anniversaries, graduations, and honeymooners.</p>
             </div>
         </div>
         <div class="trip-card site-card bg-white/80 backdrop-blur-md rounded-3xl shadow-lg overflow-hidden" data-trip="singer-travellers">
-             <div class="relative w-full h-60">
-                <video autoplay muted loop playsinline
+  <div class="relative w-full pb-[56.25%] overflow-hidden"> <!-- 16:9 aspect ratio for YouTube video -->
+    <iframe 
+      class="absolute top-0 left-0 w-full h-full" 
+      src="https://www.youtube.com/embed/T2lfTmBvI7Q?si=gN0TGaCAFb_wBPfy"
+      title="YouTube video player" 
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+      referrerpolicy="strict-origin-when-cross-origin" 
+      allowfullscreen>
+    </iframe>
+  </div>
+  <div class="p-6 cursor-pointer">
+    <h3 class="text-xl font-semibold text-gray-900 mb-2" data-i18n="trips.singer-travellers.title">Solo Traveller Safari</h3>
+    <p class="text-gray-700" data-i18n="trips.singer-travellers.brief">Custom safaris for solo adventurers to explore nature.</p>
+  </div>
+</div>
+        <div class="trip-card site-card bg-white/80 backdrop-blur-md rounded-3xl shadow-lg overflow-hidden"
+            data-trip="family-safari">
+            <div class="relative w-full h-60">
+                <img src="https://www.discoverafrica.com/wp-content/uploads/2021/11/family_safari.jpg"
+                    alt="Special Family Safari" loading="lazy"
                     class="absolute inset-0 w-full h-full object-cover rounded-t-2xl">
-                    <source src="assets/rinho.mp4" type="video/mp4">
-                    Your browser does not support the video tag.
-                </video>
             </div>
             <div class="p-6 cursor-pointer">
-                <h3 class="text-xl font-semibold text-gray-900 mb-2" data-i18n="trips.singer-travellers.title">Solo Traveller Safari</h3>
-                <p class="text-gray-700" data-i18n="trips.singer-travellers.brief">Custom safaris for solo adventurers to explore nature.</p>
+                <h3 class="text-xl font-semibold text-gray-900 mb-2" data-i18n="trips.family-safari.title">Special
+                    Family Safari</h3>
+                <p class="text-gray-700" data-i18n="trips.family-safari.brief">Family trips with special care for
+                    teenagers.</p>
             </div>
         </div>
-        <div class="trip-card site-card bg-white/80 backdrop-blur-md rounded-3xl shadow-lg overflow-hidden" data-trip="family-safari">
+        <div class="trip-card site-card bg-white/80 backdrop-blur-md rounded-3xl shadow-lg overflow-hidden"
+            data-trip="disabilities-safari">
             <div class="relative w-full h-60">
-                <img src="https://www.discoverafrica.com/wp-content/uploads/2021/11/family_safari.jpg" alt="Special Family Safari" loading="lazy" class="absolute inset-0 w-full h-full object-cover rounded-t-2xl">
+                <img src="https://media.cntraveler.com/photos/650458664f9f345bfc4edf95/master/w_1600%2Cc_limit/5Ximuwu--Luxury-Klaserie-Lodge-sophie-morgan-aug23-pr.jpg"
+                    alt="Disabilities Safari" loading="lazy"
+                    class="absolute inset-0 w-full h-full object-cover rounded-t-2xl">
             </div>
             <div class="p-6 cursor-pointer">
-                <h3 class="text-xl font-semibold text-gray-900 mb-2" data-i18n="trips.family-safari.title">Special Family Safari</h3>
-                <p class="text-gray-700" data-i18n="trips.family-safari.brief">Family trips with special care for teenagers.</p>
-            </div>
-        </div>
-        <div class="trip-card site-card bg-white/80 backdrop-blur-md rounded-3xl shadow-lg overflow-hidden" data-trip="disabilities-safari">
-            <div class="relative w-full h-60">
-                <img src="https://media.cntraveler.com/photos/650458664f9f345bfc4edf95/master/w_1600%2Cc_limit/5Ximuwu--Luxury-Klaserie-Lodge-sophie-morgan-aug23-pr.jpg" alt="Disabilities Safari" loading="lazy" class="absolute inset-0 w-full h-full object-cover rounded-t-2xl">
-            </div>
-            <div class="p-6 cursor-pointer">
-                <h3 class="text-xl font-semibold text-gray-900 mb-2" data-i18n="trips.disabilities-safari.title">Accessible Safari</h3>
-                <p class="text-gray-700" data-i18n="trips.disabilities-safari.brief">Safaris with special care for people with disabilities or illnesses.</p>
+                <h3 class="text-xl font-semibold text-gray-900 mb-2" data-i18n="trips.disabilities-safari.title">
+                    Accessible Safari</h3>
+                <p class="text-gray-700" data-i18n="trips.disabilities-safari.brief">Safaris with special care for
+                    people with disabilities or illnesses.</p>
             </div>
         </div>
     </section>
